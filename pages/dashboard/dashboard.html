@@ -90,8 +90,89 @@
                 <a class="cta" href="#"><button>Your Profile</button></a>
             </header>
         </section>
+        <section class="recommend">
+            <div class="trans fade">
+                <img src="../../src/placeholder.jpg">
+                <div class="caption">CS50x</div>
+            </div>
+            <div class="trans fade">
+                <img src="../../src/placeholder1.jpg">
+                <div class="caption">CS50 AI</div>
+            </div>
+            <div class="trans fade">
+                <img src="../../src/placeholder.jpg">
+                <div class="caption">CS50x</div>
+            </div>
+            <a class="previous" onclick="slides(-1)">&#10094;</a>
+            <a class="next" onclick="slides(1)">&#10095;</a>
+            <div class="dot-group">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+        <section class="agenda">
+            <form>
+                <input type="text" placeholder="Enter New Event" class="todo_input" />
+                <button class="todo_button" type="submit">Add Event
+                    <i class="fas fa-plus-square"></i>
+                </button>
+                <div class="select">
+                    <select name="todos" class="filter_todo">
+                        <option value="all">All</option>
+                        <option value="completed">Completed</option>
+                        <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </div>
+            </form>
+            <div class="todo_container">
+                <ul class="todo_list"></ul>
+            </div>
+        </section>
+        <br>
+        <br>
+        <section class="note_rec">
+            <h2>Note Recommendation</h2>
+            <div class="videos">
+                <!--TODO-->
+            </div>
+        </section>
         <script type="module" src="dashboard.js"></script>
+        <script>
+            var slidesIndex = 1;
+            showSlides(slidesIndex);
+
+            function slides(i){
+                showSlides(slidesIndex += i);
+            }
+
+            function currentSlide(i){
+                showSlides(slidesIndex = i);
+            }
+
+            function showSlides(i){
+                    var n;
+                    var slide = document.getElementsByClassName("trans");
+                    var dot = document.getElementsByClassName("dot");
+                    if (i > slide.length) {
+                        slidesIndex = 1;
+                    }
+                    if (i < 1){
+                        slidesIndex = slide.length;
+                    }
+                    for(n = 0; n < slide.length; n++){
+                        slide[n].style.display = "none";
+                    }
+                    for(n = 0; n < dot.length; n++){
+                        dot[n].className = dot[n].className.replace(" dotActive", "");
+                    }
+                    slide[slidesIndex-1].style.display = "block";
+                    dot[slidesIndex-1].className += " dotActive";
+                }
+        </script>
     </body>
+    <br>
+    <br>
     <footer>
         Copyright&copy;Studymate - CS50x Final Project
     </footer>
