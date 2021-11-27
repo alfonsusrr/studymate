@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #32393E;
+}
+
+li, a, button{
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 0.5%;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.logo{
+    cursor: pointer;
+    background-color: #32393E;
+    max-height: 50px;
+    max-width: 90px;
+}
+
+.nav__links{
+    list-style: none;
+    background-color: #32393E;
+}
+
+.nav__links li{
+    display: inline-block;
+    padding: 0px 20px;
+    background-color: #32393E;
+}
+
+.nav__links li a{
+    transition: all 0.3s ease 0s;
+    background-color: #32393E;
+}
+
+.nav__links li a:hover{
+    color: cyan;
+}
+
+button{
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.cta{
+    background-color: #32393E;
+}
+
+button:hover{
+    background-color: rgba(0,136,169,0.8);
+}
+
+.login-title{
+    text-align: center;
+    margin-top: 3%;
+}
+
+.login-box{
+    display: block;
+    text-align: center;
+    margin-top: 2%;
+    background-color: #32393E;
+    margin-left: 35%;
+    margin-right: 35%;
+    color: white;
+    padding: 1%;
+    padding-bottom: 3%;
+    border-radius: 2%;
+}
+
+input{
+    text-align: center;
+    padding: 1%;
+    border-radius: 50px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.username{
+    margin-top: 2%;
+}
+
+.password{
+    margin-top: 2%;
+}
+
+#usertext{
+    margin-top: 4%;
+}
+
+#passtext{
+    margin-top: 2%;
+}
+
+.login-btn{
+    margin-top: 10%;
+}
+
+h5, h5 a{
+    margin-top: 5%;
+    text-decoration: none;
+    font-family: "poppins", sans-serif;
+    font-size: small;
+    font-weight: lighter;
+}
+
+h5 a{
+    color: cyan;
+    transition: 0.5s ease;
+}
+
+h5 a:hover{
+    color: yellow;
+    transition: 0.5s ease;
+    text-decoration: underline;
+}
