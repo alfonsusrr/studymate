@@ -248,109 +248,8 @@ button:hover{
 }
 
 .agenda.active{
-    margin-top: 70px;
     margin-left: 300px;
     transition: 0.5s ease;
-}
-
-.recommend{
-    margin-left: 636px;
-    transition: 0.5s ease;
-    position: relative;
-    margin-top: 20px;
-}
-
-.recommend.active{
-    margin-left: 800px;
-    transition: 0.5s ease;
-}
-
-.recommend.active .caption{
-    transition: 0.5s ease;
-    padding: 5px 9px;
-}
-
-.recommend.active img{
-    height: 300px;
-    transition: 0.5s ease;
-}
-
-.recommend img{
-    width: 96%;
-    height: 375px;
-    transition: 0.5s ease;
-}
-
-.trans{
-    display: none;
-}
-
-.previous, .next{
-    cursor: pointer;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    margin-top: -22px;
-    position: absolute;
-}
-
-.next{
-    right: 30px;
-    border-radius: 3px 0 0 3px;
-}
-
-.previous:hover, .next:hover{
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.caption{
-    color: white;
-    font-size: 15px;
-    padding: 5px 12px;
-    position: absolute;
-    bottom: 30px;
-    width: 92.7%;
-    text-align: center;
-    background-color: black;
-    transition: 0.5s ease;
-}
-
-.dot{
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.5s ease;
-    margin: 0 2px;
-}
-
-.dotActive, .dot:hover{
-    background-color: #717171;
-}
-
-.fade{
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade{
-    from {opacity: .4}
-    to {opacity: 1}
-}
-
-@keyframes fade{
-    from {opacity: .4}
-    to {opacity: 1}
 }
 
 form{
@@ -358,7 +257,6 @@ form{
     min-height: 15vh;
     justify-content: left;
     align-items: center;
-    transform: translateY(-450%);
 }
 
 form input, form button{
@@ -421,7 +319,6 @@ select{
     display: flex;
     justify-content: left;
     align-items: center;
-    margin-top: -460px;
 }
 
 .todo_list{
@@ -488,31 +385,19 @@ select{
     opacity: 0;
 }
 
-.note_rec{
-    margin-left: 7%;
-    margin-top: -2%;
-    margin-bottom: 3%;
-    transition: 0.5s ease;
-}
-
-.note_rec.active{
-    margin-left: 22%;
-    transition: 0.5s ease;
-}
-
-.notes{
+.courses{
     margin-left: 5%;
     margin-top: 3%;
     display: inline-block;
 }
 
-.notes img{
+.courses img{
     margin-left: 10px;
     max-width: 150px;
     max-height: 300px;
 }
 
-.notes h4{
+.courses h4{
     text-align: center;
 }
 
@@ -550,4 +435,57 @@ select{
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+
+.search{
+    margin-top: 1%;
+    text-align: center;
+    transition: 0.5s ease;
+}
+
+.search.active{
+    margin-left: 15%;
+    transition: 0.5s ease;
+}
+
+.result{
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.search input{
+    padding: 6px;
+    width: 40%;
+}
+
+.private{
+    margin-left: 8%;
+    margin-top: 2%;
+    transition: 0.5s ease;
+}
+
+.public{
+    margin-left: 8%;
+    margin-top: 2%;
+    transition: 0.5s ease;
+}
+
+.private.active{
+    margin-left: 23%;
+    transition: 0.5s ease;
+}
+
+.public.active{
+    margin-left: 23%;
+    transition: 0.5s ease;
+}
+
+.add{
+    display: inline-flexbox;
+    margin-top: 1%;
+    margin-left: 85%;
+}
+
+.search h2{
+    margin-bottom: 1%;
 }
