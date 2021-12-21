@@ -369,8 +369,8 @@ form input, form button{
 }
 
 form button{
-    color: grey;
-    background: aqua;
+    color: white;
+    background: rgb(127, 80, 201);
     cursor: pointer;
     transition: all 0.3 ease;
     padding: 5px 10px;
@@ -379,8 +379,8 @@ form button{
 }
 
 form button:hover{
-    background-color: lightblue;
-    color: black;
+    background-color: rgb(87, 42, 158);
+    color: white;
 }
 
 select{
@@ -550,4 +550,8 @@ select{
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+
+.todo_item{
+    padding-left: 2%;
 }

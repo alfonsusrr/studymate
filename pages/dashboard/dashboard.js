@@ -54,6 +54,10 @@ const todoInput = document.querySelector('.todo_input');
 const todoButton = document.querySelector('.todo_button');
 const todoList = document.querySelector('.todo_list');
 const filterOption = document.querySelector('.filter_todo');
+
+var currentdate = new Date()
+var date = currentdate.getFullYear() + "-" + (currentdate.getMonth()+1)  + "-" + currentdate.getDate();
+
 //event listeners
 todoButton.addEventListener("click", addTodo)
 todoList.addEventListener("click", deleteCheck)
@@ -67,11 +71,18 @@ function addTodo(event) {
     todoDiv.classList.add('todo');
     //todo LI 
     const newTodo = document.createElement('li');
+    const newDate = document.createElement('li');
     newTodo.innerText = todoInput.value;
+    newDate.innerText = date;
     newTodo.classList.add('todo_item');
     todoDiv.appendChild(newTodo);
+    todoDiv.appendChild(newDate);
     if(todoInput.value === ""){
         return null
+    }
+    if(todoInput.value.length > 20){
+        alert("Input must be between 0 and 20 characters");
+        return null;
     }
     //check mark BUTTON
     const completedButton = document.createElement('button');
