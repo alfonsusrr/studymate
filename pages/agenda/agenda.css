@@ -248,109 +248,8 @@ button:hover{
 }
 
 .agenda.active{
-    margin-top: 70px;
     margin-left: 300px;
     transition: 0.5s ease;
-}
-
-.recommend{
-    margin-left: 636px;
-    transition: 0.5s ease;
-    position: relative;
-    margin-top: 20px;
-}
-
-.recommend.active{
-    margin-left: 800px;
-    transition: 0.5s ease;
-}
-
-.recommend.active .caption{
-    transition: 0.5s ease;
-    padding: 5px 9px;
-}
-
-.recommend.active img{
-    height: 300px;
-    transition: 0.5s ease;
-}
-
-.recommend img{
-    width: 96%;
-    height: 375px;
-    transition: 0.5s ease;
-}
-
-.trans{
-    display: none;
-}
-
-.previous, .next{
-    cursor: pointer;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    margin-top: -22px;
-    position: absolute;
-}
-
-.next{
-    right: 30px;
-    border-radius: 3px 0 0 3px;
-}
-
-.previous:hover, .next:hover{
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.caption{
-    color: white;
-    font-size: 15px;
-    padding: 5px 12px;
-    position: absolute;
-    bottom: 30px;
-    width: 92.7%;
-    text-align: center;
-    background-color: black;
-    transition: 0.5s ease;
-}
-
-.dot{
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.5s ease;
-    margin: 0 2px;
-}
-
-.dotActive, .dot:hover{
-    background-color: #717171;
-}
-
-.fade{
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade{
-    from {opacity: .4}
-    to {opacity: 1}
-}
-
-@keyframes fade{
-    from {opacity: .4}
-    to {opacity: 1}
 }
 
 form{
@@ -358,7 +257,6 @@ form{
     min-height: 15vh;
     justify-content: left;
     align-items: center;
-    transform: translateY(-450%);
 }
 
 form input, form button{
@@ -373,9 +271,9 @@ form button{
     background: rgb(127, 80, 201);
     cursor: pointer;
     transition: all 0.3 ease;
-    padding: 5px 10px;
-    font-size: 12px;
-    margin-left: 5px;
+    padding: 8px 13px;
+    font-size: 14px;
+    margin-left: 1%;
 }
 
 form button:hover{
@@ -418,10 +316,10 @@ select{
 }
 
 .todo_container{
-    display: flex;
+    float: left;
+    width: 40%;
     justify-content: left;
     align-items: center;
-    margin-top: -460px;
 }
 
 .todo_list{
@@ -430,8 +328,9 @@ select{
 }
 
 .todo_input{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 5px 10px;
+    width: 30%;
+    margin-left: 10%;
 }
 
 .todo{
@@ -445,6 +344,7 @@ select{
     align-items: center;
     transition: all 0.5s ease;
     border-radius: 10px;
+    margin-right: -10%;
 }
 
 .todo li {
@@ -488,70 +388,73 @@ select{
     opacity: 0;
 }
 
-.note_rec{
-    margin-left: 7%;
-    margin-top: -2%;
-    margin-bottom: 3%;
+h2{
+    margin-top: 1%;
     transition: 0.5s ease;
-}
-
-.note_rec.active{
-    margin-left: 22%;
-    transition: 0.5s ease;
-}
-
-.notes{
-    margin-left: 5%;
-    margin-top: 3%;
-    display: inline-block;
-}
-
-.notes img{
-    margin-left: 10px;
-    max-width: 150px;
-    max-height: 300px;
-}
-
-.notes h4{
     text-align: center;
 }
 
-.rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
+h2.active{
+    margin-left: 20%;
+    transition: 0.5s ease;
 }
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
+
+.date{
+    margin-left: 1%;
+    padding-left: 8px;
+    padding: 5px 10px;
 }
 
 .todo_item{
     padding-left: 2%;
+}
+
+.vl{
+    border-left: 2px solid black;
+    height: 100%;
+    margin-top: 19%;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+    transition: 0.5s ease;
+}
+
+.vl.active{
+    transition: 0.5s ease;
+    margin-left: 120px;
+}
+
+.todo_not_today_container{
+    align-items: center;
+    margin-left: 48%;
+    margin-right: 2%;
+}
+
+.todo_not_today_list{
+    min-width: 40%;
+    list-style: none;
+}
+
+.todo_not_today{
+    margin: 5px auto;
+    background: rgb(46, 44, 44);
+    color: #000000;
+    display: flex;
+    font-size: 1.2rem;
+    padding: 0.3rem;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+}
+
+.todo_not_today li {
+    flex: 1;
+    white-space: nowrap;
+}
+
+h3{
+    margin-bottom: 10px;
+    margin-left: 40%;
 }
