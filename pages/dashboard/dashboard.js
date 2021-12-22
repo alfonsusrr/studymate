@@ -86,12 +86,10 @@ function addTodo(event) {
     }
     //check mark BUTTON
     const completedButton = document.createElement('button');
-    completedButton.innerHTML = '<i class="fas fa-check"></i>';
-    completedButton.classList.add('complete_btn')
+    completedButton.classList.add('complete_btn');
     todoDiv.appendChild(completedButton);
     //delete BUTTON
     const deleteButton = document.createElement('button');
-    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.classList.add('delete_btn')
     todoDiv.appendChild(deleteButton);
     //Append to Actual LIST
