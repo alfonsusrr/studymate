@@ -87,27 +87,15 @@ button:hover{
 }
 
 .alfons{
-    float: left;
     margin-top: 2%;
     text-align: center;
-    margin-left: 30%;
-}
-
-.alfons img{
-    width: 200px;
+    margin-left: -30%;
 }
 
 .nic{
-    margin-left: 55%;
-    margin-top: 2%;
-}
-
-.nic img{
-    width: 200px;
-}
-
-.nic h4{
-    margin-left: 4.5%;
+    margin-top: -14.9%;
+    text-align: center;
+    margin-left: 30%;
 }
 
 h2{

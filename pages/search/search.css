@@ -173,12 +173,13 @@ button:hover{
     transition: all 0.4s ease;
     border-radius: 12px;
     white-space: nowrap;
+    padding-left: 3px;
 }
 
 .sidebar ul li a:hover{
     background: white;
-    color: darkblue;
-    padding-left: 5px;
+    color: black;
+    padding-left: 8px;
 }
 
 .sidebar ul li a img{
