@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Studymate || Dashboard</title>
+        <title>Studymate || Agenda</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="dashboard.css">
+        <link rel="stylesheet" href="agenda.css">
     </head>
     <body>
         <section class="home_section">
@@ -23,30 +23,11 @@
                 <a class="cta" href="../profile/profile.html"><button>Your Profile</button></a>
             </header>
         </section>
-        <section class="recommend">
-            <div class="trans fade">
-                <img src="../../src/placeholder.jpg">
-                <div class="caption">CS50x</div>
-            </div>
-            <div class="trans fade">
-                <img src="../../src/placeholder1.jpg">
-                <div class="caption">CS50 AI</div>
-            </div>
-            <div class="trans fade">
-                <img src="../../src/placeholder.jpg">
-                <div class="caption">CS50x</div>
-            </div>
-            <a class="previous" onclick="slides(-1)">&#10094;</a>
-            <a class="next" onclick="slides(1)">&#10095;</a>
-            <div class="dot-group">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-        </section>
+        <h2>Agenda</h2>
         <section class="agenda">
             <form>
-                <input type="text" placeholder="Enter New Event Today" class="todo_input" />
+                <input type="text" placeholder="Enter New Event" class="todo_input" />
+                <input type="date" class="date">
                 <button class="todo_button" type="submit">Add Event
                     <i class="fas fa-plus-square"></i>
                 </button>
@@ -59,44 +40,13 @@
                 </div>
             </form>
             <div class="todo_container">
+                <h3>Due Today</h3>
                 <ul class="todo_list"></ul>
             </div>
-        </section>
-        <br>
-        <br>
-        <section class="note_rec">
-            <h2>Note Recommendation</h2>
-            <div class="notes">
-                <img src="../../src/profile.jpg">
-                <h4>Note Name</h4>
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div>
-            </div>
-            <div class="notes">
-                <img src="../../src/profile.jpg">
-                <h4>Note Name</h4>
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div>
+            <div class="vl"></div>
+            <div class="todo_not_today_container">
+                <h3>Upcoming</h3>
+                <ul class="todo_not_today_list"></ul>
             </div>
         </section>
         <div class="sidebar">
@@ -109,7 +59,7 @@
             </div>
             <ul class="nav_list">
                 <li>
-                    <a href="dashboard.html">
+                    <a href="../dashboard/dashboard.html">
                         <img src="../../src/dashboard.jpg" alt="dashboard">
                         <span class="links_name">&nbsp; &nbsp; Dashboard</span>
                     </a>
@@ -166,39 +116,7 @@
                 </li>
             </ul>
         </div>
-        <script type="module" src="dashboard.js"></script>
-        <script>
-            var slidesIndex = 1;
-            showSlides(slidesIndex);
-
-            function slides(i){
-                showSlides(slidesIndex += i);
-            }
-
-            function currentSlide(i){
-                showSlides(slidesIndex = i);
-            }
-
-            function showSlides(i){
-                    var n;
-                    var slide = document.getElementsByClassName("trans");
-                    var dot = document.getElementsByClassName("dot");
-                    if (i > slide.length) {
-                        slidesIndex = 1;
-                    }
-                    if (i < 1){
-                        slidesIndex = slide.length;
-                    }
-                    for(n = 0; n < slide.length; n++){
-                        slide[n].style.display = "none";
-                    }
-                    for(n = 0; n < dot.length; n++){
-                        dot[n].className = dot[n].className.replace(" dotActive", "");
-                    }
-                    slide[slidesIndex-1].style.display = "block";
-                    dot[slidesIndex-1].className += " dotActive";
-                }
-        </script>
+        <script type="module" src="agenda.js"></script>
     </body>
     <br>
     <br>
