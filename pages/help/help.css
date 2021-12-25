@@ -100,8 +100,17 @@ p{
     margin-left: 5%;
     margin-top: -2%;
     background-color: lavender;
-    padding-top: 5%;
-    
+    padding: 5%;
+    border-radius: 10px;
+    position: relative;
+    z-index: -1;
+    display: none;
+    transition: 0.5s ease;
+}
+
+.display{
+    display: block;
+    transition: 0.5s ease;
 }
 
 h3{
@@ -112,4 +121,5 @@ h3{
     border-radius: 15px;
     color: white;
     cursor: pointer;
+    position: relative;
 }
