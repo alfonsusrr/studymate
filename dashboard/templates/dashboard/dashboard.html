@@ -12,15 +12,15 @@
 {% block content %}
     <section class="recommend">
         <div class="trans fade">
-            <img src="../../src/placeholder.jpg">
+            <img src="../../static/images/placeholder.jpg">
             <div class="caption">CS50x</div>
         </div>
         <div class="trans fade">
-            <img src="../../src/placeholder1.jpg">
+            <img src="../../static/images/placeholder1.jpg">
             <div class="caption">CS50 AI</div>
         </div>
         <div class="trans fade">
-            <img src="../../src/placeholder.jpg">
+            <img src="../../static/images/placeholder.jpg">
             <div class="caption">CS50x</div>
         </div>
         <a class="previous" onclick="slides(-1)">&#10094;</a>
@@ -54,7 +54,7 @@
     <section class="note_rec">
         <h2>Note Recommendation</h2>
         <div class="notes">
-            <img src="../../src/note_default.jpg">
+            <img src="../../static/images/note_default.jpg">
             <h4>Note Name</h4>
             <div class="rate">
                 <input type="radio" id="star5" name="rate" value="5" />
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="notes">
-            <img src="../../src/note_default.jpg">
+            <img src="../../static/images/note_default.jpg">
             <h4>Note Name</h4>
             <div class="rate">
                 <input type="radio" id="star5" name="rate" value="5" />
@@ -89,10 +89,10 @@
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../src/logo.jpg" alt="logo">
+                <img src="../../static/images/logo.jpg" alt="logo">
                 <div class="logo_name">StudyMate</div>
             </div>
-            <img src="../../src/menu_burger.jpg" alt="menu_logo" id="menu">
+            <img src="../../static/images/menu_burger.jpg" alt="menu_logo" id="menu">
         </div>
         <ul class="nav_list">
             <li>
@@ -153,7 +153,7 @@
             </li>
         </ul>
     </div>
-    <script type="module" src="{% static 'dashboard/js/dashboard.js'}"></script>
+    <script type="module" src="{% static 'dashboard/js/dashboard.js' %}"></script>
     <script>
         var slidesIndex = 1;
         showSlides(slidesIndex);

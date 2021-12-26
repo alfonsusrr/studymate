@@ -1,29 +1,15 @@
-<!DOCTYPE HTML>
-<html lang="eng">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Studymate || Your Notes</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="note_archive.css">
-    </head>
-    <body>
-        <section class="home_section">
-            <header>
-                <img class="logo" src="../../src/logo.jpg" alt="logo">
-                <nav>
-                    <ul class="nav__links">
-                        <li><a href="../about/about.html">About</a></li>
-                        <li><a href="../help/help.html">Help</a></li>
-                        <li><a href="../contacts/contacts.html">Contacts</a></li>
-                        
-                    </ul>
-                </nav>
-                <a class="cta" href="../profile/profile.html"><button>Your Profile</button></a>
-            </header>
-        </section>
+{% extends "main/main.html" %}
+
+{% block title %}Note Archive{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'notes/css/note_archive.css' %}">
+{% endblock %}
+
+
+{% block content %}
         <a href="../upload/upload.html"><button class="add">Upload Your Notes</button></a>
         <section class="search">
             <input type="text" class="search_notes" placeholder="Search Your Notes">
@@ -122,11 +108,8 @@
                 </li>
             </ul>
         </div>
-        <script type="module" src="note_archive.js"></script>
-    </body>
-    <br>
-    <br>
-    <footer>
-        Copyright&copy;Studymate - CS50x Final Project
-    </footer>
-</html>
+        <br>
+        <br>
+        <br>
+        <script type="module" src="{% static 'notes/js/note_archive.js' %}"></script>
+{% endblock %}

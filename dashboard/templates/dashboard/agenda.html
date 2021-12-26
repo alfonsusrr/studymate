@@ -1,28 +1,40 @@
-<!DOCTYPE HTML>
-<html lang="eng">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Studymate || Relax Room</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="relax.css">
-    </head>
-    <body>
-        <section class="home_section">
-            <header>
-                <img class="logo" src="../../src/logo.jpg" alt="logo">
-                <nav>
-                    <ul class="nav__links">
-                        <li><a href="../about/about.html">About</a></li>
-                        <li><a href="../help/help.html">Help</a></li>
-                        <li><a href="../contacts/contacts.html">Contacts</a></li>
-                        
-                    </ul>
-                </nav>
-                <a class="cta" href="../profile/profile.html"><button>Your Profile</button></a>
-            </header>
+{% extends "main/main.html" %}
+
+{% block title %}Agenda{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/agenda.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <h2>Agenda</h2>
+        <section class="agenda">
+            <form>
+                <input type="text" placeholder="Enter New Event" class="todo_input" />
+                <input type="date" class="date">
+                <button class="todo_button" type="submit">Add Event
+                    <i class="fa fa-plus-square"></i>
+                </button>
+                <div class="select">
+                    <select name="todos" class="filter_todo">
+                        <option value="all">All</option>
+                        <option value="completed">Completed</option>
+                        <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </div>
+            </form>
+            <div class="todo_container">
+                <h3>Due Today</h3>
+                <ul class="todo_list"></ul>
+            </div>
+            <div class="vl"></div>
+            <div class="todo_not_today_container">
+                <h3>Upcoming</h3>
+                <ul class="todo_not_today_list"></ul>
+            </div>
         </section>
         <div class="sidebar">
             <div class="logo_content">
@@ -91,19 +103,8 @@
                 </li>
             </ul>
         </div>
-        <button class="collapse">Collapse</button>
-        <section class="text">
-            <h2>Good Evening User</h2>
-            <h1></h1>
-        </section>
-        <section class="audio">
-            <iframe width="360" height="200" src="https://www.youtube.com/embed/5qap5aO4i9A?mute=1&autoplay=1" allow="autoplay"></iframe>
-        </section>
-        <script type="module" src="relax.js"></script>
-    </body>
-    <br>
-    <br>
-    <footer>
-        Copyright&copy;Studymate - CS50x Final Project
-    </footer>
-</html>
+        <br>
+        <br>
+        <br>
+        <script type="module" src="{% static 'dashboard/js/agenda.js' %}"></script>
+{% endblock %}

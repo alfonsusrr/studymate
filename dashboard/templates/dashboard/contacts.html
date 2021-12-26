@@ -1,0 +1,26 @@
+{% extends "main/main.html" %}
+
+{% block title %}Contacts{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/contacts.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <section class="inputs">
+            <h2>Contact</h2>
+            <input type="email" class="emailbox" placeholder="Enter Your Email" autocomplete="off" autofocus>
+            <br>
+            <input type="text" class="name" placeholder="Enter Your Name" autocomplete="off">
+            <br>
+            <textarea type="text" rows="5" cols= "60" class="message" placeholder="Enter Your Message"></textarea>
+            <br>
+            <button type="submit" class="send">Send</button>
+        </section>
+        <br>
+        <br>
+        <br>
+{% endblock %}
