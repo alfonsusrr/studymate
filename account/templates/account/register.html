@@ -1,0 +1,40 @@
+{% extends 'account/main.html' %}
+
+{% block title %} 
+Register
+{% endblock %}
+
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'account/css/register.css' %}">
+{% endblock %}
+
+
+{% block link %}{% url 'login' %}{% endblock %} 
+{% block link_title %} Login {% endblock %} 
+{% block content %}
+<div class="register-title">
+    <h1>Welcome to StudyMate</h1>
+    <h1>Please Register before continuing</h1>
+</div>
+<section class = "register-box">
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <h4 id="usertext">Username</h4>
+        <input class="username" name="username" placeholder="Enter Your Username" type="text" autofocus autocomplete="off">
+
+        <h4 id="passtext">Password</h4>
+        <input class="password" name="password" placeholder="Enter Your Password" type="text" autocomplete="off">
+
+        <h4 id="passtext">Re-Enter Password</h4>
+        <input class="password" placeholder="Re-type Your Password" type="text" autocomplete="off">
+
+        <div class="submit">
+            <button type="submit" class="register-btn">Register</button>
+        </div>
+    </form>
+    <h5>Already Have An Account?  <a href="{% url 'login' %}">Login</a></h5>
+</section>
+{% endblock %}
