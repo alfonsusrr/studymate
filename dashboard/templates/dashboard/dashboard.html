@@ -1,0 +1,189 @@
+{% extends "main/main.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <section class="recommend">
+        <div class="trans fade">
+            <img src="../../src/placeholder.jpg">
+            <div class="caption">CS50x</div>
+        </div>
+        <div class="trans fade">
+            <img src="../../src/placeholder1.jpg">
+            <div class="caption">CS50 AI</div>
+        </div>
+        <div class="trans fade">
+            <img src="../../src/placeholder.jpg">
+            <div class="caption">CS50x</div>
+        </div>
+        <a class="previous" onclick="slides(-1)">&#10094;</a>
+        <a class="next" onclick="slides(1)">&#10095;</a>
+        <div class="dot-group">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+    <section class="agenda">
+        <form>
+            <input type="text" placeholder="Enter New Event Today" class="todo_input" />
+            <button class="todo_button" type="submit">Add Event
+                <i class="fa fa-plus-square"></i>
+            </button>
+            <div class="select">
+                <select name="todos" class="filter_todo">
+                    <option value="all">All</option>
+                    <option value="completed">Completed</option>
+                    <option value="uncompleted">Uncompleted</option>
+                </select>
+            </div>
+        </form>
+        <div class="todo_container">
+            <ul class="todo_list"></ul>
+        </div>
+    </section>
+    <br>
+    <br>
+    <section class="note_rec">
+        <h2>Note Recommendation</h2>
+        <div class="notes">
+            <img src="../../src/note_default.jpg">
+            <h4>Note Name</h4>
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div>
+        </div>
+        <div class="notes">
+            <img src="../../src/note_default.jpg">
+            <h4>Note Name</h4>
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div>
+        </div>
+    </section>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <img src="../../src/logo.jpg" alt="logo">
+                <div class="logo_name">StudyMate</div>
+            </div>
+            <img src="../../src/menu_burger.jpg" alt="menu_logo" id="menu">
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <i class="fa fa-home fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="{% url 'agenda' %}">
+                    <i class="fa fa-calendar fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Agenda</span>
+                </a>
+                <span class="tooltip">Agenda</span>
+            </li>
+            <li>
+                <a href="{% url 'archieve' %}">
+                    <i class="fa fa-book fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Note Archive</span>
+                </a>
+                <span class="tooltip">Note Archive</span>
+            </li>
+            <li>
+                <a href="{% url 'note_share' %}">
+                    <i class="fa fa-share-alt-square fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Note Share</span>
+                </a>
+                <span class="tooltip">Note Share</span>
+            </li>
+            <li>
+                <a href="{% url 'relax' %}">
+                    <i class="fa fa-coffee fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Relax Room</span>
+                </a>
+                <span class="tooltip">Relax Room</span>
+            </li>
+            <li>
+                <a href="{% url 'search' %}">
+                    <i class="fa fa-search fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Search Courses</span>
+                </a>
+                <span class="tooltip">Search</span>
+            </li>
+            <li>
+                <a href="{% url 'settings' %}">
+                    <i class="fa fa-cog fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    <i class="fa fa-sign-out fa-2x"></i>
+                    <span class="links_name">&nbsp; &nbsp; Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+    <script type="module" src="{% static 'dashboard/js/dashboard.js'}"></script>
+    <script>
+        var slidesIndex = 1;
+        showSlides(slidesIndex);
+
+        function slides(i){
+            showSlides(slidesIndex += i);
+        }
+
+        function currentSlide(i){
+            showSlides(slidesIndex = i);
+        }
+
+        function showSlides(i){
+                var n;
+                var slide = document.getElementsByClassName("trans");
+                var dot = document.getElementsByClassName("dot");
+                if (i > slide.length) {
+                    slidesIndex = 1;
+                }
+                if (i < 1){
+                    slidesIndex = slide.length;
+                }
+                for(n = 0; n < slide.length; n++){
+                    slide[n].style.display = "none";
+                }
+                for(n = 0; n < dot.length; n++){
+                    dot[n].className = dot[n].className.replace(" dotActive", "");
+                }
+                slide[slidesIndex-1].style.display = "block";
+                dot[slidesIndex-1].className += " dotActive";
+            }
+    </script>
+{% endblock %}

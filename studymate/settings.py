@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account.apps'
+    'account',
+    'notes',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -77,10 +79,10 @@ WSGI_APPLICATION = 'studymate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'studymate',
-        'USER': 'postgres',
-        'PASSWORD': 'ALF30102501',
-        'HOST':'localhost',
+        'NAME': 'df51lihsa5o868',
+        'USER': 'vlnscpndfqjirq',
+        'PASSWORD': 'bb7e032890fd6e2597b690bdc53f5ffe94252dbaf8a517fcf51e31782789353a',
+        'HOST':'ec2-52-200-68-5.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
