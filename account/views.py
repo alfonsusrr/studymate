@@ -20,6 +20,7 @@ def login_view(request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
+        print(authenticate(username="alfonsus.rr", password="admin"))
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse('dashboard'))
