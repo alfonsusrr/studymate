@@ -564,6 +564,10 @@ color: #583429;
     .todo_list{
         margin-top: 10%;
     }
+
+    .agenda.active{
+        margin-top: 5%;
+    }
 }
 
 @media (min-height: 500px) and (max-height: 529.98px){
@@ -595,44 +599,55 @@ color: #583429;
 
 @media (min-height: 675px) and (max-height: 749.98px){
 
-    form{
+    .agenda{
         margin-top: 5%;
     }
 
-    .todo_list{
-        margin-top: -2%;
+    .agenda.active{
+        margin-top: 10%;
     }
 }
 
 @media (min-height: 750px) and (max-height: 854.98px){
 
-    form{
+    .agenda{
         margin-top: 10%;
     }
 
+    .agenda.active{
+        margin-top: 15%;
+    }
+
     .todo_list{
-        margin-top: -8%;
+        margin-top: -5%;
     }
 }
 
 @media (min-height: 855px) and (max-height: 949.98px){
 
-    form{
-        margin-top: 15%;
+    .agenda{
+        margin-top: 12%;
+    }
+
+    .agenda.active{
+        margin-top: 18%;
     }
 
     .todo_list{
-        margin-top: -15%;
+        margin-top: -12%;
     }
 }
 
 @media (min-height: 950px){
+    .agenda{
+        margin-top: 15%;
+    }
 
-    form{
-        margin-top: 20%;
+    .agenda.active{
+        margin-top: 18%;
     }
 
     .todo_list{
-        margin-top: -20%;
+        margin-top: -15%;
     }
 }
