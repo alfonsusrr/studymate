@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
-
 *{
     margin: 0;
     padding: 0;
@@ -415,7 +414,7 @@ select{
 }
 
 .select:hover::after{
-   color: #583429;
+color: #583429;
 }
 
 .todo_container{
@@ -555,4 +554,85 @@ select{
 
 .todo_item{
     padding-left: 2%;
+}
+
+@media (max-height: 499.98px) {
+    form{
+        margin-top: -8%;
+    }
+
+    .todo_list{
+        margin-top: 10%;
+    }
+}
+
+@media (min-height: 500px) and (max-height: 529.98px){
+    form{
+        margin-top: -8%;
+    }
+
+    .todo_list{
+        margin-top: 10%;
+    }
+}
+
+@media (min-height: 530px) and (max-height: 579.98px){
+    form{
+        margin-top: -5%;
+    }
+
+    .todo_list{
+        margin-top: 8%;
+    }
+}
+
+@media (min-height: 580px) and (max-height: 639.98px){
+
+    .todo_list{
+        margin-top: 4%;
+    }
+}
+
+@media (min-height: 675px) and (max-height: 749.98px){
+
+    form{
+        margin-top: 5%;
+    }
+
+    .todo_list{
+        margin-top: -2%;
+    }
+}
+
+@media (min-height: 750px) and (max-height: 854.98px){
+
+    form{
+        margin-top: 10%;
+    }
+
+    .todo_list{
+        margin-top: -8%;
+    }
+}
+
+@media (min-height: 855px) and (max-height: 949.98px){
+
+    form{
+        margin-top: 15%;
+    }
+
+    .todo_list{
+        margin-top: -15%;
+    }
+}
+
+@media (min-height: 950px){
+
+    form{
+        margin-top: 20%;
+    }
+
+    .todo_list{
+        margin-top: -20%;
+    }
 }
