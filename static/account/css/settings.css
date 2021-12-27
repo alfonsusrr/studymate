@@ -348,3 +348,37 @@ input{
 .save{
     margin-bottom: 5%;
 }
+
+@media (min-width: 800px) and (max-width: 1140px){
+
+    input{
+        width: 30%;
+    }
+
+    .display img{
+        width: 30%;
+    }
+}
+
+@media (max-width: 799.98px){
+    body{
+        font-size: x-small;
+    }
+
+    input{
+        width: 30%;
+    }
+
+    .display img{
+        width: 20%;
+        margin-left: 70%;
+    }
+
+    .display h3{
+        margin-left: 70%;
+    }
+
+    .options{
+        margin-left: 20%;
+    }
+}

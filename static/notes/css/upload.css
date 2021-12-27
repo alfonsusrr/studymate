@@ -339,3 +339,14 @@ h3{
 .submit{
     margin-top: 2%;
 }
+
+@media (max-width: 850px){
+    body{
+        font-size: x-small;
+    }
+
+    .data{
+        margin-left: 15%;
+        margin-right: 0%;
+    }
+}
