@@ -1,29 +1,15 @@
-<!DOCTYPE html>
+{% extends "main/main.html" %}
 
-<html lang="eng">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Studymate || About</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="about.css">
-    </head>
-    <body>
-        <section class="home_section">
-            <header>
-                <img class="logo" src="../../src/logo.jpg" alt="logo">
-                <nav>
-                    <ul class="nav__links">
-                        <li><a href="../about/about.html">About</a></li>
-                        <li><a href="../help/help.html">Help</a></li>
-                        <li><a href="../contacts/contacts.html">Contacts</a></li>
-                        <li><a href="../login/login.html">Login</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </section>
+{% block title %}About{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/about.css' %}">
+{% endblock %}
+
+
+{% block content %}
         <section class="Creators">
             <h2>Creators</h2>
             <div class="alfons">
@@ -40,8 +26,4 @@
             <h4>Studymate is a web application designed to help students and learners in their studying journey. Studymate is built to establish an ease of access to different types of necessity when learning or discovering new things. Our goal is to create the perfect virtual studying environment so that students can focus more on their studies. Our platform is a community based system where the community will decide the workflow of this web application. Finally, we hope you can enjoy this web application and may you experince a comfortable studying journey.</h4>
             <h4>- The Developers -</h4>
         </section>
-    </body>
-    <footer>
-        Copyright&copy;Studymate - CS50x Final Project
-    </footer>
-</html>
+{% endblock %}

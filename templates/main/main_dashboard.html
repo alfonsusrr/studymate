@@ -24,7 +24,75 @@
             </header>
         </section>
         {% block content %}{% endblock %}
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+                    <img src="../../static/images/logo.jpg" alt="logo">
+                    <div class="logo_name">StudyMate</div>
+                </div>
+                <img src="../../static/images/menu_burger.jpg" alt="menu_logo" id="menu">
+            </div>
+            <ul class="nav_list">
+                <li>
+                    <a href="{% url 'dashboard' %}">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+                </li>
+                <li>
+                    <a href="{% url 'agenda' %}">
+                        <i class="fa fa-calendar fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Agenda</span>
+                    </a>
+                    <span class="tooltip">Agenda</span>
+                </li>
+                <li>
+                    <a href="{% url 'archieve' %}">
+                        <i class="fa fa-book fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Note Archive</span>
+                    </a>
+                    <span class="tooltip">Note Archive</span>
+                </li>
+                <li>
+                    <a href="{% url 'note_share' %}">
+                        <i class="fa fa-share-alt-square fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Note Share</span>
+                    </a>
+                    <span class="tooltip">Note Share</span>
+                </li>
+                <li>
+                    <a href="{% url 'relax' %}">
+                        <i class="fa fa-coffee fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Relax Room</span>
+                    </a>
+                    <span class="tooltip">Relax Room</span>
+                </li>
+                <li>
+                    <a href="{% url 'search' %}">
+                        <i class="fa fa-search fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Search Courses</span>
+                    </a>
+                    <span class="tooltip">Search</span>
+                </li>
+                <li>
+                    <a href="{% url 'settings' %}">
+                        <i class="fa fa-cog fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Settings</span>
+                    </a>
+                    <span class="tooltip">Settings</span>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <i class="fa fa-sign-out fa-2x"></i>
+                        <span class="links_name">&nbsp; &nbsp; Logout</span>
+                    </a>
+                    <span class="tooltip">Logout</span>
+                </li>
+            </ul>
+        </div>
     </body>
+    {% block ending %}{% endblock %}
     <footer>
         Copyright&copy;Studymate - CS50x Final Project
     </footer>

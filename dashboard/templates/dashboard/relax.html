@@ -1,0 +1,22 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}Relax Room{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/relax.css' %}">
+{% endblock %}
+
+
+{% block ending %}
+        <button class="collapse">Collapse</button>
+        <section class="text">
+            <h2>Good Evening User</h2>
+            <h1></h1>
+        </section>
+        <section class="audio">
+            <iframe width="360" height="200" src="https://www.youtube.com/embed/5qap5aO4i9A?mute=1&autoplay=1" allow="autoplay"></iframe>
+        </section>
+        <script type="module" src="{% static 'dashboard/js/relax.js' %}"></script>
+{% endblock %}

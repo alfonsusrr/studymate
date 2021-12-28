@@ -1,0 +1,42 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}Agenda{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/agenda.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <h2>Agenda</h2>
+        <section class="agenda">
+            <form>
+                <input type="text" placeholder="Enter New Event" class="todo_input" />
+                <input type="date" class="date">
+                <button class="todo_button" type="submit">Add Event
+                    <i class="fa fa-plus-square"></i>
+                </button>
+                <div class="select">
+                    <select name="todos" class="filter_todo">
+                        <option value="all">All</option>
+                        <option value="completed">Completed</option>
+                        <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </div>
+            </form>
+            <div class="todo_container">
+                <h3>Due Today</h3>
+                <ul class="todo_list"></ul>
+            </div>
+            <div class="vl"></div>
+            <div class="todo_not_today_container">
+                <h3>Upcoming</h3>
+                <ul class="todo_not_today_list"></ul>
+            </div>
+        </section>
+{% endblock %} 
+{% block ending %}
+        <script type="module" src="{% static 'dashboard/js/agenda.js' %}"></script>
+{% endblock %}

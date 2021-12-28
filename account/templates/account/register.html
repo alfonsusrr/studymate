@@ -19,18 +19,28 @@ Register
     <h1>Welcome to StudyMate</h1>
     <h1>Please Register before continuing</h1>
 </div>
+<div class="message">
+    {{message}}
+</div>
+
 <section class = "register-box">
     <h2>Register</h2>
     <form method="POST">
         {% csrf_token %}
-        <h4 id="usertext">Username</h4>
-        <input class="username" name="username" placeholder="Enter Your Username" type="text" autofocus autocomplete="off">
+        <h4 class="input-label" id="usertext">Email</h4>
+        <input class="input-box email" name="email" placeholder="Enter Your Email" type="email" autofocus autocomplete="off" value={{email}} required>
 
-        <h4 id="passtext">Password</h4>
-        <input class="password" name="password" placeholder="Enter Your Password" type="text" autocomplete="off">
+        <h4 class="input-label"  id="input-name">Name</h4>
+        <input class="input-box name" name="name" placeholder="Enter Your Name" type="text" autofocus autocomplete="off" value={{name}} required>
 
-        <h4 id="passtext">Re-Enter Password</h4>
-        <input class="password" placeholder="Re-type Your Password" type="text" autocomplete="off">
+        <h4 class="input-label"  id="usertext">Username</h4>
+        <input class="input-box username" name="username" placeholder="Enter Your Username" type="text" autofocus autocomplete="off" value={{username}} required>
+
+        <h4 class="input-label"  id="passtext">Password</h4>
+        <input class="input-box password" name="password" placeholder="Enter Your Password" type="password" autocomplete="off" value={{password}} required>
+
+        <h4 class="input-label"  id="passtext">Re-Enter Password</h4>
+        <input class="input-box password" placeholder="Re-type Your Password" type="password" autocomplete="off" required>
 
         <div class="submit">
             <button type="submit" class="register-btn">Register</button>

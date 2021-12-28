@@ -8,12 +8,12 @@ def home(request):
 
 @login_required
 def relax(request):
-    pass
+    return render(request, 'dashboard/relax.html')
 
 @login_required
 def agenda(request):
-    pass
+    return render(request, 'dashboard/agenda.html')
 
 @login_required
 def search(request):
-    pass
+    return render(request, 'dashboard/search.html')

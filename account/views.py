@@ -3,8 +3,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from .models import *
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def profile(request):
     return render(request, 'account/profile.html')
 
@@ -12,7 +15,35 @@ def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        return HttpResponseRedirect(reverse("login"))
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+
+        if username and password and name and email:
+            user = User.objects.filter(username=username).first()
+            if user is not None:
+                context = {
+                    "username" : username,
+                    "password" : password,
+                    "name" : name,
+                    "email" : email,
+                    "message" : "Username already exists. Please choose other username"
+                }
+                return render(request, 'account/register.html', context)
+            user = User.objects.filter(email=email).first()
+            if user is not None:
+                context = {
+                    "username" : username,
+                    "password" : password,
+                    "name" : name,
+                    "email" : email,
+                    "message" : "Email already registered. Please login"
+                }
+                return render(request, 'account/register.html', context)
+
+            user = User.objects.create_user(username=username, email=email, name=name, password=password)           
+            return HttpResponseRedirect(reverse("login"))
+        else:
+            return render(request, 'account/register.html')
     return render(request, 'account/register.html')
 
 def login_view(request):
@@ -20,7 +51,6 @@ def login_view(request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
-        print(authenticate(username="alfonsus.rr", password="admin"))
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse('dashboard'))
@@ -35,5 +65,4 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 def settings(request):
-    pass
-
+    return render(request, "account/settings.html")

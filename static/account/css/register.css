@@ -94,7 +94,7 @@ button:hover{
 .register-box{
     display: block;
     text-align: center;
-    margin-top: 2%;
+    margin-top: 1%;
     background-color: #32393E;
     margin-left: 35%;
     margin-right: 35%;
@@ -106,13 +106,16 @@ button:hover{
 }
 
 input{
-    text-align: center;
+    text-align: left;
     padding: 1%;
     border-radius: 50px;
     padding-left: 3%;
     padding-right: 3%;
 }
 
+.input-box {
+    width: 300px;
+}
 .username{
     margin-top: 2%;
 }
@@ -131,6 +134,12 @@ input{
 
 .register-btn{
     margin-top: 10%;
+}
+
+.message {
+    text-align: center;
+    margin-top: 10px ;
+    color: rgba(0,136,169,1);
 }
 
 h5, h5 a{

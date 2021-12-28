@@ -42,6 +42,12 @@ footer{
     position: fixed;
 }
 
+.message {
+    text-align: center;
+    margin-top: 10px ;
+    color: rgba(0,136,169,1);
+}
+
 .logo{
     cursor: pointer;
     background-color: #32393E;
@@ -94,7 +100,7 @@ button:hover{
 .login-box{
     display: block;
     text-align: center;
-    margin-top: 2%;
+    margin-top: 1%;
     background-color: #32393E;
     margin-left: 35%;
     margin-right: 35%;

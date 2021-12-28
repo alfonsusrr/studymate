@@ -1,0 +1,42 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}Settings{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'account/css/settings.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <h2>Settings</h2>
+        <div class="display">
+            <h3>Display Image</h3>
+            <img src="../../src/default_relax_bg.jpg">
+        </div>
+        <div class="options">
+            <div class="background_images">
+                <h4>Relax Room - Change Background Image</h4>
+                <input class="background_image" placeholder="Enter a link" type="text">
+            </div>
+            <div class="background_videos">
+                <h4>Relax Room - Change Youtube Video</h4>
+                <input class="background_video" placeholder="Enter a Youtube Link" type="text">
+            </div>
+            <div class="display_texts">
+                <h4>Relax Room - Add Display Text (Max 5)</h4>
+                <input class="display_text" placeholder="Enter a Text" type="text">
+                <div id="added"></div>
+                <button class="add" type="button">+</button>
+            </div>
+            <div class="contacts">
+                <h4>Profile - Contact Information</h4>
+                <button class="contact" type="button">Set to Private</button>
+            </div>
+            <button class="save" type="submit">Save</button>
+        </div>
+{% endblock %}
+{% block ending %}
+        <script type="module" src="{% static 'account/js/settings.js' %}"></script>
+{% endblock %}

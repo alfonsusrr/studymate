@@ -1,52 +1,33 @@
-<!DOCTYPE HTML>
-<html lang="eng">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Studymate || Note Share</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="share.css">
-    </head>
-    <body>
-        <section class="home_section">
-            <header>
-                <img class="logo" src="../../src/logo.jpg" alt="logo">
-                <nav>
-                    <ul class="nav__links">
-                        <li><a href="../about/about.html">About</a></li>
-                        <li><a href="../help/help.html">Help</a></li>
-                        <li><a href="../contacts/contacts.html">Contacts</a></li>
-                        
-                    </ul>
-                </nav>
-                <a class="cta" href="../profile/profile.html"><button>Your Profile</button></a>
-            </header>
-        </section>
-        <section class="search">
-            <h2>Search Notes</h2>
-            <input type="text" class="search_notes" placeholder="Search a Topic">
-            <button type="submit" class="result">Search</button>
-        </section>
-        <section class="public">
-            <div class="notes">
-                <img src="../../src/note_default.jpg">
-                <h4>Note Name</h4>
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div>
+{% extends "main/main.html" %}
+
+{% block title %}Upload Note{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'notes/css/upload.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <h2>Upload Your Notes</h2>
+        <div class="data">
+            <h3>Enter Title</h3>
+            <input class="name" placeholder="Enter Your Note Title">
+            <div class="links">
+                <h3>Enter Note Link</h3>
+                <input class="link" placeholder="Enter Your Note Link">
             </div>
-        </section>
+            <div class="desc">
+                <h3>Description</h3>
+                <input class="description" placeholder="Enter a Description">
+            </div>
+            <div class="buttons">
+                <button class="public">Set to Public</button>
+                <button class="private">Set to Private</button>
+            </div>
+            <button class="submit">Upload</button>
+        </div>
         <div class="sidebar">
             <div class="logo_content">
                 <div class="logo">
@@ -114,11 +95,7 @@
                 </li>
             </ul>
         </div>
-        <script type="module" src="share.js"></script>
-    </body>
-    <br>
-    <br>
-    <footer>
-        Copyright&copy;Studymate - CS50x Final Project
-    </footer>
-</html>
+        <br>
+        <br>
+        <script type="module" src="{% static 'notes/js/upload.js' %}"></script>
+{% endblock %}

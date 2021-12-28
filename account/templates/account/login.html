@@ -17,6 +17,9 @@ Login
         <h1>Welcome to StudyMate</h1>
         <h1>Please login before continuing</h1>
     </div>
+    <div class="message">
+        {{message}}
+    </div>
     <section class = "login-box">
         <h2>Login</h2>
         <h4 id="usertext">Username</h4>
@@ -32,5 +35,7 @@ Login
         </form>
         <h5>Don't Have An Account Yet?  <a href="{% url 'register' %}">Register</a></h5>
     </section>
-</body>
+    <br>
+    <br>
+    <br>
 {% endblock %}

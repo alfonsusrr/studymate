@@ -2,13 +2,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class AccountManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, name, username, password=None):
         if not email:
             raise ValueError("Users must have an email address")
         if not username:
             raise ValueError("Users must have a username")
         user = self.model(
             email=self.normalize_email(email),
+            name=name,
             username=username,
         )
         user.set_password(password)
@@ -18,6 +19,7 @@ class AccountManager(BaseUserManager):
     def create_superuser(self, email, username, password):
         user = self.model(
             email=self.normalize_email(email),
+            name=name,
             username=username,
         )
         user.set_password(password)
@@ -31,7 +33,7 @@ def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{"profile_image.png"}'
 
 def get_default_profile_image():
-    return f'profle_images/proifle.png'
+    return f'profile_images/profile.png'
 
 class User(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(verbose_name="email", max_length=60, unique=True)
