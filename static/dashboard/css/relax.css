@@ -409,6 +409,7 @@ select{
 .collapse{
     display:flexbox;
     margin-left: 90%;
+    margin-top: 2%;
     background-color: black;
 }
 
