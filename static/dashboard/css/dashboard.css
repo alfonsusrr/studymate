@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
-
 *{
     margin: 0;
     padding: 0;
@@ -243,22 +242,30 @@ button:hover{
     margin-left: 250px;
 }
 
+.flex-container-top {
+    display: flex;
+    margin-left: 80px;
+    align-items: flex-start;
+}
+
 .agenda{
-    margin-left: 100px;
+    margin-left: 10px;
     transition: 0.5s ease;
+    width: 38%;
+    padding-right: 5px;
+    overflow-y: hidden;
+    min-height: auto;
 }
 
 .agenda.active{
-    margin-top: 70px;
-    margin-left: 300px;
     transition: 0.5s ease;
 }
 
 .recommend{
-    margin-left: 636px;
+    margin-left: auto;
     transition: 0.5s ease;
     position: relative;
-    margin-top: 20px;
+    width: 60%;
 }
 
 .recommend.active{
@@ -268,17 +275,16 @@ button:hover{
 
 .recommend.active .caption{
     transition: 0.5s ease;
-    padding: 5px 9px;
 }
 
 .recommend.active img{
-    height: 300px;
     transition: 0.5s ease;
 }
 
 .recommend img{
-    width: 96%;
-    height: 375px;
+    margin-top: 0;
+    width: 100%;
+    height: auto;
     transition: 0.5s ease;
 }
 
@@ -311,26 +317,32 @@ button:hover{
 }
 
 .caption{
+    float: right;
     color: white;
     font-size: 15px;
-    padding: 5px 12px;
+    padding: 8px 0;
     position: absolute;
     bottom: 30px;
-    width: 92.7%;
+    width: 100%;
     text-align: center;
     background-color: black;
     transition: 0.5s ease;
 }
 
+.dot-group {
+    margin-left: 49%;
+}
+
 .dot{
     cursor: pointer;
-    height: 15px;
-    width: 15px;
+    height: 10px;
+    width: 10px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.5s ease;
     margin: 0 2px;
+    text-align: center;
 }
 
 .dotActive, .dot:hover{
@@ -356,27 +368,29 @@ button:hover{
 
 form{
     display: flex;
-    min-height: 15vh;
-    justify-content: left;
+    min-height: 8vh;
     align-items: center;
-    transform: translateY(-450%);
 }
 
 form input, form button{
     padding: 0.4 rem;
     border-radius: 10px;
-    font-size: 1.6 rem;
+    font-size: 15px;
     background: white;
 }
 
+form input {
+    width: 50%;
+}
 form button{
     color: white;
     background: rgb(127, 80, 201);
     cursor: pointer;
     transition: all 0.3 ease;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 15px;
     margin-left: 5px;
+    width: 23%
 }
 
 form button:hover{
@@ -415,18 +429,16 @@ select{
 }
 
 .select:hover::after{
-   color: #583429;
+color: #583429;
 }
 
 .todo_container{
     display: flex;
     justify-content: left;
-    align-items: center;
-    margin-top: -460px;
 }
 
 .todo_list{
-    min-width: 40%;
+    width: 100%;
     list-style: none;
 }
 
@@ -555,4 +567,52 @@ select{
 
 .todo_item{
     padding-left: 2%;
+}
+
+@media only screen and (max-width: 1500px) {
+    .recommend{
+        width: 55%
+    }
+    .agenda{
+        width: 43%
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    .recommend{
+        width: 50%
+    }
+    .agenda{
+        width: 48%
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .recommend{
+        width: 50%
+    }
+    
+    form input{
+        width: 45%
+    }
+    form button{
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 1030px) {
+    form {
+        margin-top: 10px;
+        display: block;
+        min-height: 8vh;
+    }
+    form input{
+        width: 60%
+    }
+    form button{
+        width: 30%
+    }
+    .select {
+        width: 30%;
+    }
 }

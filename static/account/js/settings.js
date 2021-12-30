@@ -22,8 +22,15 @@ contact.onclick = function(){
 
 let add = document.querySelector(".add");
 
-var counter = 0
+if (private == "True") {
+    private = true;
+    contact.classList.toggle("on");
+}
+else if(private == "False") {
+    private = false;
+}
 
+var counter = 0
 add.onclick = function(){
     counter += 1
     if(counter > 4){
@@ -31,3 +38,20 @@ add.onclick = function(){
     }
     document.getElementById("added").innerHTML += "<input class='display_text' placeholder='Enter a Text' type='text'><br>";
 }
+
+$("#private").click(function () {
+    private = !private
+})
+
+$("#method-image").change(function () {
+    var method = $(this).find("option:selected").attr("value");
+    var input = document.querySelector("#background-image");
+    if (method == "link") {
+        input.type = "text"
+    }
+    else {
+        input.type = "file"
+        input.accept = "image/png, image/jpeg, image/jpg"
+    }
+
+})

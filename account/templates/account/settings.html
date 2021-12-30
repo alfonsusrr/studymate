@@ -18,25 +18,34 @@
         <div class="options">
             <div class="background_images">
                 <h4>Relax Room - Change Background Image</h4>
-                <input class="background_image" placeholder="Enter a link" type="text">
+                <button class="button-default" type="button" id="default_image">Default</button>
+                <select id="method-image">
+                    <option value="link">Link</option>
+                    <option value="local">Local</option>
+                </select>
+                <input id="background-image" class="background_image" placeholder="Enter a link" type="text">
             </div>
             <div class="background_videos">
                 <h4>Relax Room - Change Youtube Video</h4>
-                <input class="background_video" placeholder="Enter a Youtube Link" type="text">
+                <button class="button-default" type="button" id="default_music">Default</button><input class="background_video" placeholder="Enter a Youtube Link" type="text">
             </div>
             <div class="display_texts">
                 <h4>Relax Room - Add Display Text (Max 5)</h4>
+                <button class="button-default" type="button" id="default_text">Default</button>
                 <input class="display_text" placeholder="Enter a Text" type="text">
                 <div id="added"></div>
                 <button class="add" type="button">+</button>
             </div>
             <div class="contacts">
                 <h4>Profile - Contact Information</h4>
-                <button class="contact" type="button">Set to Private</button>
+                <button class="contact" type="button" id="private">Set to Private</button>
             </div>
             <button class="save" type="submit">Save</button>
         </div>
 {% endblock %}
 {% block ending %}
-        <script type="module" src="{% static 'account/js/settings.js' %}"></script>
+        <script>
+            let private = "{{private}}"
+        </script>
+        <script type="text/javascript" src="{% static 'account/js/settings.js' %}"></script>
 {% endblock %}

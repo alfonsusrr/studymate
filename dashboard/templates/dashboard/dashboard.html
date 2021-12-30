@@ -10,45 +10,47 @@
 
 
 {% block content %}
-    <section class="recommend">
-        <div class="trans fade">
-            <img src="../../static/images/placeholder.jpg">
-            <div class="caption">CS50x</div>
-        </div>
-        <div class="trans fade">
-            <img src="../../static/images/placeholder1.jpg">
-            <div class="caption">CS50 AI</div>
-        </div>
-        <div class="trans fade">
-            <img src="../../static/images/placeholder.jpg">
-            <div class="caption">CS50x</div>
-        </div>
-        <a class="previous" onclick="slides(-1)">&#10094;</a>
-        <a class="next" onclick="slides(1)">&#10095;</a>
-        <div class="dot-group">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-    </section>
-    <section class="agenda">
-        <form>
-            <input type="text" placeholder="Enter New Event Today" class="todo_input" />
-            <button class="todo_button" type="submit">Add Event
-                <i class="fa fa-plus-square"></i>
-            </button>
-            <div class="select">
-                <select name="todos" class="filter_todo">
-                    <option value="all">All</option>
-                    <option value="completed">Completed</option>
-                    <option value="uncompleted">Uncompleted</option>
-                </select>
+    <div class="flex-container-top">
+        <section class="agenda">
+            <form id="add-event-form" method=POST action="{% url 'agenda' %}">
+                <input name="title" type="text" placeholder="Enter New Event Today" class="todo_input" />
+                <button class="todo_button" type="submit">Add Event
+                    <i class="fa fa-plus-square"></i>
+                </button>
+                <div class="select">
+                    <select name="todos" class="filter_todo">
+                        <option value="all">All</option>
+                        <option value="completed">Completed</option>
+                        <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </div>
+            </form>
+            <div class="todo_container">
+                <ul class="todo_list"></ul>
             </div>
-        </form>
-        <div class="todo_container">
-            <ul class="todo_list"></ul>
-        </div>
-    </section>
+        </section>
+        <section class="recommend">
+            <div class="trans fade">
+                <img src="../../static/images/placeholder.jpg">
+                <div class="caption">CS50x</div>
+            </div>
+            <div class="trans fade">
+                <img src="../../static/images/placeholder1.jpg">
+                <div class="caption">CS50 AI</div>
+            </div>
+            <div class="trans fade">
+                <img src="../../static/images/placeholder.jpg">
+                <div class="caption">CS50x</div>
+            </div>
+            <a class="previous" onclick="slides(-1)">&#10094;</a>
+            <a class="next" onclick="slides(1)">&#10095;</a>
+            <div class="dot-group">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+    </div>
     <br>
     <br>
     <section class="note_rec">
@@ -88,37 +90,74 @@
     </section>
 {% endblock %} 
 {% block ending  %} 
-<script type="module" src="{% static 'dashboard/js/dashboard.js' %}"></script>
-    <script>
-        var slidesIndex = 1;
-        showSlides(slidesIndex);
-
-        function slides(i){
-            showSlides(slidesIndex += i);
+<script type="text/javascript" src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script>
+    var token = "{{csrf_token}}"
+    passDataAgenda("{{agenda}}")
+    $('#add-event-form').submit(function (e) {
+        e.preventDefault();
+        var dateNow = currentdate.getFullYear() + "-" + (currentdate.getMonth()+1)  + "-" + currentdate.getDate();
+        
+        var date = dateNow
+        
+        var title = this.title.value
+        
+        if(title === ""){
+            return null;
         }
 
-        function currentSlide(i){
-            showSlides(slidesIndex = i);
+        if(title.length > 100){
+            alert("Input must be between 0 and 100 characters");
+            return null;
         }
 
-        function showSlides(i){
-                var n;
-                var slide = document.getElementsByClassName("trans");
-                var dot = document.getElementsByClassName("dot");
-                if (i > slide.length) {
-                    slidesIndex = 1;
-                }
-                if (i < 1){
-                    slidesIndex = slide.length;
-                }
-                for(n = 0; n < slide.length; n++){
-                    slide[n].style.display = "none";
-                }
-                for(n = 0; n < dot.length; n++){
-                    dot[n].className = dot[n].className.replace(" dotActive", "");
-                }
-                slide[slidesIndex-1].style.display = "block";
-                dot[slidesIndex-1].className += " dotActive";
+        $.ajax({
+            type: "POST",
+            url: this.action,
+            data: {
+                "title": title,
+                "date": date,
+                "action": "add",
+                "csrfmiddlewaretoken" : token,
+            }, 
+            success: function(response){
+                addTodo({'id': response, 'title': title, 'due': date, 'completed':false})
             }
-    </script>
+        })
+    })
+</script>
+<script>
+    var slidesIndex = 1;
+    showSlides(slidesIndex);
+
+    function slides(i){
+        showSlides(slidesIndex += i);
+    }
+
+    function currentSlide(i){
+        showSlides(slidesIndex = i);
+    }
+
+    function showSlides(i){
+            var n;
+            var slide = document.getElementsByClassName("trans");
+            var dot = document.getElementsByClassName("dot");
+            if (i > slide.length) {
+                slidesIndex = 1;
+            }
+            if (i < 1){
+                slidesIndex = slide.length;
+            }
+            for(n = 0; n < slide.length; n++){
+                slide[n].style.display = "none";
+            }
+            for(n = 0; n < dot.length; n++){
+                dot[n].className = dot[n].className.replace(" dotActive", "");
+            }
+            slide[slidesIndex-1].style.display = "block";
+            dot[slidesIndex-1].className += " dotActive";
+        }
+</script>
 {% endblock %}

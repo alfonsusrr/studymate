@@ -9,14 +9,27 @@
 {% endblock %}
 
 
+{% block content %}
+<button class="collapse">Collapse</button>
+<section class="text">
+    <h2 id="greetings">Good Evening User</h2>
+    <h1></h1>
+</section>
+<section class="audio">
+    <div id="player"></div>
+</section>
+<section class="toogle-player">
+    <div class="status">Playing ... </div>
+</scetion>
+{% endblock %} 
 {% block ending %}
-        <button class="collapse">Collapse</button>
-        <section class="text">
-            <h2>Good Evening User</h2>
-            <h1></h1>
-        </section>
-        <section class="audio">
-            <iframe width="360" height="200" src="https://www.youtube.com/embed/5qap5aO4i9A?mute=1&autoplay=1" allow="autoplay"></iframe>
-        </section>
-        <script type="module" src="{% static 'dashboard/js/relax.js' %}"></script>
+    <script src="//www.youtube.com/iframe_api"></script>
+    <script type="text/javascript" src="{% static 'dashboard/js/relax.js' %}"></script>  
+    <script>
+        const defaultBG = ["{% static 'images/default_relax_bg.jpg' %}"]
+        
+        const user = "{{user_name}}";
+        console.log(user)
+        document.body.style.backgroundImage = "url('" + defaultBG + "')";
+    </script>  
 {% endblock %}

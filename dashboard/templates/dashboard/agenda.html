@@ -12,10 +12,10 @@
 {% block content %}
         <h2>Agenda</h2>
         <section class="agenda">
-            <form>
-                <input type="text" placeholder="Enter New Event" class="todo_input" />
-                <input type="date" class="date">
-                <button class="todo_button" type="submit">Add Event
+            <form id="agenda-form" action="{% url 'agenda' %}" method="POST">
+                <input name="title" type="text" placeholder="Enter New Event" class="todo_input" />
+                <input name="date" type="date" class="date">
+                <button class="todo_button" type="submit" value="submit">Add Event
                     <i class="fa fa-plus-square"></i>
                 </button>
                 <div class="select">
@@ -28,9 +28,13 @@
             </form>
             <div class="todo_container">
                 <h3>Due Today</h3>
-                <ul class="todo_list"></ul>
+                <ul class="todo_list">
+                </ul>
             </div>
-            <div class="vl"></div>
+            <div class="todo_week_container">
+                <h3>Due This Week</h3>
+                <ul class="todo_week_list"></ul>
+            </div>
             <div class="todo_not_today_container">
                 <h3>Upcoming</h3>
                 <ul class="todo_not_today_list"></ul>
@@ -38,5 +42,71 @@
         </section>
 {% endblock %} 
 {% block ending %}
-        <script type="module" src="{% static 'dashboard/js/agenda.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script type="text/javascript" src="{% static 'dashboard/js/agenda.js' %}"></script>
+        
+        <script type="text/javascript">
+            var token = "{{csrf_token}}";
+            passDataAgenda("{{agenda}}")
+        </script>
+        <script>
+            $('#agenda-form').submit(function (e) {
+                e.preventDefault();
+                var currentdate = new Date()
+                var dateNow = currentdate.getFullYear() + "-" + (currentdate.getMonth()+1)  + "-" + currentdate.getDate();
+                
+                var date = this.date.value // value of date from input
+                if(date == ""){ // if empty, use today's date
+                    date = dateNow;
+                }
+
+                var dateArray = [parseInt(date.slice(0, 4)), parseInt(date.slice(5, 7)), parseInt(date.slice(8))] //making date into array
+                var dateNowArray = [currentdate.getFullYear(), currentdate.getMonth()+1, currentdate.getDate()]
+
+                var title = this.title.value
+
+                if(dateArray[0] < dateNowArray[0]){
+                    alert("Date must be at least today");
+                    return null
+                }
+                else if(dateArray[0] == dateNowArray[0]){
+                    if (dateArray[1] < dateNowArray[1]){
+                        alert("Date must be at least today");
+                        return null
+                    }
+                    else if(dateArray[1] == dateNowArray[1]){
+                        if (dateArray[2] < dateNowArray[2]){
+                            alert("Date must be at least today");
+                            return null
+                        }
+                    }
+                }
+                
+                if(title === ""){
+                    return null;
+                }
+                if(title.length > 100){
+                    alert("Input must be between 0 and 100 characters");
+                    return null;
+                }
+
+                var serializedData = $(this).serialize();
+
+
+                $.ajax({
+                    type: "POST",
+                    url: this.action,
+                    data: {
+                        "title": title,
+                        "date": date,
+                        "action": "add",
+                        "csrfmiddlewaretoken" : token,
+                    }, 
+                    success: function(response){
+                        addTodo({'id': response, 'title': title, 'due': date, 'completed':false})
+                    }
+                })
+            })
+        </script>
 {% endblock %}

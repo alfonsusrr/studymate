@@ -472,3 +472,45 @@ select{
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+
+@media (min-width: 920px) and (max-width: 1240px){
+    .recentnotes{
+        margin-left: 50%;
+    }
+    .recentnotes.active{
+        margin-left: 30%;
+        margin-top: 50%;
+    }
+}
+
+@media (min-width: 665px) and (max-width: 919.98px){
+    .profile.active{
+        margin-left: 45%;
+    }
+
+    .recentnotes{
+        margin-left: 25%;
+        margin-top: 60%;
+    }
+
+    .recentnotes.active{
+        margin-left: 45%;
+        margin-top: 60%;
+    }
+}
+
+@media (max-width: 664.98px){
+    .profile.active{
+        margin-left: 45%;
+    }
+
+    .recentnotes{
+        margin-left: 25%;
+        margin-top: 80%;
+    }
+
+    .recentnotes.active{
+        margin-left: 60%;
+        margin-top: 80%;
+    }
+}

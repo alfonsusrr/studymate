@@ -76,6 +76,7 @@ button{
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+    margin-right: 15px;
 }
 
 .cta{
@@ -265,11 +266,24 @@ h2.active{
     transition: 0.5s ease;
 }
 
-input{
+input, select{
     margin-top: 0.5%;
     padding-left: 5px;
     padding-right: 5px;
     width: 300px;
+    border-radius: 8px;
+    height: 30px;
+    border: 1px solid grey;
+}
+
+select {
+    width: 80px;
+    padding-top: 5px;
+    height: 30px;
+}
+
+.background_image {
+    padding-top: 5px;
 }
 
 .background_videos{
@@ -280,19 +294,19 @@ input{
     margin-top: 2%;
 }
 
-.display_texts button{
+.add{
     margin-top: 5px;
     padding: 5px;
     width: 35px;
 }
 
-.contacts{
+.contacts, .default-button{
     margin-top: 2%;
 }
 
-.contacts button{
+.contacts button, .default-button button{
     margin-top: 5px;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -300,19 +314,23 @@ input{
     opacity: 0.5;
 }
 
-.contact:hover{
+.contact:hover, .default-button:hover{
     opacity: 0.75;
     background-color: rgba(0,136,169,1);
 }
 
-.contact.on{
+.contact.on, .default-button.on{
     opacity: 1;
     background-color: rgba(0,136,169,1);
 }
 
-.contact.on:hover{
+.contact.on:hover, .default-button.on:hover{
     opacity: 0.75;
     background-color: black;
+}
+
+.default-button button {
+    margin-right: 20px;
 }
 
 .save{
@@ -347,4 +365,42 @@ input{
 
 .save{
     margin-bottom: 5%;
+}
+
+#default-text {
+    display: block;
+}
+
+@media (min-width: 800px) and (max-width: 1140px){
+
+    input{
+        width: 30%;
+    }
+
+    .display img{
+        width: 30%;
+    }
+}
+
+@media (max-width: 799.98px){
+    body{
+        font-size: x-small;
+    }
+
+    input{
+        width: 30%;
+    }
+
+    .display img{
+        width: 20%;
+        margin-left: 70%;
+    }
+
+    .display h3{
+        margin-left: 70%;
+    }
+
+    .options{
+        margin-left: 20%;
+    }
 }

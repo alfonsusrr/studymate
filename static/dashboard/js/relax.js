@@ -16,10 +16,25 @@ collapse.onclick = function(){
     text.classList.toggle("position");
 }
 
+var playerReady = false;
 document.addEventListener('DOMContentLoaded',function(event){
     // array with texts to type in typewriter
-    var dataText = ["Don't Forget To Do _____", "Have a Nice Evening!"];
+    var dataText = ["Always be happy!"];
+    
+    const now = new Date()
+    if (now.getHours < 10) {
+      time = "Morning"
+    }
+    else if (now.getHours < 17) {
+      time = "Day"
+    }
+    else {
+      time = "Evening"
+    }
 
+    const text = "Good " + time + " " + user;
+    var greetings = document.querySelector("#greetings");
+    greetings.innerHTML = text;
     // type one text in the typwriter
     // keeps calling itself until the text is finished
     function typeWriter(text, i, fnCallback) {
@@ -58,3 +73,46 @@ document.addEventListener('DOMContentLoaded',function(event){
     // start the text animation
     StartTextAnimation(0);
   });
+
+  var player;
+  var isUnMuted = false;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: '5qap5aO4i9A',
+      height: '98',
+      width: '175',
+      playerVars: {
+        'modestbranding': 1,
+        'showinfo': 0,
+        'autoplay': 1
+      },
+      events: {
+        'onReady': function() {
+          player.unMute();
+          player.playVideo();
+          playerReady = true;
+        },
+        'onStateChange': function () {
+          if (player.isMuted() && player.getPlayerState() == 2 && !isUnMuted) {
+              player.unMute();
+              player.playVideo();
+              isUnMuted = true;
+          }
+        }
+      }
+    });
+  }
+  var playerDiv = document.querySelector('#player');
+  playerDiv.style.display = "none"
+
+$('body').click(function() {
+  if (playerReady) {
+    if(player.getPlayerState() == -1 || player.getPlayerState() == 2){
+      player.playVideo()
+    }
+    else if(player.getPlayerState() == 1){
+      player.pauseVideo()
+    }
+  }
+})

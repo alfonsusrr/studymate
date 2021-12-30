@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from .models import *
+from dashboard.models import *
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -65,4 +66,18 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 def settings(request):
-    return render(request, "account/settings.html")
+    if request.method == 'POST':
+        return HttpResponse('200')
+    else:
+        background = RelaxSettings.objects.filter(user=request.user).first()
+        music = MusicLinks.objects.filter(owner__user=request.user).first()
+        if music is None:
+            music = False
+        if background is None:
+            background = False
+        context = {
+            "private" : request.user.hide_email,
+            "background" : background,
+            "music": music
+        }
+        return render(request, "account/settings.html", context)
