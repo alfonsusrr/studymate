@@ -1,14 +1,20 @@
 {% extends 'main/main.html' %}
-        {% block sidebar %}
-        <div class="sidebar">
-            <div class="logo_content">
-                <div class="logo">
-                    <img src="../../static/images/logo.jpg" alt="logo">
-                    <div class="logo_name">StudyMate</div>
-                </div>
-                <img src="../../static/images/menu_burger.jpg" alt="menu_logo" id="menu">
-            </div>
-            <ul class="nav_list">
+{% block sidebar %}
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo">
+            <img src="../../static/images/logo.jpg" alt="logo">
+            <div class="logo_name">StudyMate</div>
+        </div>
+        <img src="../../static/images/menu_burger.jpg" alt="menu_logo" id="menu">
+    </div>
+    <ul class="nav_list">
+                <li>
+                    <a href="#">
+                        <img src="../../static/images/profile.jpg">
+                        <span class="links_name">&nbsp; &nbsp; Edit Profile</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{% url 'dashboard' %}">
                         <i class="fa fa-home fa-2x"></i>
