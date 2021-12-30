@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse 
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
+from django.views.decorators.csrf import csrf_exempt
 from .models import *
 import datetime
 import json
@@ -27,12 +28,56 @@ def home(request):
 
 @login_required
 def relax(request):
-    video = []
-    image = ""
+    music = []
+    text = []
+
+    default_text = ["This is default text", "Always Be Happy!", "Thank you for using studymate"]
+    default_music = ["DWcJFNfaw9c"]
+    settings = RelaxSettings.objects.filter(user=request.user)
+    if len(settings) == 0:
+        image = None
+        image_method = "default"
+        music = default_music
+        text = default_text
+    else:
+        settings = settings[0]
+        if settings.link_image is not None:
+            image = settings.link_image
+            image_method = "link"
+        else:
+            image = settings.local_image
+            image_method = "local"
+        if settings.use_default_image:
+            image_method = "default"
+    
+        if settings.use_default_text:
+            text = default_text
+        else:
+            textDB = RelaxText.objects.filter(owner=settings)
+            if len(textDB) == 0:
+                text = default_text
+            else:
+                for t in textDB:
+                    text.append(t.text)
+            
+        if settings.use_default_music:
+            music = default_music
+        else:
+            musicDB = MusicLinks.objects.filter(owner=settings)
+            if len(musicDB) == 0:
+                music = default_music
+            else:
+                for m in musicDB:
+                    music.append(m.link)
+    music = json.dumps(music)
+    text = json.dumps(text)
+    
     context = {
         'user_name': request.user.name,
-        'video': video,
+        'music': music,
         'bgimage': image,
+        'image_method': image_method,
+        'text': text
     }
     return render(request, 'dashboard/relax.html', context)
 

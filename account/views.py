@@ -7,6 +7,8 @@ from django.db.models import Q
 from .models import *
 from dashboard.models import *
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 @login_required
 def profile(request):
@@ -65,19 +67,124 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
 
+@csrf_exempt
 def settings(request):
     if request.method == 'POST':
-        return HttpResponse('200')
+        data = request.POST
+        method = data["method"]
+        
+        music = data["music"].split(",")
+        text = data["text"].split(",")
+
+        for i in range(len(text)):
+            text[i] = text[i].replace("&comma", ",")
+
+        image = None
+        image_link = None
+        return_image = None
+        img_change = data["image_change"]
+        if img_change == "True":
+            if method == "local":
+                image = request.FILES['image']
+            else:
+                image_link = data["image"]
+
+        if data["default_image"] == "true":
+            default_image = True
+        else:
+            default_image = False
+        if data["default_text"] == "true":
+            default_text = True
+        else:
+            default_text = False
+        if data["default_music"] == "true":
+            default_music = True
+        else:
+            default_music = False
+
+        settings = RelaxSettings.objects.filter(user=request.user).first()
+        if settings == None:
+            settings = RelaxSettings(user=request.user, local_image=image, link_image=image_link, use_default_image=default_image, use_default_music=default_music, use_default_text=default_text)
+            settings.save()
+        else:
+            if img_change == "True":
+                if method == "link":
+                    settings.local_image = None
+                    settings.link_image = image_link
+                else:
+                    settings.local_image = image
+                settings.link_image = None
+            settings.use_default_image=default_image
+            settings.use_default_text=default_text
+            settings.use_default_music=default_music
+            settings.save()
+
+            if method == "link":
+                return_image = image_link
+            else:
+                return_image = "/media/" + str(settings.local_image)
+        
+        musicDB = MusicLinks.objects.filter(owner__user=request.user)
+        for m in musicDB:
+            if len(music) != 0:
+                m.link = music.pop(0)
+                m.save()
+            else:
+                m.delete()
+        for m in music:
+            musicAdd = MusicLinks(owner=settings, link=m)
+            musicAdd.save()
+        
+        textDB = RelaxText.objects.filter(owner__user=request.user)
+        for t in textDB:
+            if len(text) != 0:
+                t.text = text.pop(0)
+                t.save()
+            else:
+                t.delete()
+        for t in text:
+            textAdd = RelaxText(owner=settings, text=t)
+            textAdd.save()
+        return HttpResponse(return_image)
     else:
-        background = RelaxSettings.objects.filter(user=request.user).first()
-        music = MusicLinks.objects.filter(owner__user=request.user).first()
-        if music is None:
-            music = False
-        if background is None:
-            background = False
+        settings = RelaxSettings.objects.filter(user=request.user).first()
+        musicList = MusicLinks.objects.filter(owner__user=request.user)
+        texts = RelaxText.objects.filter(owner__user=request.user)
+        d_music = True
+        d_image = True
+        d_text = True
+
+        musicLink = []
+        textList = []
+        for music in musicList:
+            musicLink.append(music.link)
+        for text in texts:
+            textList.append(text.text)
+
+        musicLink = json.dumps(musicLink)
+        textList = json.dumps(textList)
+
+        if settings is None:
+            image = None
+            method = "default"
+        else:
+            if settings.link_image is not None:
+                image = settings.link_image
+                method = "link"
+            else:
+                image = settings.local_image
+                method = "local"
+            d_image = settings.use_default_image
+            d_music = settings.use_default_music
+            d_text = settings.use_default_text
         context = {
             "private" : request.user.hide_email,
-            "background" : background,
-            "music": music
+            "bgimage" : image,
+            "method": method,
+            "music": musicLink,
+            "text": textList,
+            "d_music": d_music,
+            "d_image": d_image,
+            "d_text": d_text
         }
         return render(request, "account/settings.html", context)

@@ -22,16 +22,30 @@
     <button class="playButton"><i class="fa fa-play fa-2x" aria-hidden="true"></i></button>
     <button class="pauseButton"><i class="fa fa-pause fa-2x" aria-hidden="true"></i></button>
     <div class="status">Now playing ...</div>
-</scetion>
+</section>
 {% endblock %} 
 {% block ending %}
-    <script src="//www.youtube.com/iframe_api"></script>
-    <script type="text/javascript" src="{% static 'dashboard/js/relax.js' %}"></script>  
+    <script src="//www.youtube.com/iframe_api"></script> 
     <script>
         const defaultBG = ["{% static 'images/default_relax_bg.jpg' %}"]
         
         const user = "{{user_name}}";
-        console.log(user)
-        document.body.style.backgroundImage = "url('" + defaultBG + "')";
+        let image_method = "{{image_method}}"
+        if (image_method == "local"){
+            let userBG = "/media/{{bgimage}}";
+            document.body.style.backgroundImage = "url('" + userBG + "')";
+
+        }
+        else if (image_method == "link") {
+            let userBG = "{{bgimage}}"
+            document.body.style.backgroundImage = "url('" + userBG + "')";
+        }
+        else {
+            document.body.style.backgroundImage = "url('" + defaultBG + "')";
+        }
+        
+        let music = {{music|safe}}
+        let textData = {{text|safe}}
     </script>  
+    <script type="text/javascript" src="{% static 'dashboard/js/relax.js' %}"></script> 
 {% endblock %}

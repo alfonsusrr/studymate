@@ -28,16 +28,16 @@ Register
     <form method="POST">
         {% csrf_token %}
         <h4 class="input-label" id="usertext">Email</h4>
-        <input class="input-box email" name="email" placeholder="Enter Your Email" type="email" autofocus autocomplete="off" value={{email}} required>
+        <input class="input-box email" name="email" placeholder="Enter Your Email" type="email" autofocus autocomplete="off" value="{{email}}" required>
 
         <h4 class="input-label"  id="input-name">Name</h4>
-        <input class="input-box name" name="name" placeholder="Enter Your Name" type="text" autofocus autocomplete="off" value={{name}} required>
+        <input class="input-box name" name="name" placeholder="Enter Your Name" type="text" autofocus autocomplete="off" value="{{name}}" required>
 
         <h4 class="input-label"  id="usertext">Username</h4>
-        <input class="input-box username" name="username" placeholder="Enter Your Username" type="text" autofocus autocomplete="off" value={{username}} required>
+        <input class="input-box username" name="username" placeholder="Enter Your Username" type="text" autofocus autocomplete="off" value="{{username}}" required>
 
         <h4 class="input-label"  id="passtext">Password</h4>
-        <input class="input-box password" name="password" placeholder="Enter Your Password" type="password" autocomplete="off" value={{password}} required>
+        <input class="input-box password" name="password" placeholder="Enter Your Password" type="password" autocomplete="off" value="{{password}}" required>
 
         <h4 class="input-label"  id="passtext">Re-Enter Password</h4>
         <input class="input-box password" placeholder="Re-type Your Password" type="password" autocomplete="off" required>

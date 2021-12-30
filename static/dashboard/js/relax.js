@@ -39,7 +39,7 @@ pauseButton.onclick = function() {
 var playerReady = false;
 document.addEventListener('DOMContentLoaded',function(event){
     // array with texts to type in typewriter
-    var dataText = ["Always be happy!"];
+    var dataText = textData;
     
     const now = new Date()
     if (now.getHours < 10) {
@@ -96,10 +96,11 @@ document.addEventListener('DOMContentLoaded',function(event){
 
   var player;
   var isUnMuted = false;
+  var music_now = 0;
 
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-      videoId: '5qap5aO4i9A',
+      videoId: music[music_now],
       height: '98',
       width: '175',
       playerVars: {

@@ -13,12 +13,12 @@
         <h2>Settings</h2>
         <div class="display">
             <h3>Display Image</h3>
-            <img src="../../src/default_relax_bg.jpg">
+            <img id="display-image" src="">
         </div>
         <div class="options">
             <div class="background_images">
                 <h4>Relax Room - Change Background Image</h4>
-                <button class="button-default" type="button" id="default_image">Default</button>
+                <button class="default-button" type="button" id="default-image">Default</button>
                 <select id="method-image">
                     <option value="link">Link</option>
                     <option value="local">Local</option>
@@ -26,26 +26,36 @@
                 <input id="background-image" class="background_image" placeholder="Enter a link" type="text">
             </div>
             <div class="background_videos">
-                <h4>Relax Room - Change Youtube Video</h4>
-                <button class="button-default" type="button" id="default_music">Default</button><input class="background_video" placeholder="Enter a Youtube Link" type="text">
+                <h4>Relax Room - Add Youtube Video (Max 5) </h4>
+                <button class="default-button" type="button" id="default-music">Default</button><input id="background-music-1" class="background_video" placeholder="Enter a Youtube Video ID (?v=...)" type="text">
+                <div id="added-video"></div>
+                <button id="add-video" class="add" type="button">+</button>
             </div>
             <div class="display_texts">
                 <h4>Relax Room - Add Display Text (Max 5)</h4>
-                <button class="button-default" type="button" id="default_text">Default</button>
-                <input class="display_text" placeholder="Enter a Text" type="text">
-                <div id="added"></div>
-                <button class="add" type="button">+</button>
+                <button class="default-button" type="button" id="default-text">Default</button>
+                <input id="text-1" class="display_text" placeholder="Enter a Text" type="text">
+                <div id="added-text"></div>
+                <button id="add-text" class="add" type="button">+</button>
             </div>
             <div class="contacts">
                 <h4>Profile - Contact Information</h4>
                 <button class="contact" type="button" id="private">Set to Private</button>
             </div>
-            <button class="save" type="submit">Save</button>
+            <button id="submit" class="save" type="submit">Save</button>
         </div>
 {% endblock %}
 {% block ending %}
         <script>
             let private = "{{private}}"
+            let default_music = '{{d_music}}';
+            let default_image = '{{d_image}}';
+            let default_text ='{{d_text}}';
+            let method_image = '{{method}}';
+            let image = '{{bgimage}}';
+            const url = "{% url 'settings' %}";
+            let music = {{music|safe}};
+            let text = {{text|safe}};
         </script>
         <script type="text/javascript" src="{% static 'account/js/settings.js' %}"></script>
 {% endblock %}

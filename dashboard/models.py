@@ -1,5 +1,6 @@
 from django.db import models
 from account.models import *
+from studymate.storage import OverwriteStorage
 
 def get_course_banner_filepath(self, filename):
     return f'banner/{self.pk}/{"banner.png"}'
@@ -8,12 +9,12 @@ def get_default_banner_image():
     return f'banner/banner.png'
 
 def get_bg_filepath(self, filename):
-    return f'banner/{self.user.pk}/background/{"bg.png"}'
+    return f'{self.user.pk}/background/bg.png'
 
 class Course(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.TextField(null=False)
-    profile_image   = models.ImageField(max_length=255, upload_to=get_course_banner_filepath, null=True, blank=True, default=get_default_banner_image())
+    profile_image   = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_course_banner_filepath, null=True, blank=True, default=get_default_banner_image())
     ratings = models.FloatField(null=False, default=0)
 
 class UserCourse(models.Model):
@@ -26,7 +27,7 @@ class UserCourse(models.Model):
 class RelaxSettings(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="relax_settings")
     link_image = models.CharField(max_length=500, null=True)
-    local_image = models.ImageField(max_length=255, upload_to=get_bg_filepath, null=True, blank=True)
+    local_image = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_bg_filepath, null=True, blank=True)
     use_default_image = models.BooleanField(default=True)
     use_default_music = models.BooleanField(default=True)
     use_default_text = models.BooleanField(default=True)
