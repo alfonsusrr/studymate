@@ -1,88 +1,30 @@
+{% extends "main/main_dashboard.html" %}
 
-{% extends 'main/main.html' %}
-
-{% block title %} 
-Edit Profile
-{% endblock %}
-
+{% block title %}Edit Profile{% endblock %}
 {% block head %} 
 {% load static %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'account/css/edit.css' %}">
 {% endblock %}
 
-{% block link_title %} <button>Edit Your Profile</button> {% endblock %} 
 
 {% block content %}
-<div class="sidebar">
-    <div class="logo_content">
-        <div class="logo">
-            <img src="{% static 'images/logo.jpg' %}" alt="logo">
-            <div class="logo_name">StudyMate</div>
-        </div>
-        <img src="../../src/menu_burger.jpg" alt="menu_logo" id="menu">
-    </div>
-    <ul class="nav_list">
-        <li>
-            <a href="/dashboard">
-                <img src="../../src/dashboard.jpg" alt="dashboard">
-                <span class="links_name">&nbsp; &nbsp; Dashboard</span>
-            </a>
-            <span class="tooltip">Dashboard</span>
-        </li>
-        <li>
-            <a href="../agenda/agenda.html">
-                <img src="../../src/agenda.jpg">
-                <span class="links_name">&nbsp; &nbsp; Agenda</span>
-            </a>
-            <span class="tooltip">Agenda</span>
-        </li>
-        <li>
-            <a href="note/archive">
-                <img src="../../src/note_archive.jpg">
-                <span class="links_name">&nbsp; &nbsp; Note Archive</span>
-            </a>
-            <span class="tooltip">Note Archive</span>
-        </li>
-        <li>
-            <a href="note/share">
-                <img src="../../src/note_share.jpg">
-                <span class="links_name">&nbsp; &nbsp; Note Share</span>
-            </a>
-            <span class="tooltip">Note Share</span>
-        </li>
-        <li>
-            <a href="../relax/relax.html">
-                <img src="../../src/relax_room.jpg">
-                <span class="links_name">&nbsp; &nbsp; Relax Room</span>
-            </a>
-            <span class="tooltip">Relax Room</span>
-        </li>
-        <li>
-            <a href="../search/search.html">
-                <img src="../../src/search_courses.jpg">
-                <span class="links_name">&nbsp; &nbsp; Search Courses</span>
-            </a>
-            <span class="tooltip">Search</span>
-        </li>
-        <li>
-            <a href="/account/setting">
-                <img src="../../src/settings.jpg">
-                <span class="links_name">&nbsp; &nbsp; Settings</span>
-            </a>
-            <span class="tooltip">Settings</span>
-        </li>
-        <li>
-            <a href="account/login">
-                <img src="../../src/logout.jpg">
-                <span class="links_name">&nbsp; &nbsp; Logout</span>
-            </a>
-            <span class="tooltip">Logout</span>
-        </li>
-    </ul>
-</div>
+<h2>Edit Your Profile</h2>
 <section class="profile">
-    <img src="../../src/profile.jpg">
+    <div class="background_images">
+        <h3>Change Profile Picture</h3>
+        <button class="default-button" type="button" id="default-image">Default</button>
+        <select id="method-image">
+            <option value="link">Link</option>
+            <option value="local">Local</option>
+        </select>
+        <input id="background-image" class="background_image" placeholder="Enter a link" type="text">
+    </div>
+    <img src="../../../static/images/profile.jpg">
 </section>
-<script type="module" src="edit.js"></script>
+{% endblock %}
+
+{% block ending %}
+<script type="module" src="../../../static/account/js/edit.js"></script>
 {% endblock %}

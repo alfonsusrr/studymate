@@ -243,155 +243,9 @@ button:hover{
     margin-left: 250px;
 }
 
-.agenda{
-    margin-left: 100px;
-    transition: 0.5s ease;
-}
-
-.agenda.active{
-    margin-left: 300px;
-    transition: 0.5s ease;
-}
-
-form{
-    display: flex;
-    min-height: 15vh;
-    justify-content: left;
-    align-items: center;
-}
-
-form input, form button{
-    padding: 0.4 rem;
-    border-radius: 10px;
-    font-size: 1.6 rem;
-    background: white;
-}
-
-form button{
-    color: grey;
-    background: aqua;
-    cursor: pointer;
-    transition: all 0.3 ease;
-    padding: 5px 10px;
-    font-size: 12px;
-    margin-left: 5px;
-}
-
-form button:hover{
-    background-color: lightblue;
-    color: black;
-}
-
-select{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
-    border: none;
-}
-
-.select{
-    margin: 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-select{
-    color: #c065c0;
-    width: 8rem;
-    cursor: pointer;
-    padding: 0.7rem;
-}
-
-.select::after{
-    content: "\25bc";
-    position: absolute;
-    color: #c065c0;
-    top: 7px;
-    right: 6px;
-    pointer-events: none;
-}
-
-.select:hover::after{
-   color: #583429;
-}
-
-.todo_container{
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.todo_list{
-    min-width: 40%;
-    list-style: none;
-}
-
-.todo_input{
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.todo{
-    margin: 5px auto;
-    background: rgb(46, 44, 44);
-    color: #000000;
-    display: flex;
-    font-size: 1.2rem;
-    padding: 0.3rem;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.5s ease;
-    border-radius: 10px;
-}
-
-.todo li {
-    flex: 1;
-    white-space: nowrap;
-}
-
-.complete_btn, .delete_btn{
-    padding: 0.5rem;
-    background: #ff3700;
-    color: white;
-    border: none;
-    margin-left: 0.2rem;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.complete_btn{
-    background: rgb(67, 179, 67);
-}
-.complete_btn:active{
-    background: green;
-}
-
-.delete_btn:active{
-    background: #b65337;
-}
-
-.fa-trash, .fa-check{
-    pointer-events: none;
-}
-
-.completedItem{
-    text-decoration: line-through;
-    opacity: 0.5;
-    transform: scale(0.96);
-}
-
-.fall{
-    transform: 0.3 ease;
-    opacity: 0;
-}
-
 .profile{
-    display: flexbox;
-    position: absolute;
-    margin-left: 8%;
+    text-align: center;
     margin-top: 2%;
-    z-index: -1;
     transition: 0.5s ease;
 }
 
@@ -403,114 +257,47 @@ select{
 .profile img{
     width: 330px;
     height: 330px;
+    margin-top: 3%;
 }
 
-.profile h4{
+h2{
     text-align: center;
-}
-
-.recentnotes{
-    display: flexbox;
-    margin-left: 35%;
     margin-top: 2%;
     transition: 0.5s ease;
 }
 
-.recentnotes.active{
-    margin-left: 50%;
+h2.active{
+    margin-left: 24%;
     transition: 0.5s ease;
 }
 
-.notes{
-    margin-left: 5%;
-    margin-top: 3%;
-    display: inline-block;
+h3{
+    margin-bottom: 1%;
 }
 
-.notes img{
-    margin-left: 10px;
-    max-width: 150px;
-    max-height: 300px;
+.background_images input{
+    width: 40%;
+    font-size: medium;
+    padding: 0px 5px;
 }
 
-.notes h4{
-    text-align: center;
+.background_images select{
+    font-size: medium;
 }
 
-.rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
-
-@media (min-width: 920px) and (max-width: 1240px){
-    .recentnotes{
-        margin-left: 50%;
-    }
-    .recentnotes.active{
-        margin-left: 30%;
-        margin-top: 50%;
-    }
+.background_images button{
+    padding: 5px;
+    border-radius: 10px;
 }
 
 @media (min-width: 665px) and (max-width: 919.98px){
     .profile.active{
         margin-left: 45%;
     }
-
-    .recentnotes{
-        margin-left: 25%;
-        margin-top: 60%;
-    }
-
-    .recentnotes.active{
-        margin-left: 45%;
-        margin-top: 60%;
-    }
 }
 
 @media (max-width: 664.98px){
     .profile.active{
         margin-left: 45%;
-    }
-
-    .recentnotes{
-        margin-left: 25%;
-        margin-top: 80%;
-    }
-
-    .recentnotes.active{
-        margin-left: 60%;
-        margin-top: 80%;
     }
 }
