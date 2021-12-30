@@ -296,10 +296,45 @@ button:hover{
 
 .toogle-player{
     position:absolute;
-    margin-left: 80px;
+    margin-left: 7%;
     bottom: 10%;
+    transition: 0.5s ease;
+}
+
+.toogle-player button{
+    padding: 0px;
+    background-color: inherit;
+}
+
+.toogle-player.position{
+    bottom: -15%;
+    transition: 0.5s ease;
+}
+
+.toogle-player.active{
+    margin-left: 20%;
 }
 
 .status {
     color: white;
+    margin-top: 1%;
+    font-weight: bold;
+    font-size: large;
+}
+
+.playButton{
+    opacity: 0.5;
+}
+
+.pauseButton{
+    margin-left: 5%;
+    opacity: 1;
+}
+
+.playButton.change{
+    opacity: 1;
+}
+
+.pauseButton.change{
+    opacity: 0.5;
 }

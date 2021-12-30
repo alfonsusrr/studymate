@@ -4,16 +4,36 @@ let sidebar = document.querySelector(".sidebar");
 let home = document.querySelector(".home_section");
 let collapse = document.querySelector(".collapse")
 let text = document.querySelector(".text");
+let playerBox = document.querySelector(".toogle-player");
+let status = false;
+let playButton = document.querySelector(".playButton");
+let pauseButton = document.querySelector(".pauseButton");
 
 btn.onclick = function(){
     sidebar.classList.toggle("active");    
     home.classList.toggle("active");
+    playerBox.classList.toggle("active");
+    status = !status;
 }
 
 collapse.onclick = function(){
     sidebar.classList.toggle("collapse");    
     home.classList.toggle("collapse");
     text.classList.toggle("position");
+    playerBox.classList.toggle("position");
+    if(status == true){
+      playerBox.classList.toggle("active");
+    }
+}
+
+playButton.onclick = function() {
+    pauseButton.classList.toggle("change");
+    playButton.classList.toggle("change");
+}
+
+pauseButton.onclick = function() {
+    playButton.classList.toggle("change");
+    pauseButton.classList.toggle("change");
 }
 
 var playerReady = false;
