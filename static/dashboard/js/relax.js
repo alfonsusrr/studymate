@@ -13,7 +13,6 @@ btn.onclick = function(){
     sidebar.classList.toggle("active");    
     home.classList.toggle("active");
     playerBox.classList.toggle("active");
-    status = !status;
 }
 
 collapse.onclick = function(){
@@ -21,19 +20,6 @@ collapse.onclick = function(){
     home.classList.toggle("collapse");
     text.classList.toggle("position");
     playerBox.classList.toggle("position");
-    if(status == true){
-      playerBox.classList.toggle("active");
-    }
-}
-
-playButton.onclick = function() {
-    pauseButton.classList.toggle("change");
-    playButton.classList.toggle("change");
-}
-
-pauseButton.onclick = function() {
-    playButton.classList.toggle("change");
-    pauseButton.classList.toggle("change");
 }
 
 var playerReady = false;
@@ -113,6 +99,7 @@ document.addEventListener('DOMContentLoaded',function(event){
           player.unMute();
           player.playVideo();
           playerReady = true;
+          onPlayerReady();
         },
         'onStateChange': function () {
           if (player.isMuted() && player.getPlayerState() == 2 && !isUnMuted) {
@@ -124,16 +111,59 @@ document.addEventListener('DOMContentLoaded',function(event){
       }
     });
   }
-  var playerDiv = document.querySelector('#player');
-  playerDiv.style.display = "none"
 
-$('body').click(function() {
-  if (playerReady) {
-    if(player.getPlayerState() == -1 || player.getPlayerState() == 2){
+
+var playerDiv = document.querySelector('#player');
+playerDiv.style.display = "none"
+
+function onPlayerReady() {
+  document.querySelector("#status-player").innerHTML = "press play to start"
+  playButton.onclick = function() {
+    if (player.getPlayerState() == 2) {
+      pauseButton.classList.add("pause");
+      playButton.classList.add("pause");
       player.playVideo()
     }
-    else if(player.getPlayerState() == 1){
+    else if(player.getPlayerState() == -1) {
+      player.playVideo()
+      setTimeout(function() {
+        if(player.getPlayerState() == -1) {
+          document.querySelector("#status-player").innerHTML = "Video URL Error, please change the video URL"
+        }
+        else {
+          pauseButton.classList.add("pause");
+          playButton.classList.add("pause");
+        }
+      }, 2000);
+    }
+  }
+  
+  pauseButton.onclick = function() {
+    if (player.getPlayerState() == 1) {
+      playButton.classList.remove("pause");
+      pauseButton.classList.remove("pause");
       player.pauseVideo()
     }
   }
-})
+  player.addEventListener('onStateChange', function(e) {
+    let status_player = document.querySelector("#status-player")
+    if (e.data === 1){
+      if (!playButton.classList.contains("pause")) {
+        pauseButton.classList.add("pause");
+        playButton.classList.add("pause");
+      }
+      status_player.innerHTML = "now playing " + player.getVideoData().title
+    }
+    else if (e.data === 2) {
+      status_player.innerHTML = "paused"
+      if (playButton.classList.contains("pause")) {
+        pauseButton.classList.remove("pause");
+        playButton.classList.remove("pause");
+      }
+    }
+    else if (e.data === -1) {
+      status_player.innerHTML = "press play to start"
+    }
+  })
+}
+

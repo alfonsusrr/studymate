@@ -295,24 +295,27 @@ button:hover{
 }
 
 .toogle-player{
-    position:absolute;
-    margin-left: 7%;
-    bottom: 10%;
+    bottom:70px;
+    left: 90px;
+    position: absolute;
     transition: 0.5s ease;
 }
 
-.toogle-player button{
+.toogle button{
     padding: 0px;
     background-color: inherit;
+    margin-right: 6px;
 }
 
 .toogle-player.position{
-    bottom: -15%;
-    transition: 0.5s ease;
+    left: 20px;
+    bottom: -130px;
 }
 
-.toogle-player.active{
-    margin-left: 20%;
+
+.toogle {
+    display: flex;
+    align-items: center;
 }
 
 .status {
@@ -323,18 +326,18 @@ button:hover{
 }
 
 .playButton{
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .pauseButton{
-    margin-left: 5%;
-    opacity: 1;
-}
-
-.playButton.change{
-    opacity: 1;
-}
-
-.pauseButton.change{
+    margin-left: 4px;
     opacity: 0.5;
+}
+
+.playButton.pause{
+    opacity: 0.5;
+}
+
+.pauseButton.pause{
+    opacity: 1;
 }

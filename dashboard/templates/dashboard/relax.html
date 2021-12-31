@@ -19,9 +19,11 @@
     <div id="player"></div>
 </section>
 <section class="toogle-player">
-    <button class="playButton"><i class="fa fa-play fa-2x" aria-hidden="true"></i></button>
-    <button class="pauseButton"><i class="fa fa-pause fa-2x" aria-hidden="true"></i></button>
-    <div class="status">Now playing ...</div>
+    <div class="toogle">
+        <button id="play" class="playButton"><i class="fa fa-play fa-2x" aria-hidden="true"></i></button>
+        <button id="pause" class="pauseButton"><i class="fa fa-pause fa-2x" aria-hidden="true"></i></button>
+    </div>
+    <div class="status" id="status-player">Loading ...</div>
 </section>
 {% endblock %} 
 {% block ending %}
