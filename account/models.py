@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from studymate.storage import OverwriteStorage
 
 class AccountManager(BaseUserManager):
     def create_user(self, email, name, username, password=None):
@@ -30,15 +31,22 @@ class AccountManager(BaseUserManager):
         return user
 
 def get_profile_image_filepath(self, filename):
-    return f'profile_images/{self.pk}/{"profile_image.png"}'
+    return f'profile_images/{self.pk}/{"profile.jpg"}'
 
 def get_default_profile_image():
-    return f'profile_images/profile.png'
+    return f'profile_images/profile.jpg'
+
+def get_cover_image_filepath(self, filename):
+    return f'profile_images/{self.pk}/{"cover.jpg"}'
+
+def get_default_cover_image():
+    return f'profile_images/cover.jpg'
 
 class User(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username        = models.CharField(max_length=100, null=False, unique=True)
     name            = models.CharField(max_length=200, null=True)
+    bio             = models.TextField(null=True)
     date_joined     = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login      = models.DateTimeField(verbose_name="last login", auto_now=True)
 
@@ -47,7 +55,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff        = models.BooleanField(default = False)
     is_superuser    = models.BooleanField(default = False)
 
-    profile_image   = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image())
+    profile_image   = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image())
+    cover_image     = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_cover_image_filepath, null=True, blank=True, default=get_default_cover_image())
     hide_email      = models.BooleanField(default=True)
 
     objects = AccountManager()

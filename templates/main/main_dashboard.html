@@ -6,12 +6,12 @@
             <img src="../../static/images/logo.jpg" alt="logo">
             <div class="logo_name">StudyMate</div>
         </div>
-        <img src="../../static/images/menu_burger.jpg" alt="menu_logo" id="menu">
+        <i id="menu" class="fa fa-bars fa-2x"></i>
     </div>
     <ul class="nav_list">
                 <li>
-                    <a href="#">
-                        <img src="../../static/images/profile.jpg">
+                    <a href="{% url 'edit_profile' %}">
+                        <img src="/media/{{user.profile_image}}">
                         <span class="links_name">&nbsp; &nbsp; Edit Profile</span>
                     </a>
                 </li>

@@ -3,7 +3,7 @@ let btn = document.querySelector("#menu");
 let sidebar = document.querySelector(".sidebar");
 let home = document.querySelector(".home_section");
 let recommend = document.querySelector(".recommend");
-let agenda = document.querySelector(".agenda");
+let container = document.querySelector(".flex-container-top");
 let caption = document.querySelector(".caption");
 let img = document.querySelector("img");
 let note = document.querySelector(".note_rec");
@@ -12,7 +12,7 @@ btn.onclick = function(){
     sidebar.classList.toggle("active");    
     home.classList.toggle("active");
     recommend.classList.toggle("active");
-    agenda.classList.toggle("active");
+    container.classList.toggle("active");
     caption.classList.toggle("active");
     img.classList.toggle("active");
     note.classList.toggle("active");

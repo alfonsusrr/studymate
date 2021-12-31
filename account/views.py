@@ -113,7 +113,7 @@ def settings(request):
                     settings.link_image = image_link
                 else:
                     settings.local_image = image
-                settings.link_image = None
+                    settings.link_image = None
             settings.use_default_image=default_image
             settings.use_default_text=default_text
             settings.use_default_music=default_music
@@ -188,3 +188,29 @@ def settings(request):
             "d_text": d_text
         }
         return render(request, "account/settings.html", context)
+
+@login_required
+@csrf_exempt
+def profile_edit(request):
+    if request.method == "POST":
+        files = request.FILES
+        data = request.POST
+
+        for file in files:
+            if file == "profile":
+                request.user.profile_image = files[file]
+            elif file =="cover":
+                request.user.cover_image = files[file]
+        
+        bio = data["bio"]
+        name = data["name"]
+        username = data["username"]
+        if name != "":
+            request.user.name = name
+        if username != "":
+            request.user.username = username
+        request.user.bio = bio
+        request.user.save()
+        return HttpResponse(json.dumps([str(request.user.cover_image), str(request.user.profile_image)]))
+    else:
+        return render(request, "account/edit.html")

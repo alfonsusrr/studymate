@@ -29,21 +29,25 @@
 {% block ending %}
     <script src="//www.youtube.com/iframe_api"></script> 
     <script>
+        const gradient = "linear-gradient(" +
+          "rgba(0, 0, 0, 0.3)," +
+          "rgba(0, 0, 0, 0.6)" +
+        "),"
         const defaultBG = ["{% static 'images/default_relax_bg.jpg' %}"]
         
         const user = "{{user_name}}";
         let image_method = "{{image_method}}"
         if (image_method == "local"){
             let userBG = "/media/{{bgimage}}";
-            document.body.style.backgroundImage = "url('" + userBG + "')";
+            document.body.style.backgroundImage = gradient + "url('" + userBG + "')";
 
         }
         else if (image_method == "link") {
             let userBG = "{{bgimage}}"
-            document.body.style.backgroundImage = "url('" + userBG + "')";
+            document.body.style.backgroundImage = gradient + "url('" + userBG + "')";
         }
         else {
-            document.body.style.backgroundImage = "url('" + defaultBG + "')";
+            document.body.style.backgroundImage = gradient + "url('" + defaultBG + "')";
         }
         
         let music = {{music|safe}}

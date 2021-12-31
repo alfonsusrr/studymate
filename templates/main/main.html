@@ -5,6 +5,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Studymate | {% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
         <meta name="description" content="">
         {% block head %}{% endblock %}
     </head>

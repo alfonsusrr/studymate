@@ -10,21 +10,62 @@
 
 
 {% block content %}
-<h2>Edit Your Profile</h2>
 <section class="profile">
-    <div class="background_images">
-        <h3>Change Profile Picture</h3>
-        <button class="default-button" type="button" id="default-image">Default</button>
-        <select id="method-image">
-            <option value="link">Link</option>
-            <option value="local">Local</option>
-        </select>
-        <input id="background-image" class="background_image" placeholder="Enter a link" type="text">
+    <div class="profile-container">
+        <img id="cover-image" class="cover-image" src="/media/{{user.cover_image}}">
+        <div class="info-box">
+            <img id="profile-image" class="profile-image" src="/media/{{user.profile_image}}">
+            <div class="profile-info-box">
+                <div class="profile-info">
+                    <div class="name">{{user.name}}</div>
+                    <div class="username">@{{user.username}}</div>
+                </div>
+                <div class="edit-profile"><button id="edit-profile">Edit Profile</button></div>
+            </div>
+        </div>
+        <div class="posts">
+            <div class="post-box">
+                <div class="post-name">{{user.name}}</div>
+                <div class="post-username">{{user.username}}</div>
+            </div>
+        </div>
     </div>
-    <img src="../../../static/images/profile.jpg">
+    <div class="right-container">
+        <div class="friend-heading">Friends</div>
+        <div class="friend-lists">
+
+        </div>
+    </div>
 </section>
 {% endblock %}
 
 {% block ending %}
-<script type="module" src="../../../static/account/js/edit.js"></script>
+<script type="text/html" id="popup-block">
+    <div class="edit-profile-box">
+        <img id="cover-image-edit-pop" class="cover-image-edit" src="/media/{{user.cover_image}}">
+        <input type="file" style="display: none" id="cover-image-input" accept="image/png, image/jpeg, image/jpg">
+
+        <div id="close-popup" class="button-close">
+            <i class="fa fa-times"></i>
+        </div>
+        <img id="profile-image-edit-pop" class="profile-image-edit" src="/media/{{user.profile_image}}">
+        <input type="file" style="display: none" id="profile-image-input" accept="image/png, image/jpeg, image/jpg">
+        <form class="form-edit-profile" method="POST">
+            <label for="name">Name</label></br>
+            <input id="name-input" name="name" type="text" placeholder="Enter your name" value="{{user.name}}"></input>
+
+            <label for="username">Username</label></br>
+            <input id="username-input" name="username" type="text" placeholder="Enter your username" value="{{user.username}}"></input>
+
+            <label for="bio">Bio</label></br>
+            <textarea id="bio-input" name="name" type="text" placeholder="Input your bio">{{user.bio}}</textarea>
+
+            <button id="submit-edit-profile" type="button">Save changes</button>
+        </form>
+    </div>
+</script>
+<script type="text/javascript" src="{% static 'account/js/edit.js' %}"></script>
+<script>
+    const url_profile_edit = "{% url 'edit_profile' %}";
+</script>
 {% endblock %}
