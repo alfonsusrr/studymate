@@ -1,0 +1,30 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'account/css/edit.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<h2>Edit Your Profile</h2>
+<section class="profile">
+    <div class="background_images">
+        <h3>Change Profile Picture</h3>
+        <button class="default-button" type="button" id="default-image">Default</button>
+        <select id="method-image">
+            <option value="link">Link</option>
+            <option value="local">Local</option>
+        </select>
+        <input id="background-image" class="background_image" placeholder="Enter a link" type="text">
+    </div>
+    <img src="../../../static/images/profile.jpg">
+</section>
+{% endblock %}
+
+{% block ending %}
+<script type="module" src="../../../static/account/js/edit.js"></script>
+{% endblock %}
