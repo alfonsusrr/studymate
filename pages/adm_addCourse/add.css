@@ -284,15 +284,6 @@ h3{
     font-size: small;
 }
 
-.desc{
-    margin-top: 1%;
-}
-
-.description{
-    width: 90%;
-    padding: 1%;
-}
-
 .thumbnail{
     width: 80%;
     padding: 1%;
@@ -301,6 +292,8 @@ h3{
 
 select{
     padding: 5px;
+    width: 8%;
+    margin-right: 1%;
 }
 
 .data button{
