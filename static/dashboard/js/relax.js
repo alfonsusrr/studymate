@@ -13,6 +13,7 @@ btn.onclick = function(){
     sidebar.classList.toggle("active");    
     home.classList.toggle("active");
     playerBox.classList.toggle("active");
+    status = !status;
 }
 
 collapse.onclick = function(){
@@ -20,6 +21,12 @@ collapse.onclick = function(){
       width:'toggle'
     }, 200)
     $(".home_section").slideToggle(200)
+    if(status == true){
+      playerBox.classList.toggle("active");
+      sidebar.classList.toggle("active");    
+      home.classList.toggle("active");
+      status = !status;
+    }
     text.classList.toggle("position");
     playerBox.classList.toggle("position");
 }
