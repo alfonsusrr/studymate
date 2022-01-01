@@ -13,3 +13,110 @@ btn.onclick = function(){
     privateNote.classList.toggle("active");
     publicNote.classList.toggle("active");
 }
+let page_public = 1;
+let page_private = 1
+$("#more-public").click(function() {
+    $(this).hide()
+    $("#loader-public").css("display", "block")
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            csrfmiddlewaretoken: token,
+            private: false,
+            page: page_public + 1
+        },
+        success: function(response) {
+            $("#loader-public").css("display", "none")
+            $("#public-notes").append(response.notes_html)
+            console.log(response.has_next)
+            if (response.has_next) {
+                $('#more-public').show()
+            }
+            page_public += 1
+            action()
+        }
+    })
+})
+
+$("#more-private").click(function() {
+    $(this).hide()
+    $("#loader-private").css("display", "block")
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            csrfmiddlewaretoken: token,
+            private: true,
+            page: page_private + 1
+        },
+        success: function(response) {
+            $("#loader-private").css("display", "none")
+            $("#private-notes").append(response.notes_html)
+            console.log(response.has_next)
+            if (response.has_next) {
+                $('#more-private').show()
+            }
+            page_private += 1
+            action()
+        }
+    })
+})
+
+function action() {
+    $(".delete").click(function() {
+        let notes_id = $(this).parents(".notes").find(".notes-id").val()
+        let notes_is_private =  JSON.parse($(this).parents(".action").find(".notes-is-private").val())
+        $(".confirm-delete").show()
+        $(".delete-confirm").click(function() {
+            $.ajax({
+                type: "POST",
+                url: url_delete,
+                data: {
+                    "id": notes_id, 
+                    "csrfmiddlewaretoken": token
+                },
+                success: function() {
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            page: 1,
+                            csrfmiddlewaretoken: token,
+                            private: notes_is_private
+                        },
+                        success: function(response) {
+                            if (notes_is_private) {
+                                if (response.notes_html != '') {
+                                    $("#private-notes").html(response.notes_html)
+                                }
+                                else {
+                                    $("#private-notes").html('<div class="no-notes">You have no private notes</div>')
+                                }
+                            }
+                            else {
+                                if (response.notes_html != '') {
+                                    $("#public-notes").html(response.notes_html)
+                                }
+                                else {
+                                    $("#public-notes").html('<div class="no-notes">You have no public notes</div>')
+                                }
+                            }
+                            console.log(response.has_next)
+                            if (response.has_next) {
+                                $('#more-private').show()
+                            }
+                            page_private = 1
+                        }
+                    })
+                    $(".confirm-delete").hide()
+                }
+            })
+        })
+        $(".cancel-confirm").click(function() {
+            $(".confirm-delete").hide()
+        })
+    })
+}
+action()

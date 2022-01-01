@@ -82,7 +82,7 @@ $("#save-note").click(function(e) {
             processData: false,
 		    contentType: false,
             success: function(response) {
-                console.log("uploaded!")
+                alert("Uploaded!")
             }
         })
     }
