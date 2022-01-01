@@ -23,31 +23,6 @@ h3{
     margin-top: 1%;
 }
 
-.name{
-    width: 90%;
-    padding: 1%;
-    font-size: small;
-}
-
-.links{
-    margin-top: 1%;
-}
-
-.link{
-    width: 90%;
-    padding: 1%;
-    font-size: small;
-}
-
-.desc{
-    margin-top: 1%;
-}
-
-.description{
-    width: 90%;
-    padding: 1%;
-}
-
 .buttons{
     margin-top: 2%;
 }
@@ -104,4 +79,66 @@ h3{
         margin-left: 15%;
         margin-right: 0%;
     }
+}
+
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.data {
+    width: 40%;
+}
+
+.description {
+    height: 100px;
+}
+
+.input-box {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;;
+    border: 1px solid grey;
+}
+
+.input-group {
+    margin-top: 20px;
+}
+
+.category-container {
+    margin-top: 8px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.category-tag {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    margin: 5px;
+    color: white; 
+    padding: 8px;
+    font-size: 15px;
+}
+
+.delete-tag {
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.delete-tag:hover {
+    color: rgb(160, 160, 160);
+}
+
+.preview {
+    width: 50%;
+    margin-left: 100px;
+}
+
+.file-viewer{
+    width: 90%;
+    min-height: 600px;
+    display: none;
 }

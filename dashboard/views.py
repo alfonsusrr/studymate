@@ -128,3 +128,6 @@ def agenda(request):
 @login_required
 def search(request):
     return render(request, 'dashboard/search.html')
+
+def about(request):
+    return render(request, 'dashboard/about.html')

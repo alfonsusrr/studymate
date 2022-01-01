@@ -1,3 +1,66 @@
+from os import name
 from django.db import models
+from django.db.models.aggregates import Count
+from django.db.models.deletion import CASCADE
+from account.models import *
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_delete
+from studymate.storage import OverwriteStorage
+import datetime
 
-# Create your models here.
+def get_note_filepath(self, filename):
+    now = datetime.datetime.now()
+    now = now.strftime("%Y_%m_%d_%H_%m_%S")
+    return f'notes/{self.owner.pk}/{now}_{filename}'
+
+def get_note_thumbnail_filepath(self, filename):
+    return f'notes/{self.owner.pk}/{self.pk}_thumbnail.jpg'
+
+def get_default_note_thumbnail():
+    return f'notes/thumbnail.jpg' 
+
+class NotesCategory(models.Model):
+    name        = models.CharField(max_length=50, blank=False, unique=True)
+
+class Notes(models.Model):
+    title           = models.CharField(max_length=200, null=False)
+    description     = models.TextField(null=True)
+    owner           = models.ForeignKey(User, on_delete=CASCADE, related_name="notes")
+    file            = models.FileField(upload_to=get_note_filepath, blank=False)
+    uploaded_on     = models.DateTimeField(auto_now=True)
+    thumbnail       = models.ImageField(upload_to=get_note_thumbnail_filepath,storage=OverwriteStorage, default=get_default_note_thumbnail())
+    categories      = models.ManyToManyField(NotesCategory, related_name="notes")
+    is_private      = models.BooleanField(default=False)
+    overall_rating  = models.FloatField(default=0)
+
+
+class NotesRating(models.Model):
+    user            = models.ForeignKey(User, on_delete=CASCADE, related_name="notes_rating")
+    note            = models.ForeignKey(Notes, on_delete=CASCADE, related_name="ratings")
+    rating          = models.PositiveIntegerField(blank=False)
+    comment         = models.TextField(null=True)
+
+@receiver(pre_save, sender=Notes)
+def pre_save_notes(sender, instance, *args, **kwargs):
+    try:
+        old_file = instance.__class__.objects.get(id=instance.id).file.path
+        try:
+            new_file = instance.file.path
+        except:
+            new_file = None
+        import os
+        if os.path.exists(old_file) and new_file != old_file:
+            os.remove(old_file)
+    except:
+        pass
+
+@receiver(post_delete, sender=Notes)
+def post_delete_notes(sender, instance, *args, **kwargs):
+    try:
+        old_file = instance.file.path
+        import os
+        if os.path.exists(old_file):
+            os.remove(old_file)
+    except:
+        pass
+

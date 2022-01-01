@@ -9,7 +9,7 @@ def get_default_banner_image():
     return f'banner/banner.png'
 
 def get_bg_filepath(self, filename):
-    return f'{self.user.pk}/background/bg.png'
+    return f'background/{self.user.pk}/bg.png'
 
 class Course(models.Model):
     name = models.CharField(max_length=100, null=False)
