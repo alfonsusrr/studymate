@@ -1,0 +1,32 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}Add Courses{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dashboard/css/add.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <h2>Add a New Course</h2>
+        <div class="data">
+            <h3>Upload a Thumbnail</h3>
+            <select>
+                <option>Link</option>
+                <option>Local File</option>
+            </select>
+            <input class="thumbnail" type="text" placeholder="Enter a Link to a Picture">
+            <h3>Enter Course Name</h3>
+            <input class="name" placeholder="Enter The Name of The Course">
+            <div class="links">
+                <h3>Enter Course Link</h3>
+                <input class="link" placeholder="Enter The Link to The Course">
+            </div>
+            <button class="submit">Publish</button>
+        </div>
+{% endblock %}
+{% blockending %}
+        <script type="module" src="{% static 'dashboard/js/add.js' %}"></script>
+{% endblock %}
