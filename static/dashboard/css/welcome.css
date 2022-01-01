@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+    margin-bottom: 5%;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #32393E;
+}
+
+li, a, button{
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 0.5%;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.logo{
+    cursor: pointer;
+    background-color: #32393E;
+    max-height: 50px;
+    max-width: 90px;
+}
+
+.nav__links{
+    list-style: none;
+    background-color: #32393E;
+}
+
+.nav__links li{
+    display: inline-block;
+    padding: 0px 20px;
+    background-color: #32393E;
+}
+
+.nav__links li a{
+    transition: all 0.3s ease 0s;
+    background-color: #32393E;
+}
+
+.nav__links li a:hover{
+    color: cyan;
+}
+
+button{
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.cta{
+    background-color: #32393E;
+}
+
+button:hover{
+    background-color: rgba(0,136,169,0.8);
+}
+
+h1{
+    background-image: url("../../static/images/welcome.jpg");
+    padding-top: 10%;
+    padding-bottom: 15%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+    padding-left: 3%;
+    font-size: 50px;
+}
+
+h1 button{
+    font-size: large;
+    padding: 10px 20px;
+}
+
+.par{
+    padding: 8% 0%;
+    background-color: #DDDDDD;
+}
+
+.par h2{
+   margin-left: 5%;
+   font-size: 30px; 
+   color: blue;
+}
+
+.par p{
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-top: 1%;
+    line-height: 30px;
+    font-size: large;
+}
+
+.ft{
+    text-align: center;
+    margin-top: 3%;
+}
+
+.box-area{
+    margin-top: 2%;
+}
+
+.box{
+    display: inline-block;
+    background-color: #EEEEEE;
+    padding: 5% 5%;
+    text-align: left;
+}
+
+.box h3{
+    margin-top: 5%;
+}
+
+.box p{
+    margin-top: 2%;
+}
+
+.midbox{
+    display: inline-block;
+    background-color: #EEEEEE;
+    padding: 5% 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: left;
+}
+
+.midbox h3{
+    margin-top: 5%;
+}
+
+.midbox p{
+    margin-top: 2%;
+}
+
+.faq{
+    background-color: aliceblue;
+    margin-top: 5%;
+    padding: 2% 5%;
+    text-align: center;
+}
+
+.q{
+    margin-top: 2%;
+}
+
+.q a{
+    color: blue;
+    text-decoration: underline;
+}
