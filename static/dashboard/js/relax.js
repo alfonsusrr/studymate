@@ -16,8 +16,10 @@ btn.onclick = function(){
 }
 
 collapse.onclick = function(){
-    sidebar.classList.toggle("collapse");    
-    home.classList.toggle("collapse");
+    $(".sidebar").animate({
+      width:'toggle'
+    }, 200)
+    $(".home_section").slideToggle(200)
     text.classList.toggle("position");
     playerBox.classList.toggle("position");
 }
