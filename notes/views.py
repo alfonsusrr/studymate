@@ -21,18 +21,19 @@ import json
 def archive(request):
     private_notes = Notes.objects.filter(owner=request.user, is_private=True)
     public_notes = Notes.objects.filter(owner=request.user, is_private=False)
-    if len(private_notes) > 5:
+    result_page = 10
+    if len(private_notes) > result_page:
         more_private = True 
     else:
         more_private = False
 
-    if len(public_notes) > 5:
+    if len(public_notes) > result_page:
         more_public = True 
     else:
         more_public = False
     context = {
-        "private_notes": private_notes[:5],
-        "public_notes": public_notes[:5],
+        "private_notes": private_notes[:result_page],
+        "public_notes": public_notes[:result_page],
         "more_private": more_private,
         "more_public": more_public
     }
@@ -76,30 +77,47 @@ def upload(request):
 
 def get_archive(request):
     if request.method == "POST":
-        part = request.POST.get('page')
-        private = request.POST.get('private')
-        if private == "true":
-            private = True
-        elif private == "false":
-            private = False
-        notes = Notes.objects.filter(owner=request.user, is_private=private)
-        result_per_page = 5
-        paginator = Paginator(notes, result_per_page)
-
         try:
-            notes = paginator.page(part)
-        except PageNotAnInteger:
-            notes = paginator.page(2)
-        except EmptyPage:
-            notes = paginator.page(paginator.num_pages)
+            query = request.POST.get('query')
+        except:
+            query = None
+        if query != None:
+            private_notes = Notes.objects.filter(owner=request.user, title__icontains=query, is_private=True)
+            private_html = loader.render_to_string('notes/notes.html', {'notes': private_notes, 'private': True})
+            public_notes = Notes.objects.filter(owner=request.user, title__icontains=query, is_private=False)
+            public_html = loader.render_to_string('notes/notes.html', {'notes': public_notes, 'private': False})
+            private_html = private_html.strip()
+            public_html = public_html.strip()
+            output = {
+                'private_html': private_html,
+                'public_html': public_html
+            }
+            return JsonResponse(output)
+        else:
+            part = request.POST.get('page')
+            private = request.POST.get('private')
+            if private == "true":
+                private = True
+            elif private == "false":
+                private = False
+            notes = Notes.objects.filter(owner=request.user, is_private=private)
+            result_per_page = 10
+            paginator = Paginator(notes, result_per_page)
 
-        notes_html = loader.render_to_string('notes/notes.html', {'notes': notes, 'private': private})
-        notes_html = notes_html.strip()
-        output = {
-            'notes_html': notes_html,
-            'has_next': notes.has_next()
-        }
-        return JsonResponse(output)
+            try:
+                notes = paginator.page(part)
+            except PageNotAnInteger:
+                notes = paginator.page(2)
+            except EmptyPage:
+                notes = paginator.page(paginator.num_pages)
+
+            notes_html = loader.render_to_string('notes/notes.html', {'notes': notes, 'private': private})
+            notes_html = notes_html.strip()
+            output = {
+                'notes_html': notes_html,
+                'has_next': notes.has_next()
+            }
+            return JsonResponse(output)
     else:
         return HttpResponseForbidden
 

@@ -13,8 +13,8 @@
     <div class="page">
         <a href="{% url 'upload_notes' %}"><button class="add">Upload Your Notes</button></a>
         <section class="search">
-            <input type="text" class="search_notes" placeholder="Search Your Notes">
-            <button type="submit" class="result">Search</button>
+            <input id="search-query" type="text" class="search_notes" placeholder="Search Your Notes">
+            <button id="search-submit" type="submit" class="result">Search</button>
         </section>
         <section class="private">
             <h3>Your Private Notes</h3>
@@ -82,6 +82,21 @@
     let token = "{{csrf_token}}"
 </script>
 <script type="module" src="{% static 'notes/js/note_archive.js' %}"></script>
-<script type="text/html">
+<script type="text/html" id="loader-skeleton">
+    <div class="notes note-skeleton">
+        <div class="note-card-img loading-skeleton"></div>
+        <div class="note-card-title loading-skeleton"></div>
+        <div class="note-card-desc loading-skeleton"></div>
+    </div>
+    <div class="notes note-skeleton">
+        <div class="note-card-img loading-skeleton"></div>
+        <div class="note-card-title loading-skeleton"></div>
+        <div class="note-card-desc loading-skeleton"></div>
+    </div>
+    <div class="notes note-skeleton">
+        <div class="note-card-img loading-skeleton"></div>
+        <div class="note-card-title loading-skeleton"></div>
+        <div class="note-card-desc loading-skeleton"></div>
+    </div>
 </script>
 {% endblock %}

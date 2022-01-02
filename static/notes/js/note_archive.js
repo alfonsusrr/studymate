@@ -120,3 +120,45 @@ function action() {
     })
 }
 action()
+
+$("#search-submit").click(function () {
+    let query = $(this).siblings("#search-query").val();
+    search_notes(query)
+})
+
+$("#search-query").on("keypress", function (e) {
+    if (e.which == 13) {
+        let query = $(this).val()
+        search_notes(query)
+    }
+})
+
+function search_notes (query) {
+    let loader = $("#loader-skeleton").html()
+    $('#public-notes').html(loader)
+    $('#private-notes').html(loader)
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            "csrfmiddlewaretoken": token, 
+            "query": query,
+        },
+        success: function(response){
+            if (response.public_html != '') {
+                $('#public-notes').html(response.public_html)
+            } 
+            else {
+                $('#public-notes').html('<div class="no-notes">No notes found</div>')
+            }
+            if (response.private_html != '') {
+                $('#private-notes').html(response.private_html)
+            } 
+            else {
+                $('#private-notes').html('<div class="no-notes">No notes found</div>')
+            }
+            $('#more-private').hide()
+            $('#more-public').hide()
+        }
+    })
+}

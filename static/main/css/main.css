@@ -247,3 +247,11 @@ button:hover{
     transition: 0.5s ease;
     margin-left: 250px;
 }
+
+input {
+    outline: none;
+}
+
+input:focus {
+    border: 2px solid rgba(0,136,169,1)
+}
