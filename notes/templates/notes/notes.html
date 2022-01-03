@@ -1,27 +1,27 @@
 {% if private %}
 {% for note in notes %}
 <div class="notes note-private">
-    <img src="/media/{{note.thumbnail}}">
+    <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
     <input class="notes-id" type="hidden" value="{{note.id}}">
     <div class="action">
         <input type="hidden" class="notes-is-private" value="true">
         <div class="edit"><i class="fa fa-pencil"></i></div>
-        <div class="delete"><i class="fa fa-trash-o"></i></div>
+        <div class="delete"><i class="fas fa-trash"></i></div>
     </div>
-    <h4>{{note.title}</h4>
+    <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}</h4>
 </div>
 {% endfor %}
 {% else %} 
 {% for note in notes %}
 <div class="notes note-public">
-    <img src="/media/{{note.thumbnail}}">
+    <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
     <input class="notes-id" type="hidden" value="{{note.id}}">
     <div class="action">
         <input type="hidden" class="notes-is-private" value="false">
         <div class="edit"><i class="fa fa-pencil"></i></div>
-        <div class="delete"><i class="fa fa-trash-o"></i></div>
+        <div class="delete"><i class="fas fa-trash"></i></div>
     </div>
-    <h4>{{note.title}}</h4>
+    <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}}</h4>
 </div>
 {% endfor %}
 {% endif %}

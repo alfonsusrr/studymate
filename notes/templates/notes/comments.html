@@ -1,0 +1,33 @@
+{% for review in reviews %}
+<div class="comment-card comment-box" data-user-id="{{review.user.id}}" data-review-id="{{review.id}}">
+    <div class="comment-info">
+        <div class="comment-avatar">
+            <img src="/media/{{review.user.profile_image}}">
+        </div>
+        <div class="comment-owner">
+            <div class="owner-name">{{review.user.name}} </div>
+            <div class="owner-username">@{{review.user.username}}</div>
+        </div>
+        <div class="comment-date">
+            <div class="date">{{review.last_modified|date:"d M y"}}</div>
+            <div class="rating-stars">
+                <i class="fa fa-star {% if review.rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+                <i class="fa fa-star {% if review.rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+                <i class="fa fa-star {% if review.rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+                <i class="fa fa-star {% if review.rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+                <i class="fa fa-star {% if review.rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+            </div>
+        </div>
+    </div>
+    <div class="comment-content">
+        {{review.review}}
+    </div>
+    <div class="comment-reaction">
+        <div class="vote">
+            {{review.votes_total}} votes
+            <i class="fa fa-caret-up" data-url-vote="{% url 'vote_comment' review.id%}"></i>Up Vote
+            <i class="fa fa-caret-down" data-url-vote="{% url 'vote_comment' review.id%}"></i>Down Vote
+        </div>
+    </div>
+</div>
+{% endfor %}

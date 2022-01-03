@@ -38,7 +38,20 @@ class NotesRating(models.Model):
     user            = models.ForeignKey(User, on_delete=CASCADE, related_name="notes_rating")
     note            = models.ForeignKey(Notes, on_delete=CASCADE, related_name="ratings")
     rating          = models.PositiveIntegerField(blank=False)
-    comment         = models.TextField(null=True)
+    review          = models.TextField(blank=True)
+    last_modified   = models.DateTimeField(auto_now_add=True)
+    votes_total     = models.IntegerField(default=0)
+
+class NotesRatingVotes(models.Model):
+    notes_rating    = models.ForeignKey(NotesRating, on_delete=CASCADE, related_name="votes")
+    owner           = models.ForeignKey(User, on_delete=CASCADE, related_name="rating_votes")
+    value           = models.IntegerField(blank=False)
+
+class NotesDiscussion(models.Model):
+    user           = models.ForeignKey(User, on_delete=CASCADE, related_name="notes_discussion")
+    note           = models.ForeignKey(Notes, on_delete=CASCADE, related_name="discussion")
+    comment        = models.TextField(null=False)
+    parent         = models.ForeignKey("self", on_delete=CASCADE, blank=True, null=True, related_name="comment_parent")
 
 @receiver(pre_save, sender=Notes)
 def pre_save_notes(sender, instance, *args, **kwargs):

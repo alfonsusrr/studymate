@@ -1,0 +1,20 @@
+{% for note in notes %}
+<div class="notes">
+    <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
+    <input class="notes-id" type="hidden" value="{{note.id}}">
+    <div class="action">
+        <input type="hidden" class="notes-is-private" value="false">
+    </div>
+    <div class="rating-stars">
+        <i class="fa fa-star {% if note.overall_rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+        <i class="fa fa-star {% if note.overall_rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+        <i class="fa fa-star {% if note.overall_rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+        <i class="fa fa-star {% if note.overall_rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+        <i class="fa fa-star {% if note.overall_rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+    </div>
+    <div class="notes-info">
+        <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}}</h4>
+        <div class="notes-owner">By {{note.owner.name}}</div>
+    </div>
+</div>
+{% endfor %}

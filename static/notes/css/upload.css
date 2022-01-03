@@ -100,7 +100,14 @@ h3{
     margin-top: 5px;
     padding: 10px;
     border-radius: 10px;;
-    border: 1px solid grey;
+    box-shadow: 8px 3px 30px 0 rgba(0,0,0,0.1);
+    border: 0;
+}
+ 
+.input-box:focus {
+    box-shadow: 8px 3px 30px 0 rgba(0,0,0,0.3);
+    outline: none;
+    border: none;
 }
 
 .input-group {
