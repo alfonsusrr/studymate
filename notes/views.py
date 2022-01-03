@@ -69,34 +69,86 @@ def autocomplete_search(request):
 @csrf_exempt
 def upload(request):
     if request.method == "POST":
-        file = request.FILES
         data = request.POST
-
         title = data["title"]
         desc = data["desc"]
         private = json.loads(data["private"])
-        file = file["file"]
         categories = json.loads(data["category"])
+        if data["new"] == "true": 
+            file = request.FILES
+            file = file["file"]
 
-        categoriesList = []
-        for category in categories:
-            category = category.lower()
-            categoryDB = NotesCategory.objects.filter(name=category).first()
-            if categoryDB == None:
-                categoryDB = NotesCategory(name=category)
-                categoryDB.save()
-            categoriesList.append(categoryDB)
+            categoriesList = []
+            for category in categories:
+                category = category.lower()
+                categoryDB = NotesCategory.objects.filter(name=category).first()
+                if categoryDB == None:
+                    categoryDB = NotesCategory(name=category)
+                    categoryDB.save()
+                categoriesList.append(categoryDB)
 
-        note = Notes(title=title, description=desc, file=file, owner=request.user, is_private=private)
-        note.save()
-        for category in categoriesList:
-            note.categories.add(category)
-        
-        note.save()
-        thumbnail_creation(note)
-        return HttpResponse("200")
+            note = Notes(title=title, description=desc, file=file, owner=request.user, is_private=private)
+            note.save()
+            for category in categoriesList:
+                note.categories.add(category)
+            
+            note.save()
+            thumbnail_creation(note)
+            output = {
+                "status": "success",
+                "message": "File Uploaded!"
+            }
+            return JsonResponse(output)
+        else:
+            note_id = data["id"]
+            note = Notes.objects.filter(id=note_id).first()
+
+            
+            if note == None:
+                output = {
+                    "status": "failed",
+                    "message": "note doesn't exist"
+                }
+            else:
+                try:
+                    file = request.FILES["file"]
+                except:
+                    file = None
+                
+                if file != None:
+                    note.file = file
+
+                note.title = title
+                note.description = desc
+                note.is_private = private
+                note.categories.clear()
+                categoriesList = []
+                for category in categories:
+                    category = category.lower()
+                    categoryDB = NotesCategory.objects.filter(name=category).first()
+                    if categoryDB == None:
+                        categoryDB = NotesCategory(name=category)
+                        categoryDB.save()
+                    categoriesList.append(categoryDB)
+                for category in categoriesList:
+                    note.categories.add(category)
+                note.save()
+                thumbnail_creation(note)
+                output = {
+                    "status": "success",
+                    "message": "File Updated!"
+                }
+                return JsonResponse(output)
+
+
+                
+
+
     else:
-        return render(request, "notes/upload.html")
+        context = {
+            "new": True
+        }
+        return render(request, "notes/upload.html", context)
         
 @login_required
 def get_archive(request):
@@ -292,8 +344,15 @@ def category(request, name):
     }
     return render(request, "notes/share.html", context)
 
-def edit_notes(request):
-    if request.method == "POST":
-        pass
+def edit_notes(request, id):
+    notes = Notes.objects.filter(id=id).first()
+    categories = notes.categories.all()
+    if notes.owner == request.user:
+        context = {
+            "new": False,
+            "note": notes,
+            "categories": categories
+        }
+        return render(request, "notes/upload.html", context)
     else:
-        pass
+        return HttpResponseForbidden

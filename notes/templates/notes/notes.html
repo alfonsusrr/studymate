@@ -5,7 +5,7 @@
     <input class="notes-id" type="hidden" value="{{note.id}}">
     <div class="action">
         <input type="hidden" class="notes-is-private" value="true">
-        <div class="edit"><i class="fa fa-pencil"></i></div>
+        <div class="edit" data-url-edit="{% url 'edit_notes' note.id %}"><i class="fa fa-pencil"></i></div>
         <div class="delete"><i class="fas fa-trash"></i></div>
     </div>
     <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}</h4>
@@ -18,7 +18,7 @@
     <input class="notes-id" type="hidden" value="{{note.id}}">
     <div class="action">
         <input type="hidden" class="notes-is-private" value="false">
-        <div class="edit"><i class="fa fa-pencil"></i></div>
+        <div class="edit" data-url-edit="{% url 'edit_notes' note.id %}"><i class="fa fa-pencil"></i></div>
         <div class="delete"><i class="fas fa-trash"></i></div>
     </div>
     <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}}</h4>

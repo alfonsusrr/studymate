@@ -14,8 +14,6 @@ btn.onclick = function(){
     title.classList.toggle("active");
 }
 
-let private_value = false
-
 setpublic.onclick = function(){
     setpublic.classList.toggle("unselected")
     setprivate.classList.toggle("selected")
@@ -27,6 +25,10 @@ setprivate.onclick = function(){
     setpublic.classList.toggle("unselected")
     private_value = true
 }
+
+$('.delete-tag').click(function() {
+    $(this).parent().remove()
+})
 
 $('#category-input').on("keypress", function(e) {
     if(e.which == 13) {
@@ -57,11 +59,27 @@ $("#file").on("change", function() {
 })
 
 let formEl = document.querySelector(".data");
-$("#save-note").click(function(e) {
-    e.preventDefault()
-    let valid = formEl.reportValidity()
+$("#save-note").on("click", function(e) {
+    $(this).prop("disabled", true)
+    let id = $(this).attr("data-note-id")
+    let data_new = $(this).attr("data-new")
+
+    let title = $('#title').val()
+    let file = $('#file').val()
+
+    let valid = true;
+    if (data_new == "true")
+        if (file == '') {
+            $("#file-required").show()
+            valid = false
+        }
+
+    if (title == "") {
+        $("#title-required").show()
+        valid = false
+    }
+
     if (valid) {
-        let title = $('#title').val()
         let desc = $('#desc').val()
         let allCategory = $('.tag');
         let categories = []
@@ -75,6 +93,8 @@ $("#save-note").click(function(e) {
         formdata.append("desc", desc)
         formdata.append("category", categories)
         formdata.append("private", private_value)
+        formdata.append("id", id)
+        formdata.append("new", data_new)
         $.ajax({
             type: "POST",
             url: url,
@@ -86,6 +106,9 @@ $("#save-note").click(function(e) {
             }
         })
     }
+    $("#file-required").hide()
+    $("#title-required").hide()
+    $(this).prop("disabled", false)
 })
 
 $(".data").on('keyup keypress', function(e) {

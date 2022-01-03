@@ -149,3 +149,16 @@ h3{
     min-height: 600px;
     display: none;
 }
+
+.input-label {
+    display:flex;
+    align-items: center;
+}
+
+.required-message{
+    margin-left: 10px;
+    color: grey;
+    margin-top:3px;
+    font-size: 13px;
+    display: none;
+}

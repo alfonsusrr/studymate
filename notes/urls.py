@@ -15,5 +15,6 @@ urlpatterns = [
     path('votecomment/<id>/', views.vote_comment, name='vote_comment'),
     path('category/<name>/', views.category, name="category"),
     path('search/', views.search, name="search_notes"),
-    path('autocomplete/search/', views.autocomplete_search, name="autocomplete_search")
+    path('autocomplete/search/', views.autocomplete_search, name="autocomplete_search"),
+    path('edit/<id>', views.edit_notes, name="edit_notes")
 ]

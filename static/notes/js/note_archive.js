@@ -134,6 +134,11 @@ function action() {
             $(".confirm-delete").hide()
         })
     })
+
+    $(".edit").click(function() {
+        let edit_url = $(this).attr("data-url-edit")
+        window.location.href = edit_url
+    })
 }
 action()
 

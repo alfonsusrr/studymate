@@ -1,6 +1,12 @@
 {% extends "main/main_dashboard.html" %}
 
-{% block title %}Upload Note{% endblock %}
+{% block title %}
+{% if new %}
+    Upload Note
+{% else %} 
+    Edit - {{note.title}}
+{% endif %}
+{% endblock %}
 {% block head %} 
 {% load static %}
 <link rel="stylesheet" href="{% static 'notes/css/upload.css' %}">
@@ -8,35 +14,53 @@
 
 
 {% block content %}
-        <h2>Upload Your Notes</h2>
+        <h2>
+            {% if new %}
+                Upload Your Notes
+            {% else %} 
+                Edit : {{note.title}}
+            {% endif %}
+        </h2>
         <div class="form-wrapper">
-            <form class="data">
+            <div class="data">
                 <div class="name input-group">
-                    <h3>Title</h3>
-                    <input id="title" class="name input-box" placeholder="Enter Your Note Title" required>
+                    <div class="input-label">
+                        <h3>Title</h3><div class="title-required required-message">You must input title!</div>
+                    </div>
+                    <input id="title" class="name input-box" placeholder="Enter Your Note Title" required {% if not new %} value="{{note.title}}" {% endif %}>
                 </div>
                 <div class="links input-group">
-                    <h3>File (.pdf)</h3>
-                    <input id="file" type="file" class="link input-box" placeholder="Enter Your Note Link" accept=".pdf" required>
+                    <div class="input-label">
+                        <h3>File (.pdf)</h3><div class="file-required required-message">You must input note file!</div>
+                    </div>
+                    <input id="file" type="file" class="link input-box" placeholder="Enter Your Note Link" accept=".pdf" {% if not new %} value="{{note.file}}" {% else %} required {% endif %}>
                 </div>
                 <div class="desc input-group">
                     <h3>Description</h3>
-                    <textarea id="desc" class="description input-box" placeholder="Enter a Description"></textarea>
+                    <textarea id="desc" class="description input-box" placeholder="Enter a Description">{% if not new %}{{note.description}}{% endif %}</textarea>
                 </div>
                 <div class="category input-group">
                     <h3>Category</h3>
                     <input id="category-input" class="category input-box" placeholder="Enter Your Note's Category, end with enter">
                     <div class="category-container">
+                        {% if not new %} 
+                        {% for category in categories %}
+                            <div class="category-tag">
+                                <div class="delete-tag"><i class="fa fa-times"></i></div>
+                                <div class="tag">{{category.name|capfirst}}</div>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="public">Public</button>
-                    <button class="private">Private</button>
+                    <button class="public {% if note.is_private %} unselected {% endif %}">Public</button>
+                    <button class="private {% if note.is_private %} selected {% endif %}">Private</button>
                 </div>
-                <button id="save-note" class="submit">Upload</button>
-            </form>
+                <button id="save-note" class="submit" {% if not new %} data-new="false" data-note-id="{{note.id}}" {% else %} data-new="true" {% endif %}>Upload</button>
+            </div>
             <div class="preview">
-                <iframe id="file-viewer" class="file-viewer"></iframe>
+                <iframe id="file-viewer" class="file-viewer" {% if not new %} src="/media/{{note.file}}" style="display: block" {% endif %}></iframe>
             </div>
         </div>
 {% endblock %}
@@ -48,6 +72,17 @@
 <script type="text/javascript" src="{% static 'notes/js/upload.js' %}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
 <script type="text/javascript">
+    
+    {% if not new %}
+        {% if note.is_private %}
+            let private_value = true
+        {% else %}
+            let private_value = false
+        {% endif %}
+    {% else %}
+        let private_value = false
+    {% endif %}
+
     let url = "{% url 'upload_notes' %}"
 </script>
 {% endblock %}
