@@ -1,0 +1,234 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}{{notes.title}}{% endblock %}
+{% block head %} 
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'notes/css/notes_view.css' %}">
+<script src="{% static 'notes/js/pdf/lib/webviewer.min.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="view">
+        <div id="viewer" class="file-viewer"></div>
+    </div>
+    <div class="data">
+        <div class="data-box">
+            <h3 class="name">{{notes.title}}</h3>
+            <div class="owner">
+                Uploaded by <span class="notes-owner">{{notes.owner.name}}</span> on {{notes.uploaded_on}}
+            </div>
+            <div class="overall-ratings">
+                <input type="hidden" value="{{notes.overall_rating}}" id="notes-rating">
+                <div class="rating-stars overall-rating-star">
+                    <i class="fa fa-star" id="rating-1"></i>
+                    <i class="fa fa-star" id="rating-2"></i>
+                    <i class="fa fa-star" id="rating-3"></i>
+                    <i class="fa fa-star" id="rating-4"></i>
+                    <i class="fa fa-star" id="rating-5"></i>
+                </div>
+                {% if notes.overall_rating == 0 %} 
+                    No ratings yet
+                {% else %}
+                    {{notes.overall_rating}}/5.0 from {{number_ratings}} users
+                {% endif %}
+            </div>
+        </div>
+        <div class="desc  data-box">
+            {% if notes.description != '' %}
+                {{notes.description}}
+            {% else %} 
+                No description 
+            {% endif %}
+        </div>
+        <div class="category data-box">
+            <h3>Category</h3>
+            <div class="category-container">
+            {% for category in categories %}
+                <div class="category-tag" data-url-category="{% url 'category' category.name %}">
+                    {{category.name|capfirst}}
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="reaction-box">
+            <div class="rate data-box">
+                <h3>Rate This Note</h3>
+                <div class="rating-stars user-rate">
+                    <div class="star-wrap">
+                        <i class="far fa-star user-star" id="user-star-1" data-rating-user={{user_rating}} data-id-star="1"></i>
+                        <i class="far fa-star user-star" id="user-star-2" data-rating-user={{user_rating}} data-id-star="2"></i>
+                        <i class="far fa-star user-star" id="user-star-3" data-rating-user={{user_rating}} data-id-star="3"></i>
+                        <i class="far fa-star user-star" id="user-star-4" data-rating-user={{user_rating}} data-id-star="4"></i>
+                        <i class="far fa-star user-star" id="user-star-5" data-rating-user={{user_rating}} data-id-star="5"></i>
+                    </div>
+                    <div class="loader loader-rate">
+                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notes-recommendation data-box">
+            <h3>Reviews</h3>
+            <div class="input-review">
+                <textarea id="review" class="review" placeholder="Enter your review"></textarea>
+                <div class="button-review-wrapper">
+                    <button id="submit-review" data-user-id="{{user.id}}" data-url-review="{% url 'review_notes' notes.id %}" data-url-get-comment="{% url 'get_comments_by_id' '&id' %}">Submit Review</button>
+                    <div class="loader loader-review" style="display: 'block'">
+                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                    </div>
+                    <div class="message">
+                        You must rate this notes first
+                    </div>
+                </div>
+            </div>
+            <div class="comments">
+                {% for review in reviews %}
+                <div class="comment-card comment-box" data-user-id="{{review.user.id}}" data-url-review="{% url 'get_comments_by_id' review.id %}" data-review-id="{{review.id}}">
+                    <div class="comment-info">
+                        <div class="comment-avatar">
+                            <img src="/media/{{review.user.profile_image}}">
+                        </div>
+                        <div class="comment-owner">
+                            <div class="owner-name" data-url="{% url 'view_user' review.user.username %}">{{review.user.name}} </div>
+                            <div class="owner-username">@{{review.user.username}}</div>
+                        </div>
+                        <div class="comment-date">
+                            <div class="date">{{review.last_modified|date:"d M y"}}</div>
+                            <div class="rating-stars rating-comment">
+                                <i class="fa fa-star {% if review.rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+                                <i class="fa fa-star {% if review.rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+                                <i class="fa fa-star {% if review.rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+                                <i class="fa fa-star {% if review.rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+                                <i class="fa fa-star {% if review.rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        {{review.review}}
+                    </div>
+                    <div class="comment-reaction">
+                        <div class="vote">
+                            <div class="votes-total" data-review-id="{{review.id}}">{{review.votes_total}} votes </div>
+                            <i class="fa fa-caret-up" data-url-vote="{% url 'vote_comment' review.id %}"></i>Up Vote
+                            <i class="fa fa-caret-down" data-url-vote="{% url 'vote_comment' review.id %}"></i>Down Vote
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block ending %}
+<script type="text/html" id="reply-input-template">
+    <div class="discussion data-box">
+        <h3>Discussion</h3>
+        <div class="comments">
+            <div class="comment-card comment-box">
+                <div class="comment-info">
+                    <div class="comment-avatar">
+                        <img src="/media/{{user.profile_image}}">
+                    </div>
+                    <div class="comment-owner">
+                        <div class="owner-name">Alfonsus Rendy </div>
+                        <div class="owner-username">@alfonsus.rr</div>
+                    </div>
+                    <div class="comment-date">
+                        3 days ago
+                    </div>
+                </div>
+                <div class="comment-content">
+                    This is great!
+                </div>
+                <div class="comment-reaction">
+                    <div class="reply">
+                        Reply
+                    </div>
+                    <div class="vote">
+                        <i class="fa fa-caret-up"></i>Up Vote •
+                        <i class="fa fa-caret-down"></i>Down Vote
+                    </div>
+                </div>
+                <div class="reply-box comment-box">
+                    <div class="comment-info">
+                        <div class="comment-avatar">
+                            <img src="/media/{{user.profile_image}}">
+                        </div>
+                        <div class="comment-owner">
+                            <div class="owner-name">Alfonsus Rendy </div>
+                            <div class="owner-username">@alfonsus.rr</div>
+                        </div>
+                        <div class="comment-date">
+                            3 days ago
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        This is great!
+                    </div>
+                    <div class="comment-reaction">
+                        <div class="reply">
+                            Reply
+                        </div>
+                        <div class="vote">
+                            10 votes •
+                            <i class="fa fa-caret-up"></i>Up Vote •
+                            <i class="fa fa-caret-down"></i>Down Vote
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reply-box comment-box reply-box-new">
+        <div class="comment-info">
+            <div class="comment-avatar">
+                <img src="/media/{{user.profile_image}}">
+            </div>
+            <div class="comment-owner">
+                <div class="owner-name">Alfonsus Rendy </div>
+                <div class="owner-username">@alfonsus.rr</div>
+            </div>
+            <div class="comment-date">
+            </div>
+        </div>
+        <div class="comment-content">
+            <textarea class="reply-input" placeholder="Post a reply"></textarea>
+        </div>
+        <div class="comment-reaction">
+            <button id="post-reply" class="post-reply-btn">Post</button>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="{% static 'notes/js/notes_view.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+<script>
+    WebViewer({
+      path: "{% static 'notes/js/pdf/lib' %}",
+      licenseKey: 'CjfA56vIcPvmnTXSBn7J',
+      initialDoc: "/media/{{notes.file}}",
+    }, document.getElementById('viewer'))
+    .then(instance => {
+      // now you can access APIs through the WebViewer instance
+      const { Core, UI } = instance;
+      var FitMode = instance.UI.FitMode;
+      instance.UI.setFitMode(FitMode.FitWidth);
+      // adding an event listener for when a document is loaded
+      Core.documentViewer.addEventListener('documentLoaded', () => {
+        console.log('document loaded');
+      });
+  
+      // adding an event listener for when the page number has changed
+      Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
+        console.log(`Page number is: ${pageNumber}`);
+      });
+    });
+</script>
+<script>
+    let token = "{{csrf_token}}"
+    let url_rate = "{% url 'rate_notes' notes.id %}"
+</script>
+{% endblock %}

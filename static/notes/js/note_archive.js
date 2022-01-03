@@ -35,6 +35,7 @@ $("#more-public").click(function() {
             }
             page_public += 1
             action()
+            clicked()
         }
     })
 })
@@ -62,6 +63,19 @@ $("#more-private").click(function() {
         }
     })
 })
+
+function clicked() {
+    $(".notes").find('img').on("click", function () {
+        let url = $(this).attr('data-link')
+        view_notes(url)
+    })
+
+    $(".notes").find('h4').on("click", function () {
+        let url = $(this).attr('data-link')
+        view_notes(url)
+    })
+}
+clicked()
 
 function action() {
     $(".delete").click(function() {
@@ -103,7 +117,9 @@ function action() {
                                     $("#public-notes").html('<div class="no-notes">You have no public notes</div>')
                                 }
                             }
-                            console.log(response.has_next)
+                            
+                            clicked()
+
                             if (response.has_next) {
                                 $('#more-private').show()
                             }
@@ -121,6 +137,10 @@ function action() {
 }
 action()
 
+function view_notes(url_id) {
+    window.location.href = url_id
+}
+
 $("#search-submit").click(function () {
     let query = $(this).siblings("#search-query").val();
     search_notes(query)
@@ -135,6 +155,8 @@ $("#search-query").on("keypress", function (e) {
 
 function search_notes (query) {
     let loader = $("#loader-skeleton").html()
+    $('#more-private').hide()
+    $('#more-public').hide()
     $('#public-notes').html(loader)
     $('#private-notes').html(loader)
     $.ajax({
@@ -159,6 +181,8 @@ function search_notes (query) {
             }
             $('#more-private').hide()
             $('#more-public').hide()
+
+            clicked()
         }
     })
 }

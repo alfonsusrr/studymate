@@ -214,3 +214,6 @@ def profile_edit(request):
         return HttpResponse(json.dumps([str(request.user.cover_image), str(request.user.profile_image)]))
     else:
         return render(request, "account/edit.html")
+
+def view_user(request, id):
+    pass

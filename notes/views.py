@@ -8,6 +8,7 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.template import loader
 from pdf2image import convert_from_path
 from django.conf import settings
@@ -43,6 +44,19 @@ def archive(request):
 def share(request):
     return render(request, "notes/share.html")
 
+def search(request):
+    if request.method == "POST":
+        query = request.POST.get("query")
+        notes = Notes.objects.filter(is_private=False).filter(Q(title__icontains=query) | Q(description__icontains=query)).order_by('-overall_rating')
+
+        html_response = loader.render_to_string("notes/notes_search_temp.html", {"notes": notes})
+        html_response = html_response.strip()
+        output = {
+            'status': "success",
+            "html_response": html_response
+        }
+        return JsonResponse(output)
+
 @login_required
 @csrf_exempt
 def upload(request):
@@ -58,6 +72,7 @@ def upload(request):
 
         categoriesList = []
         for category in categories:
+            category = category.lower()
             categoryDB = NotesCategory.objects.filter(name=category).first()
             if categoryDB == None:
                 categoryDB = NotesCategory(name=category)
@@ -74,7 +89,8 @@ def upload(request):
         return HttpResponse("200")
     else:
         return render(request, "notes/upload.html")
-
+        
+@login_required
 def get_archive(request):
     if request.method == "POST":
         try:
@@ -130,6 +146,7 @@ def thumbnail_creation(note):
     note.thumbnail = img_content
     note.save()
 
+@login_required
 def delete_notes(request):
     id = request.POST.get("id")
     notes = Notes.objects.filter(id=id).first()
@@ -137,3 +154,127 @@ def delete_notes(request):
         return HttpResponseForbidden
     notes.delete()
     return HttpResponse("Deleted")
+
+@login_required
+def view_notes(request, id):
+    note = Notes.objects.filter(id=id).first()
+    if note == None:
+        return Http404
+    else:
+        user_rating = NotesRating.objects.filter(user=request.user, note=note).first()
+        if user_rating == None:
+            user_rating = 0
+        else:
+            user_rating = user_rating.rating
+        categories = note.categories.all()
+        number_ratings = NotesRating.objects.filter(note=note)
+        ratings_with_review = NotesRating.objects.filter(note=note).exclude(review='').order_by('-votes_total', '-last_modified')
+        context = {
+            "notes": note,
+            "categories": categories,
+            "user_rating": user_rating,
+            "number_ratings": len(number_ratings),
+            "reviews": ratings_with_review
+        }
+        if note.is_private:
+            if note.owner == request.user:
+                return render(request, 'notes/notes_view.html', context)
+            else:
+                return HttpResponseForbidden
+        else:
+            return render(request, 'notes/notes_view.html', context)
+
+@login_required
+def rate_notes(request, id):
+    note = Notes.objects.filter(id=id).first()
+    if note == None:
+        output = {
+            "status": "failed",
+            "message": "Notes doesn't exist"
+        }
+        return Jsonresponse(output)
+    else:
+        if request.method == "POST":
+            rate = request.POST.get("rate")
+            ratingDB = NotesRating.objects.filter(note=note, user=request.user).first()
+            if ratingDB == None:
+                ratingDB = NotesRating(user=request.user, note=note, rating=rate)
+            else:
+                ratingDB.rating = rate
+            ratingDB.save()
+
+            ratingDB = NotesRating.objects.filter(note=note)
+            overall_rate = 0
+            for rating in ratingDB:
+                overall_rate += rating.rating
+            try:
+                overall_rate = overall_rate / len(ratingDB)
+            except:
+                overall_rate = 0
+            
+            note.overall_rating = overall_rate
+            note.save()
+            
+            output = {
+                "status": "success",
+                "rating": rate 
+            }
+            return JsonResponse(output)
+        else:
+            return HttpResponseForbidden
+
+@login_required
+def review_notes(request, id):
+    notesRatingDB = NotesRating.objects.filter(note__id=id, user=request.user).first()
+    if notesRatingDB == None:
+        output = {
+            "status": "failed",
+            "message": "Rating not found"
+        }
+        return JsonResponse(output)
+    else:
+        review = request.POST.get("review")
+        notesRatingDB.review = review
+        notesRatingDB.save()
+        output = {
+            "status": "success",
+            "review": review,
+            "id": notesRatingDB.id
+        }
+        return JsonResponse(output)
+
+def get_comments_by_id(request, id):
+    comment =  NotesRating.objects.filter(id=id)
+    comment_html = loader.render_to_string('notes/comments.html', {'reviews': comment})
+    comment_html = comment_html.strip()
+    output = {
+        "status": "success",
+        "html_response": comment_html
+    }
+    return JsonResponse(output)
+
+def vote_comment(request, id):
+    if request.method == "POST":
+        value = int(request.POST.get("value"))
+        notes_rating = NotesRating.objects.filter(id=id).first()
+        vote = NotesRatingVotes.objects.filter(owner=request.user, notes_rating__id=id).first()
+        if vote == None:
+            vote = NotesRatingVotes(owner=request.user, value=value, notes_rating=notes_rating)
+        else:
+            notes_rating.votes_total -= vote.value
+            vote.value = value
+        vote.save()
+        notes_rating.votes_total += value
+        notes_rating.save()
+
+        output = {
+            'status': 'success',
+            'id': id,
+            'total_vote': notes_rating.votes_total
+        }
+        return JsonResponse(output)
+    else:
+        return HttpResponseForbidden
+
+def category(request, name):
+    pass

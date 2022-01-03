@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      if (window.location.href.slice(-1) !== '/' && window.location.href.slice(-4) !== 'html') {
+        // hacky redirect for mac php server...
+        window.location = window.location.href + '/';
+      }
+    </script>
+    <link rel="stylesheet" href="../style.css" />
+    <title>Advanced Demo & Samples for JavaScript PDF Viewer</title>
+  </head>
+
+  <body class="pdfjs">
+    <header>
+      <div class="container">
+        <div>
+          <a href="https://pdftron.com" target="_blank">
+            <div class="logo"></div>
+          </a>
+          <span class="title">PDFJS Express</span>
+        </div>
+        <div>
+          <a class="button" href="https://pdfjs.express/documentation/get-started/overview" target="_blank">Go to Guides</a>
+          <a class="button filled" href="https://pdfjs.express/purchase" target="_blank">Purchase</a>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="sidebar">
+        <p><b>Samples</b></p>
+
+        <p><a class="" href="../">Viewing</a></p>
+        <p><a class="" href="../annotation">Annotation</a></p>
+        <p><a class="" href="../forms">Forms</a></p>
+        <p><a class="" href="../customization">Customization</a></p>
+        <p><a class="active" href=".">Advanced</a></p>
+
+        <p><b>Showcase</b></p>
+        <p><a href="https://pdfjs.express/demo" target="_blank">Go to showcase</a></p>
+      </div>
+      <div class="content">
+        <div id="error-message" style="display: none; background-color: red; color: white">Samples are not runnable from the file system. Please run using "npm start" or use a local web server.</div>
+
+        <h1>Advanced Demo for PDF Viewer</h1>
+
+        <div>
+          <h4>Text compare</h4>
+          <p>
+            Shows how to compare text in different documents.
+            <br />
+          </p>
+          <div class="inline">
+            <a href="./text-compare">Launch demo</a>
+            <a href="./text-compare/text-compare.js" target="_self">View Source</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Accessibility</h4>
+          <p>
+            Demonstrates how to use accessibility feature of WebViewer to read PDF text out loud.
+            <br />
+          </p>
+          <div class="inline">
+            <a href="./accessibility">Launch demo</a>
+            <a href="./accessibility/accessibility.js" target="_self">View Source</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Measurement Annotations</h4>
+          <p>
+            Shows how to create annotations that measure distance, perimeter and area.
+            <br />
+          </p>
+          <div class="inline">
+            <a href="./measurement">Launch demo</a>
+            <a href="./measurement/measurement.js" target="_self">View Source</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Text position</h4>
+          <p>
+            Shows how to extract text positions from a document. The sample highlights the positions with different colors.
+            <br />
+          </p>
+          <div class="inline">
+            <a href="./text-position">Launch demo</a>
+            <a href="./text-position/text-position.js" target="_self">View Source</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Table Extraction</h4>
+          <p>
+            This sample shows how to use the PDFTron.AI REST endpoint to extract table from PDF documents.
+            <br />
+          </p>
+          <div class="inline">
+            <a href="./table-extraction">Launch demo</a>
+            <a href="./table-extraction/table-extraction.js" target="_self">View Source</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      if (window.location.href.indexOf('file://') === 0) {
+        alert('Samples are not runnable from the file system. Please run using "npm start" or use a local web server.');
+        document.getElementById('error-message').style.display = 'block';
+      }
+    </script>
+  </body>
+</html>
