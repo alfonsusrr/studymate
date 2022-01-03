@@ -15,8 +15,18 @@ up.onclick = function(){
     document.documentElement.scrollTop = 0;
 }
 
-let heart = document.querySelector(".fa-heart-o");
+function heart(){
+    this.classList.toggle("fa-heart-o");
+}
 
-heart.onclick = function() {
-    
+let comment = document.querySelector(".fa-comment-o");
+
+comment.onclick = function(){
+    comment.classList.toggle("fa-comment-o");
+}
+
+let bookmark = document.querySelector(".fa-bookmark-o");
+
+bookmark.onclick = function(){
+    bookmark.classList.toggle("fa-bookmark-o");
 }

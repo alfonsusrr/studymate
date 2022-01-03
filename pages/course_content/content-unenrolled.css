@@ -243,47 +243,70 @@ button:hover{
     margin-left: 250px;
 }
 
-.interfaceOdd{
-    display: block;
-    padding: 3% 10%;
-    background-color: #afeffa;
+h2{
+    color: white;
+    font-size: 50px;
 }
 
-.interfaceEven{
-    display: block;
-    padding: 3% 10%;
-    background-color: rgb(224, 239, 252);
+.course button{
+    font-size: large;
+    font-weight: bold;
 }
 
-.pfp{
-    display: inline-block;
-    border-radius: 100px;
-    width: 2%;
+.course{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../static/images/placeholder.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding: 10% 0%;
+    background-position: center;
+    text-align: center;
 }
 
-.username{
-    display: inline-block;
+.details h3{
+    text-align: center;
+    background-color: #DDDDDD;
+    color: #323950;
+    font-size: xx-large;
 }
 
-p{
+.profile{
+    text-align: center;
     margin-top: 1%;
-    margin-bottom: 1%;
 }
 
-.interactions{
+.instructors{
+    column-count: 2;
+}
+
+.profile img{
+    margin-top: 2%;
+    max-height: 200px;
+}
+
+.about p{
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
     margin-top: 1%;
 }
 
-.interactions i{
-    width: 33%;
+.about h4{
+    margin-top: 2%;
+    text-align: center;
+    font-size: large;
 }
 
-.goUp{
-    position: fixed;
-    left: 95%;
-    top: 88%;
+.instructor h4{
+    margin-top: 2%;
+    text-align: center;
+    font-size: larger;
 }
 
-html{
-    scroll-behavior: smooth;
+.content{
+    transition: 0.5s ease;
+}
+
+.content.active{
+    transition: 0.5s ease;
+    margin-left: 15%;
 }

@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Studymate | Social</title>
+        <title>Studymate | CS50x: Introduction to programming</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="social.css">
+        <link rel="stylesheet" href="content-unenrolled.css">
     </head>
     <body>
         <section class="home_section">
             <header>
-                <img class="logo" src="../../static/images/logo.jpg" alt="logo">
+                <img class="logo" src="../../src/logo.jpg" alt="logo">
                 <nav>
                     <ul class="nav__links">
                         <li><a href="../about/about.html">About</a></li>
@@ -23,114 +23,100 @@
                 <a class="cta" href="../profile/profile.html"><button>Your Profile</button></a>
             </header>
         </section>
-        <div class="interfaceOdd">
-            <div class="post">
-                <img class="pfp" src="../../static/images/profile.jpg">
-                <h4 class="username">Admin</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptates! Dignissimos, accusamus libero harum voluptas natus fugit aut est voluptatem aliquam, facere odit repellat magni. Soluta praesentium voluptate consequatur ipsa.</p>
-                <img src="../../static/images/note_default.jpg">
-                <div class="interactions">    
-                    <i class="fa fa-comment-o" aria-hidden="true">1000</i>
-                    <i class="fa fa-bookmark-o" aria-hidden="true">1000</i>
-                    <i class="fa fa-heart-o" aria-hidden="true">1000</i>
+        <div class="content">
+            <div class="course">
+                <h2>CS50x: Introduction to programming</h2>
+                <button class="Enroll">Enroll</button>
+            </div>
+            <div class="details">
+                <h3>Details</h3>
+                <div class="about">
+                    <h4>About The Course</h4>
+                    <p>Introduction to the intellectual enterprises of computer science and the art of programming. This course teaches students how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web programming. Languages include C, Python, and SQL plus HTML, CSS, and JavaScript. Problem sets inspired by the arts, humanities, social sciences, and sciences. Course culminates in a final project. Designed for concentrators and non-concentrators alike, with or without prior programming experience. Two thirds of CS50 students have never taken CS before. Among the overarching goals of this course are to inspire students to explore unfamiliar waters, without fear of failure, create an intensive, shared experience, accessible to all students, and build community among students.</p>
+                </div>
+                <div class="instructor">
+                    <h4>Instructors</h4>
+                    <div class="instructors">
+                        <div class="profile">
+                            <img src="../../static/images/instructor.jpg">
+                            <p>David J Mallan</p>
+                        </div>
+                        <div class="profile">
+                            <img src="../../static/images/instructor2.jpg">
+                            <p>Brian Yu</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="interfaceEven">
-            <div class="post">
-                <img class="pfp" src="../../static/images/profile.jpg">
-                <h4 class="username">Admin</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptates! Dignissimos, accusamus libero harum voluptas natus fugit aut est voluptatem aliquam, facere odit repellat magni. Soluta praesentium voluptate consequatur ipsa.</p>
-                <img src="../../static/images/note_default.jpg">
-                <div class="interactions">    
-                    <i class="fa fa-comment-o" aria-hidden="true">1000</i>
-                    <i class="fa fa-bookmark-o" aria-hidden="true">1000</i>
-                    <i class="fa fa-heart-o" aria-hidden="true">1000</i>
-                </div>
-            </div>
-        </div>
-        <div class="interfaceOdd">
-            <div class="post">
-                <img class="pfp" src="../../static/images/profile.jpg">
-                <h4 class="username">Admin</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptates! Dignissimos, accusamus libero harum voluptas natus fugit aut est voluptatem aliquam, facere odit repellat magni. Soluta praesentium voluptate consequatur ipsa.</p>
-                <img src="../../static/images/note_default.jpg">
-                <div class="interactions">    
-                    <i class="fa fa-comment-o" aria-hidden="true">1000</i>
-                    <i class="fa fa-bookmark-o" aria-hidden="true">1000</i>
-                    <i class="fa fa-heart-o" aria-hidden="true">1000</i>
-                </div>
-            </div>
-        </div>
-        <button class="goUp">^</button>
         <div class="sidebar">
             <div class="logo_content">
                 <div class="logo">
-                    <img src="../../static/images/logo.jpg" alt="logo">
+                    <img src="../../src/logo.jpg" alt="logo">
                     <div class="logo_name">StudyMate</div>
                 </div>
-                <img src="../../static/images/menu_burger.jpg" alt="menu_logo" id="menu">
+                <img src="../../src/menu_burger.jpg" alt="menu_logo" id="menu">
             </div>
             <ul class="nav_list">
                 <li>
                     <a href="../dashboard/dashboard.html">
-                        <i class="fa fa-home fa-2x"></i>
+                        <img src="../../src/dashboard.jpg" alt="dashboard">
                         <span class="links_name">&nbsp; &nbsp; Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>
                 </li>
                 <li>
                     <a href="../agenda/agenda.html">
-                        <i class="fa fa-calendar fa-2x"></i>
+                        <img src="../../src/agenda.jpg">
                         <span class="links_name">&nbsp; &nbsp; Agenda</span>
                     </a>
                     <span class="tooltip">Agenda</span>
                 </li>
                 <li>
                     <a href="../note_archive/note_archive.html">
-                        <i class="fa fa-book fa-2x"></i>
+                        <img src="../../src/note_archive.jpg">
                         <span class="links_name">&nbsp; &nbsp; Note Archive</span>
                     </a>
                     <span class="tooltip">Note Archive</span>
                 </li>
                 <li>
                     <a href="../note_share/share.html">
-                        <i class="fa fa-share-alt-square fa-2x"></i>
+                        <img src="../../src/note_share.jpg">
                         <span class="links_name">&nbsp; &nbsp; Note Share</span>
                     </a>
                     <span class="tooltip">Note Share</span>
                 </li>
                 <li>
                     <a href="../relax/relax.html">
-                        <i class="fa fa-coffee fa-2x"></i>
+                        <img src="../../src/relax_room.jpg">
                         <span class="links_name">&nbsp; &nbsp; Relax Room</span>
                     </a>
                     <span class="tooltip">Relax Room</span>
                 </li>
                 <li>
                     <a href="../search/search.html">
-                        <i class="fa fa-search fa-2x"></i>
+                        <img src="../../src/search_courses.jpg">
                         <span class="links_name">&nbsp; &nbsp; Search Courses</span>
                     </a>
                     <span class="tooltip">Search</span>
                 </li>
                 <li>
                     <a href="../settings/settings.html">
-                        <i class="fa fa-cog fa-2x"></i>
+                        <img src="../../src/settings.jpg">
                         <span class="links_name">&nbsp; &nbsp; Settings</span>
                     </a>
                     <span class="tooltip">Settings</span>
                 </li>
                 <li>
                     <a href="../login/login.html">
-                        <i class="fa fa-sign-out fa-2x"></i>
+                        <img src="../../src/logout.jpg">
                         <span class="links_name">&nbsp; &nbsp; Logout</span>
                     </a>
                     <span class="tooltip">Logout</span>
                 </li>
             </ul>
         </div>
-        <script type="module" src="social.js"></script>
+        <script type="module" src="content-unenrolled.js"></script>
     </body>
     <br>
     <br>
