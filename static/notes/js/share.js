@@ -24,7 +24,13 @@ $("#search-query").on("keypress", function (e) {
     }
 })
 
+$("#search-query").autocomplete({
+    source: $("#search-query").attr("data-url-autocomplete"),
+    position: {my: "left top+10px" }
+})
+
 function search_notes (query) {
+    $('.category-container').hide()
     let loader = $("#loader-skeleton").html()
     $('.notes-container').html(loader)
     let url = $("#search-submit").attr("data-url-search")

@@ -8,7 +8,8 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
+from django.db.models import Q, Value
+from django.db.models.functions import Replace
 from django.template import loader
 from pdf2image import convert_from_path
 from django.conf import settings
@@ -47,7 +48,7 @@ def share(request):
 def search(request):
     if request.method == "POST":
         query = request.POST.get("query")
-        notes = Notes.objects.filter(is_private=False).filter(Q(title__icontains=query) | Q(description__icontains=query)).order_by('-overall_rating')
+        notes = Notes.objects.filter(is_private=False).filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(categories__name__icontains=query)).order_by('-overall_rating', '-uploaded_on').distinct()
 
         html_response = loader.render_to_string("notes/notes_search_temp.html", {"notes": notes})
         html_response = html_response.strip()
@@ -56,6 +57,13 @@ def search(request):
             "html_response": html_response
         }
         return JsonResponse(output)
+
+def autocomplete_search(request):
+    if 'term' in request.GET:
+        notes = Notes.objects.filter(title__icontains=request.GET.get("term"))
+        titles = [note.title for note in notes]
+        return JsonResponse(titles, safe=False)
+    return JsonResponse({})
 
 @login_required
 @csrf_exempt
@@ -277,4 +285,15 @@ def vote_comment(request, id):
         return HttpResponseForbidden
 
 def category(request, name):
-    pass
+    notes = Notes.objects.filter(is_private=False).annotate(category_now=Replace('categories__name', Value(' '), Value('-'))).filter(category_now__iexact=name).order_by('-overall_rating', '-uploaded_on')
+    context = {
+        "category": name.replace("-", " "),
+        "notes": notes
+    }
+    return render(request, "notes/share.html", context)
+
+def edit_notes(request):
+    if request.method == "POST":
+        pass
+    else:
+        pass

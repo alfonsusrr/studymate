@@ -8,25 +8,42 @@
 
 
 {% block content %}
+    <div class="page-wrapper">
         <section class="search">
             <h2>Search Notes</h2>
-            <input id="search-query" type="text" class="search_notes" placeholder="Search a Topic">
+            <input id="search-query" type="text" class="search_notes" placeholder="Search a Topic" data-url-autocomplete="{% url 'autocomplete_search' %}">
             <button id="search-submit" type="submit" class="result" data-url-search="{% url 'search_notes' %}">Search</button>
         </section>
+        {% if category %} 
+        <div class="category-container">
+            <div class="category-tag">
+                {{category|capfirst}}
+            </div>
+        </div>
+        {% endif %}
         <section class="notes-container">
             {% for note in notes %}
-                <div class="notes">
-                    <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
-                    <input class="notes-id" type="hidden" value="{{note.id}}">
-                    <div class="action">
-                        <input type="hidden" class="notes-is-private" value="true">
-                        <div class="edit"><i class="fa fa-pencil"></i></div>
-                        <div class="delete"><i class="fa fa-trash-o"></i></div>
-                    </div>
-                    <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}}</h4>
+            <div class="notes">
+                <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
+                <input class="notes-id" type="hidden" value="{{note.id}}">
+                <div class="action">
+                    <input type="hidden" class="notes-is-private" value="false">
                 </div>
+                <div class="rating-stars">
+                    <i class="fa fa-star {% if note.overall_rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+                    <i class="fa fa-star {% if note.overall_rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+                    <i class="fa fa-star {% if note.overall_rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+                    <i class="fa fa-star {% if note.overall_rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+                    <i class="fa fa-star {% if note.overall_rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+                </div>
+                <div class="notes-info">
+                    <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}}</h4>
+                    <div class="notes-owner">By {{note.owner.name}}</div>
+                </div>
+            </div>
             {% endfor %}
         </section>
+    </div>
 {% endblock %}
 {% block ending %}
 <script>
