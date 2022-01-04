@@ -1,0 +1,180 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}CS50x: Introduction to programming{% endblock %}
+{% block head %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'dashboard/css/content-enrolled.css' %}">
+{% endblock %}
+
+
+{% block content %}
+        <div class="content">
+            <div class="course">
+                <h2>CS50x: Introduction to programming</h2>
+                <button class="enroll">Enrolled</button>
+            </div>
+            <div class="lectures">
+                <h3>Week 0</h3>
+                <hr>
+                <div class="video">
+                    <div class="links">
+                        <p>
+                            <a href="#" class="current">Week 0</a> >
+                            <a href="#">Week 1</a> >
+                            <a href="#">Week 2</a> >
+                            <a href="#">Week 3</a> >
+                            <a href="#">Week 4</a> >
+                            <a href="#">Week 5</a> >
+                            <a href="#">Week 6</a> >
+                            <a href="#">Week 7</a> >
+                            <a href="#">Week 8</a> >
+                            <a href="#">Week 9</a> >
+                            <a href="#">Week 10</a>
+                        </p>
+                    </div>
+                    <div class="videos">
+                        <iframe width="100%" height="750px" src="https://www.youtube.com/embed/1tnj3UCkuxU?mute=1&autoplay=1" allow="autoplay"></iframe>
+                        <div class="text">
+                            <h4>Description</h4>
+                            <hr>
+                            <pre>
+TABLE OF CONTENTS
+
+00:00:00 - Intro
+00:01:17 - Problem Solving
+00:05:36 - Representation
+00:06:14 - Binary
+00:13:25 - Letters
+00:16:40 - ASCII
+00:20:12 - Unicode
+00:25:38 - Color
+00:28:00 - Images
+00:29:28 - Videos
+00:30:43 - Music
+00:31:50 - Questions on representation
+00:35:41 - Algorithms
+00:40:33 - Time to solve
+00:43:57 - Pseudocode
+00:50:35 - Scratch
+00:52:39 - Scratch blocks
+00:57:22 - Hello world
+01:03:30 - Inputs to outputs, outputs to inputs
+01:05:50 - Text to speech
+01:07:41 - Meow
+01:08:35 - Loops
+01:10:42 - Custom blocks
+01:15:50 - Conditionals
+01:17:25 - Forever
+01:18:42 - Video sensing
+01:20:25 - Whack-a-mole
+01:21:57 - One piece at a time
+01:22:48 - Oscartime
+01:24:24 - Oscartime stage
+01:25:30 - Oscartime trash can
+01:27:18 - Oscartime falling trash
+01:29:42 - Oscartime dragging trash
+01:31:30 - Putting Oscartime together
+01:33:42 - Movement
+01:35:32 - Movement's abstractions
+01:37:30 - Bouncing
+01:39:05 - Following
+01:41:00 - Ivy's Hardest Game
+
+***
+
+This is CS50, Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.
+
+***
+
+HOW TO SUBSCRIBE
+
+http://www.youtube.com/subscription_c...
+
+HOW TO TAKE CS50
+
+edX: https://cs50.edx.org/
+
+Harvard Extension School: https://cs50.harvard.edu/extension
+
+Harvard Summer School: https://cs50.harvard.edu/summer
+
+OpenCourseWare: https://cs50.harvard.edu/x
+
+
+HOW TO JOIN CS50 COMMUNITIES
+
+Discord: https://discord.gg/T8QZqRx
+
+Ed: https://cs50.harvard.edu/x/ed
+
+Facebook Group: https://www.facebook.com/groups/cs50/
+
+Faceboook Page: https://www.facebook.com/cs50/
+
+GitHub: https://github.com/cs50
+
+Gitter: https://gitter.im/cs50/x
+
+Instagram: https://instagram.com/cs50
+
+LinkedIn Group: https://www.linkedin.com/groups/7437240/
+
+LinkedIn Page: https://www.linkedin.com/school/cs50/
+
+Reddit: https://www.reddit.com/r/cs50/
+
+Quora: https://www.quora.com/topic/CS50
+
+Slack: https://cs50.edx.org/slack
+
+Snapchat: https://www.snapchat.com/add/cs50
+
+Twitter: https://twitter.com/cs50
+
+YouTube: http://www.youtube.com/cs50
+
+HOW TO FOLLOW DAVID J. MALAN
+
+Facebook: https://www.facebook.com/dmalan
+
+GitHub: https://github.com/dmalan
+
+Instagram: https://www.instagram.com/davidjmalan/
+
+LinkedIn: https://www.linkedin.com/in/malan/
+
+Quora: https://www.quora.com/profile/David-J...
+
+Twitter: https://twitter.com/davidjmalan
+
+
+***
+
+CS50 SHOP
+
+https://cs50.harvardshop.com/
+
+
+***
+
+LICENSE
+
+CC BY-NC-SA 4.0
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+
+David J. Malan
+https://cs.harvard.edu/malan
+
+malan@harvard.edu
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block ending %}
+        <script type="module" src="{% static 'dashboard/js/content-enrolled.js' %}"></script>
+{% endblock %}
