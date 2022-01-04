@@ -1,12 +1,12 @@
 .flex-container-top {
     display: flex;
-    margin-left: 80px;
+    margin-left: 100px;
     align-items: flex-start;
     transition: 0.5s ease;
 }
 
 .agenda{
-    margin-left: 10px;
+    margin-left: 20px;
     transition: 0.5s ease;
     width: 38%;
     padding-right: 5px;
@@ -139,10 +139,12 @@ form input, form button{
 
 form input {
     width: 50%;
+    border: 1px solid rgb(5, 139, 201)
 }
+
 form button{
     color: white;
-    background: rgb(127, 80, 201);
+    background: rgb(5, 139, 201);
     cursor: pointer;
     transition: all 0.3 ease;
     padding: 5px 10px;
@@ -152,7 +154,7 @@ form button{
 }
 
 form button:hover{
-    background-color: rgb(87, 42, 158);
+    background-color: rgb(5, 139, 201);
     color: white;
 }
 
@@ -171,7 +173,7 @@ select{
 }
 
 select{
-    color: #c065c0;
+    color: rgb(0, 118, 173);
     width: 8rem;
     cursor: pointer;
     padding: 0.7rem;
@@ -180,14 +182,14 @@ select{
 .select::after{
     content: "\25bc";
     position: absolute;
-    color: #c065c0;
+    color: rgb(0, 157, 230);
     top: 7px;
     right: 6px;
     pointer-events: none;
 }
 
 .select:hover::after{
-color: #583429;
+color: rgb(25, 39, 230)139, 201);
 }
 
 .todo_container{

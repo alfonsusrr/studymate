@@ -17,33 +17,33 @@ let Settings = document.querySelector(".Settings");
 let Questions = document.querySelector(".Questions");
 
 headerdashboard.onclick = function(){
-    dashboard.classList.toggle("display");
+    $(".dashboard").slideToggle("slow", "linear")
 }
 
 headerAgenda.onclick = function(){
-    Agenda.classList.toggle("display");
+    $(".Agenda").slideToggle("slow", "linear")
 }
 
 headerNoteArchive.onclick = function(){
-    NoteArchive.classList.toggle("display");
+    $(".NoteArchive").slideToggle("slow", "linear")
 }
 
 headerNoteShare.onclick = function(){
-    NoteShare.classList.toggle("display");
+    $(".NoteShare").slideToggle("slow", "linear")
 }
 
 headerRelaxRoom.onclick = function(){
-    RelaxRoom.classList.toggle("display");
+    $(".RelaxRoom").slideToggle("slow", "linear")
 }
 
 headerSearchCourses.onclick = function(){
-    SearchCourses.classList.toggle("display");
+    $(".SearchCourses").slideToggle("slow", "linear")
 }
 
 headerSettings.onclick = function(){
-    Settings.classList.toggle("display");
+    $(".Settings").slideToggle("slow", "linear")
 }
 
 headerQuestions.onclick = function(){
-    Questions.classList.toggle("display");
+    $(".Questions").slideToggle("slow", "linear")
 }

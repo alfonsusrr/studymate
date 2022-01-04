@@ -5,27 +5,28 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'dashboard/css/welcome.css' %}">
 {% endblock %}
-
 {% block content %}
-        <h1>
-            Enchance Your Learning <br>
-            Experience With <br>
-            Studymate <br>
-            <a href="../login/login.html"><button class="start">Get Started</button></a>
+        <h1 class="banner">
+            <div class="banner-text">
+                Enhance Your Learning <br>
+                Experience With <br>
+                Studymate <br>
+            </div>
+            <a href="{% url 'login' %}"><button class="start">Get Started</button></a>
         </h1>
         <div class="par">
-            <h2>Behind Studymate</h2>
-            <p>In the year of 2020 and 2021 we experienced that digital learning is as important as learning in class. Most knowledge and information that students gather these days are from the internet, such as searching for open courses and finding learning materials. But sometimes searching for a course or learning materials can be confusing especially for people who just started to learn something new and doesn't know whom to ask. Thus Studymate is created to solve this problem in a community based learning experience. Studymate provides learning materials and recommended courses based on what the community had experienced, so the user can choose their own learning materials based on what other say about a certain learning material or course.</p>
+            <h2 class="text-animate animate-left">Behind Studymate</h2>
+            <p class="text-animate animate-right">In the year of 2020 and 2021 we experienced that digital learning is as important as learning in class. Most knowledge and information that students gather these days are from the internet, such as searching for open courses and finding learning materials. But sometimes searching for a course or learning materials can be confusing especially for people who just started to learn something new and doesn't know whom to ask. Thus Studymate is created to solve this problem in a community based learning experience. Studymate provides learning materials and recommended courses based on what the community had experienced, so the user can choose their own learning materials based on what other say about a certain learning material or course.</p>
         </div>
         <div class="ft">
-            <h2>~ &nbsp; Features &nbsp; ~</h2>
-            <div class="box-area">
+            <h2 class="text-animate animate-fade">Features</h2>
+            <div class="box-area text-animate animate-fade">
                 <div class="box">
                     <i class="fa fa-home fa-3x"></i>
                     <h3>Dashboard</h3>
-                    <p>This is a page where <br> users gets directed to <br> once they have <br> logged in.</p>
+                    <p>This is a page where <br> users can find course recommendation, <br> daily agenda reminder and note <br>recommendation based of their experience</p>
                 </div>
-                <div class="midbox">
+                <div class="box">
                     <i class="fa fa-calendar fa-3x"></i>
                     <h3>Agenda</h3>
                     <p>This is a page where <br> users can keep track of <br> their own agenda for <br> future planning.</p>
@@ -35,17 +36,15 @@
                     <h3>Note Archive</h3>
                     <p>This is a page where users can <br> upload their notes and manage <br> uploaded notes as well as <br> see their note's ratings </p>
                 </div>
-            </div>
-            <div class="box-area">
                 <div class="box">
                     <i class="fa fa-share-alt-square fa-3x"></i>
                     <h3>Note Share</h3>
                     <p>This is page where <br> users can see other <br> user's notes and <br> rate it.</p>
                 </div>
-                <div class="midbox">
+                <div class="box">
                     <i class="fa fa-search fa-3x"></i>
-                    <h3>Search Courses</h3>
-                    <p>This is a page where <br> users can search and <br> rate courses based <br> on their experience.</p>
+                    <h3>Course</h3>
+                    <p>This is a page where <br> users can find courses and <br> rate courses based <br> on their experience.</p>
                 </div>
                 <div class="box">
                     <i class="fa fa-coffee fa-3x"></i>
@@ -62,7 +61,14 @@
             </div>
             <div class = "q">
                 <h4>Need Help?</h4>
-                <p>you can reffer to our <a href="../help/help.html">help</a> page or <br> if you have any more questions, you can directly contact us through our <a href="../contacts/contacts.html">contact</a> page.</p>
+                <p>you can refer to our <a href="{% url 'help' %}">help</a> page or <br> if you have any more questions, you can directly contact us through our <a href="#">contact</a> page.</p>
             </div>
         </div>
+{% endblock %}
+{% block ending %} 
+<script type="text/javascript">
+    $('.banner').css("background-image", "url({% static 'images/welcome.jpg' %})")
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/meetselva/attrchange@master/js/attrchange.js"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/welcome.js'%}"></script>
 {% endblock %}

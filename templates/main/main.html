@@ -16,13 +16,13 @@
     <body>
         <section class="home_section">
             <header>
-                <img class="logo" src="{% static 'images/logo.jpg' %}" alt="logo">
+                <img class="logo" src="{% static 'images/logo.png' %}" alt="logo">
                 <nav>
                     <ul class="nav__links">
-                        <li><a href="#">Welcome</a></li>
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Contacts</a></li>
+                        <li><a href="{% url 'welcome' %}">Home</a></li>
+                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
                         <li><a href="{% block link %}{% endblock %}">{% block link_title %}{% endblock %}</a></li>
                     </ul>
                 </nav>
@@ -38,6 +38,6 @@
     <br>
     <br>
     <footer>
-        Copyright&copy;Studymate - CS50x Final Project
+        Copyright &copy; Studymate - CS50x Final Project
     </footer>
 </html>

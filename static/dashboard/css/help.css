@@ -9,15 +9,12 @@ h2{
 }
 
 p{
-    margin-left: 5%;
-    margin-top: -2%;
-    background-color: lavender;
-    padding: 5%;
+    background-color: #F7FBFA;
+    padding: 50px 40px;
     border-radius: 10px;
     position: relative;
     z-index: -1;
     display: none;
-    transition: 0.5s ease;
 }
 
 .display{

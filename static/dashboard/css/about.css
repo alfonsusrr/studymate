@@ -1,25 +1,7 @@
-.alfons{
-    float: left;
-    margin-top: 2%;
-    text-align: center;
-    margin-left: 30%;
-}
 
-.alfons img{
-    width: 200px;
-}
-
-.nic{
-    margin-left: 55%;
-    margin-top: 2%;
-}
-
-.nic img{
-    width: 200px;
-}
-
-.nic h4{
-    margin-left: 4.5%;
+header, .home_section{
+    background-color: rgba(0,0,0,1);
+    position: sticky;
 }
 
 h2{
@@ -36,4 +18,188 @@ h2{
     margin-left: 3%;
     margin-right: 3%;
     margin-top: 1%;
+}
+
+.home_section, header {
+    z-index: 99;
+}
+
+.banner {
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 50% 30%;
+    background-attachment: fixed;
+    color: white;
+    font-size: 50px;
+}
+
+.logo-about {
+    width: 300px;
+}
+
+.description-text{
+    width: 50%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.mission {
+    width: 100%;
+    display: flex;
+    margin-top: 100px;
+    align-items: center;
+}
+
+.mission-image {
+    width: 50%;
+    padding: 20%;
+    margin: 50px 10% 50px 20px;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: 10% 0%;
+    background-attachment: fixed;
+}
+
+.mission-text {
+    margin-right: 15%;
+    text-align: center
+}
+
+.about-heading {
+    font-size: 30px;
+}
+
+.vision {
+    display: block;
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 10% 90%;
+    background-attachment: fixed;
+    padding: 30px 0;
+    margin-top: 100px;
+    color: white;
+}
+
+.vision h2 {
+    font-size: 50px;
+}
+
+.vision-text {
+    padding: 0 20%;
+    font-size: 35px;
+    text-align: center;
+}
+
+.creators {
+    padding: 30px 20%;
+}
+
+.creators-pic {
+    display: flex;
+    flex-direction: row wrap;
+    margin: 20px;
+    justify-content: center;
+}
+
+.creator-pic {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.creator-card a{
+    margin: 25px;
+}
+
+.creator-card {
+    margin: 30px;
+    width: 250px;
+}
+
+.creator-name {
+    text-align: center;
+    font-size: 18px;
+    color: #0093a0;
+}
+
+.creator-job {
+    text-align: center;
+    color:grey;
+}
+
+.underline-heading {
+    margin: 10px auto;
+    width: 50px;
+    height: 10px;
+    background-color: #0AC8D8;
+}
+
+.contact-us {
+    display: block;
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 10% 80%;
+    background-attachment: fixed;
+    padding: 60px 0 30px 0;
+    margin-top: 100px;
+    color: white;
+}
+
+.contact-us h2 {
+    font-size: 60px;
+}
+
+.contact-us-text {
+    padding: 10px 20%;
+    text-align: center;
+    font-size: 30px;
+}
+
+.contact {
+    margin-top: 100px;
+    padding: 30px 20%;
+}
+
+.form-contact {
+    width: 100%
+}
+
+.form-contact input, .form-contact textarea {
+    margin: 10px 20px;
+    width: 100%;
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 35px;
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.form-contact input:focus, .form-contact textarea:focus{
+    box-shadow: 0 3px 30px 0 rgba(0, 136, 177, 0.5);
+    outline: none;
+}
+
+.form-contact input {
+    height: 50px
+}
+
+.form-contact textarea {
+    height: 200px;
+}
+
+.send-message {
+    margin-left: 45%;
+    background-color: #0AC8D8;
 }

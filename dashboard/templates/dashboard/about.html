@@ -8,20 +8,93 @@
 
 
 {% block content %}
-        <section class="Creators">
-            <h2>Creators</h2>
-            <div class="alfons">
-                <a href="https://github.com/ArnedyNavi"><img src = "../../src/profile.jpg" alt="Profile"></a>
-                <h4>Alfonsus Rodriques Rendy</h4>
-            </div>
-            <div class="nic">
-                <a href="https://github.com/Nicholas-Sidharta12365"><img src = "../../src/nic.jpg" alt="Profile"></a>
-                <h4>Nicholas Sidharta</h4>
-            </div>
-        </section>
-        <section class="description">
-            <h2>What is Studymate?</h2>
-            <h4>Studymate is a web application designed to help students and learners in their studying journey. Studymate is built to establish an ease of access to different types of necessity when learning or discovering new things. Our goal is to create the perfect virtual studying environment so that students can focus more on their studies. Our platform is a community based system where the community will decide the workflow of this web application. Finally, we hope you can enjoy this web application and may you experince a comfortable studying journey.</h4>
-            <h4>- The Developers -</h4>
-        </section>
+<section class="banner">
+    <h2>About Us</h2>
+</section>
+<section class="description">
+    <img class="logo-about" src="{% static 'images/logo.png' %}">
+    <div class="description-text about-text">
+        Studymate is a web application designed to help students and learners in their 
+        studying journey. Studymate is built to establish an ease of access to different 
+        types of necessity when learning or discovering new things. Our goal is to create the 
+        perfect virtual studying environment so that students can focus more on their studies. 
+        Our platform is a community based system where the community will decide the workflow of this web 
+        application. Finally, we hope you can enjoy this web application and may you experince a 
+        comfortable studying journey.
+    </div>
+
+</section>
+<section class="vision">
+    <div class="vision-text">
+        <h2 class="about-heading">Our Vision</h2>
+        <div class="about-text">
+            We envision a world where anyone, anywhere has the power to transform their life through learning.
+        </div>
+    </div>
+</section>
+
+</section>
+<section class="mission">
+    <div class="mission-image"></div>
+    <div class="mission-text">
+        <h2  class="about-heading">Our Mision</h2>
+        <div class="about-text">
+            We believe that learning is crucial for human development. But, sometimes the process of learning is not easy.
+            There are many people that have limited or even no access to education. Some people have,
+            but sometimes they don't have access to additional material. Our commitement is to 
+            ensure that students can learn from anyone, anywhere and to make the process of learning to be fun. 
+            We are here to ensure that everyone has their own studymate
+        </div>
+    </div>
+</section>
+<section class="creators">
+    <h2 class="about-heading">Our Team</h2>
+    <div class="underline-heading"></div>
+    <div class="creators-pic">
+        <div class="creator-card">
+            <a href="https://github.com/ArnedyNavi"><img class="creator-pic" src = "/media/profile_images/profile.jpg" alt="Profile"></a>
+            <div class="creator-name">Alfonsus Rodriques Rendy</div>
+            <div class="creator-job">Full Stack Developer</div>
+        </div>
+        <div class="creator-card">
+            <a href="https://github.com/Nicholas-Sidharta12365"><img class="creator-pic" src = "{% static 'images/nic.jpg' %}" alt="Profile"></a>
+            <div class="creator-name">Nicholas Sidharta</div>
+            <div class="creator-job">Front-end Developer</div>
+        </div>
+    </div>
+</section>
+<section class="contact-us">
+    <div class="contact-us-text">
+        <h2 class="about-heading">Contact Us</h2>
+        <div class="about-text">
+            We are glad to hear from you!
+        </div>
+    </div>
+</section>
+<section class="contact">
+    <div class="form-contact">
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="E-mail">
+        <textarea placeholder="Your Message"></textarea>
+        <button class="send-message">Send Message</button>
+    </div>
+</section>
+
+{% endblock %}
+{% block ending %} 
+<script type="text/javascript">
+    const gradient = "linear-gradient(" +
+          "rgba(0, 0, 0, 0.5)," +
+          "rgba(0, 0, 0, 0.7)" +
+        "),"
+    const gradient2 = "linear-gradient(" +
+        "rgba(0, 0, 0, 0.2)," +
+        "rgba(0, 0, 0, 0.4)" +
+    "),"
+
+    $('.banner').css("background-image", gradient + "url({% static 'images/about.jpg' %})")
+    $('.mission-image').css("background-image", "url({% static 'images/mission.jpg' %})")
+    $('.vision').css("background-image", gradient2 + "url({% static 'images/vision.jpg' %})")
+    $('.contact-us').css("background-image", gradient2 + "url({% static 'images/contact.jpg' %})")
+</script>
 {% endblock %}

@@ -61,7 +61,7 @@
 }
 
 .profile-container {
-    border-left: 1px solid rgb(68, 68, 68);
+    border-left: 0.5px solid #E3E6EF;
     width: 70%;
     min-height:700px;
     overflow-y: visible;
@@ -69,7 +69,7 @@
 
 .right-container {
     width: 20%;
-    border-left: 1px solid rgb(68, 68, 68);
+    border-left: 0.5px solid #E3E6EF;
     padding-left: 5px;
     min-height:700px;
     overflow-y: visible;
@@ -161,6 +161,7 @@ h3{
     height: 70%;
     overflow-y: scroll;
     overflow-x: hidden;
+    box-shadow: 8px 3px 30px 0 rgba(0,0,0,0.2);
 }
 
 .cover-image-edit{
@@ -191,14 +192,21 @@ h3{
 .form-edit-profile label{
     font-size: 16px;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .form-edit-profile input, .form-edit-profile textarea{
     width: 100%;
     padding: 5px;
     border-radius: 10px;
-    border: 1px solid grey;
     margin-bottom: 20px;
+    box-shadow: 8px 3px 30px 0 rgba(0,0,0,0.15);
+    border: none;
+}
+
+.form-edit-profile input:hover, .form-edit-profile textarea:hover{
+    box-shadow: 8px 3px 30px 0 rgba(0,0,0,0.2);
+    outline:none;
 }
 
 .form-edit-profile textarea{

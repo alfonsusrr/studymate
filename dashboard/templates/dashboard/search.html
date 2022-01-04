@@ -1,4 +1,4 @@
-{% extends "main/main.html" %}
+{% extends "main/main_dashboard.html" %}
 
 {% block title %}Search Courses{% endblock %}
 {% block head %} 
@@ -47,75 +47,6 @@
                 </div>
             </div>
         </section>
-        <div class="sidebar">
-            <div class="logo_content">
-                <div class="logo">
-                    <img src="../../src/logo.jpg" alt="logo">
-                    <div class="logo_name">StudyMate</div>
-                </div>
-                <img src="../../src/menu_burger.jpg" alt="menu_logo" id="menu">
-            </div>
-            <ul class="nav_list">
-                <li>
-                    <a href="../dashboard/dashboard.html">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="../agenda/agenda.html">
-                        <i class="fa fa-calendar fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Agenda</span>
-                    </a>
-                    <span class="tooltip">Agenda</span>
-                </li>
-                <li>
-                    <a href="../note_archive/note_archive.html">
-                        <i class="fa fa-book fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Note Archive</span>
-                    </a>
-                    <span class="tooltip">Note Archive</span>
-                </li>
-                <li>
-                    <a href="../note_share/share.html">
-                        <i class="fa fa-share-alt-square fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Note Share</span>
-                    </a>
-                    <span class="tooltip">Note Share</span>
-                </li>
-                <li>
-                    <a href="../relax/relax.html">
-                        <i class="fa fa-coffee fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Relax Room</span>
-                    </a>
-                    <span class="tooltip">Relax Room</span>
-                </li>
-                <li>
-                    <a href="../search/search.html">
-                        <i class="fa fa-search fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Search Courses</span>
-                    </a>
-                    <span class="tooltip">Search</span>
-                </li>
-                <li>
-                    <a href="../settings/settings.html">
-                        <i class="fa fa-cog fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Settings</span>
-                    </a>
-                    <span class="tooltip">Settings</span>
-                </li>
-                <li>
-                    <a href="../login/login.html">
-                        <i class="fa fa-sign-out fa-2x"></i>
-                        <span class="links_name">&nbsp; &nbsp; Logout</span>
-                    </a>
-                    <span class="tooltip">Logout</span>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <br>
-        <br>
+        
         <script type="module" src="{% static 'dashboard/js/search.js' %}"></script>
 {% endblock %}

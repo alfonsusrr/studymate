@@ -18,12 +18,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dashboard.urls')),
-    path('accounts/', include('account.urls'), name='about'),
+    path('accounts/', include('account.urls')),
     path('notes/', include('notes.urls')),
+    path('about/', views.about, name="about"),
+    path('help/', views.help, name="help"),
 ]
 
 if settings.DEBUG:

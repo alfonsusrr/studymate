@@ -47,6 +47,9 @@ def register(request):
             return HttpResponseRedirect(reverse("login"))
         else:
             return render(request, 'account/register.html')
+
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('dashboard'))
     return render(request, 'account/register.html')
 
 def login_view(request):
@@ -61,12 +64,15 @@ def login_view(request):
             return render(request, 'account/login.html', {
                 "message" : "Invalid credentials"
             })
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('dashboard'))
     return render(request, 'account/login.html')
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
 
+@login_required
 @csrf_exempt
 def settings(request):
     if request.method == 'POST':

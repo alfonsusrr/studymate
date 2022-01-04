@@ -3,70 +3,70 @@
 <div class="sidebar">
     <div class="logo_content">
         <div class="logo">
-            <img src="../../static/images/logo.jpg" alt="logo">
-            <div class="logo_name">StudyMate</div>
+            {% load static %}
+            <img src="{% static 'images/logo.png' %}" alt="logo">
         </div>
         <i id="menu" class="fa fa-bars fa-2x"></i>
     </div>
     <ul class="nav_list">
                 <li>
                     <a href="{% url 'edit_profile' %}">
-                        <img src="/media/{{user.profile_image}}">
+                        <div class="icon"><img src="/media/{{user.profile_image}}"></div>
                         <span class="links_name">&nbsp; &nbsp; Edit Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'dashboard' %}">
-                        <i class="fa fa-home fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'dashboard' %}">
+                        <div class="icon"><i class="fa fa-home fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>
                 </li>
                 <li>
-                    <a href="{% url 'agenda' %}">
-                        <i class="fa fa-calendar fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'agenda' %}">
+                        <div class="icon"><i class="fa fa-calendar fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Agenda</span>
                     </a>
                     <span class="tooltip">Agenda</span>
                 </li>
                 <li>
-                    <a href="{% url 'archive' %}">
-                        <i class="fa fa-book fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'archive' %}">
+                        <div class="icon"><i class="fa fa-book fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Note Archive</span>
                     </a>
                     <span class="tooltip">Note Archive</span>
                 </li>
                 <li>
-                    <a href="{% url 'note_share' %}">
-                        <i class="fa fa-share-alt-square fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'note_share' %}">
+                        <div class="icon"><i class="fa fa-share-alt-square fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Note Share</span>
                     </a>
                     <span class="tooltip">Note Share</span>
                 </li>
                 <li>
-                    <a href="{% url 'relax' %}">
-                        <i class="fa fa-coffee fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'relax' %}">
+                        <div class="icon"><i class="fa fa-coffee fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Relax Room</span>
                     </a>
                     <span class="tooltip">Relax Room</span>
                 </li>
                 <li>
-                    <a href="{% url 'search' %}">
-                        <i class="fa fa-search fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'search' %}">
+                        <div class="icon"><i class="fa fa-search fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Search Courses</span>
                     </a>
                     <span class="tooltip">Search</span>
                 </li>
                 <li>
-                    <a href="{% url 'settings' %}">
-                        <i class="fa fa-cog fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'settings' %}">
+                        <div class="icon"><i class="fa fa-cog fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Settings</span>
                     </a>
                     <span class="tooltip">Settings</span>
                 </li>
                 <li>
-                    <a href="{% url 'logout' %}">
-                        <i class="fa fa-sign-out fa-2x"></i>
+                    <a class="sidebar-icon-wrapper" href="{% url 'logout' %}">
+                        <div class="icon"><i class="fa fa-sign-out fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Logout</span>
                     </a>
                     <span class="tooltip">Logout</span>

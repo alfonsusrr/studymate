@@ -1,13 +1,3 @@
-.agenda{
-    margin-left: 100px;
-    transition: 0.5s ease;
-}
-
-.agenda.active{
-    margin-left: 300px;
-    transition: 0.5s ease;
-}
-
 form{
     display: flex;
     min-height: 15vh;

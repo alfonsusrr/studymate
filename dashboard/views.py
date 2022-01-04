@@ -7,6 +7,10 @@ from .models import *
 import datetime
 import json
 
+
+def welcome(request):
+    return render (request, 'dashboard/welcome.html')
+    
 @login_required
 def home(request):
     today = datetime.date.today()

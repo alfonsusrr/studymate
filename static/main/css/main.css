@@ -24,8 +24,8 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;
-    background-color: #32393E;
+    padding: 15px 20px 15px calc(100px + 2%);
+    background-color: black;
 }
 
 li, a, button{
@@ -36,7 +36,7 @@ li, a, button{
 }
 
 footer{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     text-align: center;
     padding: 0.5%;
@@ -48,29 +48,25 @@ footer{
 
 .logo{
     cursor: pointer;
-    background-color: #32393E;
-    max-height: 50px;
-    max-width: 90px;
+    max-height: 100px;
+    max-width: 150px;
 }
 
 .nav__links{
     list-style: none;
-    background-color: #32393E;
 }
 
 .nav__links li{
     display: inline-block;
     padding: 0px 20px;
-    background-color: #32393E;
 }
 
 .nav__links li a{
     transition: all 0.3s ease 0s;
-    background-color: #32393E;
 }
 
 .nav__links li a:hover{
-    color: cyan;
+    color: #0AC8D8;
 }
 
 button{
@@ -125,7 +121,7 @@ button:hover{
 .logo_content .logo img{
     font-size: 28px;
     margin-right: 5px;
-    max-width: 90px;
+    max-width: 150px;
     max-height: 60px;
 }
 
@@ -139,12 +135,13 @@ button:hover{
     color: white;
     left: 50%;
     top: 6px;
-    font-size: 20px;
+    font-size: 30px;
     height: 50px;
     width: 50px;
     text-align: center;
     line-height: 50px;
     transform:  translateX(-50%);
+    cursor: pointer;
 }
 
 .sidebar #menu:hover{
@@ -164,7 +161,6 @@ button:hover{
     list-style: none;
     height: 50px;
     width: 100%;
-    margin: 0 5px;
     position: relative;
     line-height: 50px;
 }
@@ -177,13 +173,12 @@ button:hover{
     transition: all 0.4s ease;
     border-radius: 12px;
     white-space: nowrap;
-    padding-left: 3px;
+    text-align: center;
 }
 
 .sidebar ul li a:hover{
     background: white;
     color: black;
-    padding-left: 8px;
 }
 
 .sidebar ul li a img{
@@ -214,7 +209,7 @@ button:hover{
     width: 122px;
     background: white;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    left: 122px;
+    left: 128px;
     top: 0;
     transform: translate(-50% , -50%);
     border-radius: 6px;
@@ -239,8 +234,6 @@ button:hover{
 
 .home_section{
     transition: 0.5s ease;
-    margin-left: 75px;
-    margin-bottom: 1%;
 }
 
 .home_section.active{
@@ -255,3 +248,16 @@ input {
 input:focus {
     border: 2px solid rgba(0,136,169,1)
 }
+
+.sidebar-icon-wrapper {
+    display:flex;
+    align-items: center;
+}
+
+.sidebar .icon {
+    font-size: 12px;
+    text-align: center;
+    min-width: 45px;
+    height: 45px;
+}
+
