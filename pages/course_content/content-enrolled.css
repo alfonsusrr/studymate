@@ -244,107 +244,86 @@ button:hover{
 }
 
 h2{
+    color: white;
+    font-size: 50px;
+}
+
+.course button{
+    font-size: large;
+    font-weight: bold;
+}
+
+.course{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../static/images/placeholder.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding: 10% 0%;
+    background-position: center;
     text-align: center;
-    margin-top: 1%;
+}
+
+.content{
     transition: 0.5s ease;
 }
 
-h2.active{
+.content.active{
+    transition: 0.5s ease;
     margin-left: 15%;
-    transition: 0.5s ease;
 }
 
-.options{
-    margin-left: 10%;
-    margin-top: -2%;
-    transition: 0.5s ease;
-}
-
-.options.active{
-    margin-left: 25%;
-    transition: 0.5s ease;
-}
-
-input{
-    margin-top: 0.5%;
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 300px;
-}
-
-.background_videos{
+.lectures{
     margin-top: 2%;
 }
 
-.display_texts{
+.lectures h3{
+    color: black;
+    font-size: xx-large;
+    margin-left: 8%;
+}
+
+.lectures hr{
+    margin-left: 8%;
+    margin-right: 5%;
+}
+
+.video{
+    margin-left: 8%;
     margin-top: 2%;
 }
 
-.display_texts button{
-    margin-top: 5px;
-    padding: 5px;
-    width: 35px;
-}
-
-.contacts{
+.videos{
     margin-top: 2%;
+    margin-right: 5%;
 }
 
-.contacts button{
-    margin-top: 5px;
-    border-radius: 10px;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: black;
-    opacity: 0.5;
+.current{
+    text-decoration: underline;
+    font-weight: bold;
 }
 
-.contact:hover{
-    opacity: 0.75;
-    background-color: rgba(0,136,169,1);
+.links a{
+    color: black;
 }
 
-.contact.on{
-    opacity: 1;
-    background-color: rgba(0,136,169,1);
+.text h4{
+    font-size: x-large;
 }
 
-.contact.on:hover{
-    opacity: 0.75;
-    background-color: black;
-}
-
-.save{
-    margin-top: 3%;
-    border-radius: 15px;
-}
-
-.display img{
-    position: absolute;
-    display: flexbox;
-    width: 40%;
-    margin-left: 55%;
+.text{
     margin-top: 1%;
-    z-index: -1;
+    margin-bottom: 2%;
 }
 
-.display h3{
-    display: flexbox;
-    margin-left: 55%;
-    z-index: -1;
+.links a:hover{
+    color: rgb(57, 57, 245);
+    text-decoration: underline;
 }
 
-.display{
-    transition: 0.5s ease;
-    margin-top: 2%;
-}
-
-.display.active{
-    transition: 0.5s ease;
+.text pre{
     margin-top: 1%;
 }
 
-.save{
-    margin-bottom: 5%;
+.text hr{
+    margin-left: initial;
+    margin-right: initial;
 }
