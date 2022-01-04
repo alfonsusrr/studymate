@@ -48,7 +48,7 @@
             <div class="category-container">
             {% for category in categories %}
                 <div class="category-tag" data-url-category="{% url 'category' category.name %}">
-                    {{category.name|capfirst}}
+                    {{category.name|title}}
                 </div>
             {% endfor %}
             </div>

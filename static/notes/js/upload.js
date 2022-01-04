@@ -2,8 +2,6 @@
 let btn = document.querySelector("#menu");
 let sidebar = document.querySelector(".sidebar");
 let home = document.querySelector(".home_section");
-let setpublic = document.querySelector(".public")
-let setprivate = document.querySelector(".private")
 let data = document.querySelector(".data")
 let title = document.querySelector("h2")
 
@@ -12,18 +10,6 @@ btn.onclick = function(){
     home.classList.toggle("active");
     data.classList.toggle("active");
     title.classList.toggle("active");
-}
-
-setpublic.onclick = function(){
-    setpublic.classList.toggle("unselected")
-    setprivate.classList.toggle("selected")
-    private_value = false
-}
-
-setprivate.onclick = function(){
-    setprivate.classList.toggle("selected")
-    setpublic.classList.toggle("unselected")
-    private_value = true
 }
 
 $('.delete-tag').click(function() {
@@ -60,7 +46,14 @@ $("#file").on("change", function() {
 
 let formEl = document.querySelector(".data");
 $("#save-note").on("click", function(e) {
-    $(this).prop("disabled", true)
+    // Disable button
+    $("#cancel-edit").prop("disabled", true)
+    $("#save-note").prop("disabled", true)
+    $(this).addClass("disabled")
+    // Show loader
+    $(".loader-upload").show()
+    $(".loader").show()
+
     let id = $(this).attr("data-note-id")
     let data_new = $(this).attr("data-new")
 
@@ -102,7 +95,39 @@ $("#save-note").on("click", function(e) {
             processData: false,
 		    contentType: false,
             success: function(response) {
-                alert("Uploaded!")
+                $(".loader").hide()
+                $(".upload-message").show()
+                if (response.status == "success") {
+                    $("#success").show()
+                    $("#failed").hide()
+                    $(".status-message").html("File is sucessfully uploaded!")
+                    $("#go-notes-btn").show()
+                    $("#back-btn").show()
+                    $("#close-btn").hide()
+
+                    $("#back-btn").click(function() {
+                        history.back()
+                    })
+
+                    $("#go-notes-btn").click(function() {
+                        window.location.href = response.notes_url
+                    })
+                }
+                else {
+                    $("#success").hide()
+                    $("#failed").show()
+                    $(".status-message").html("File is failed to be uploaded! Please try again")
+                    $("#go-notes-btn").hide()
+                    $("#back-btn").hide()
+                    $("#close-btn").show()
+
+                    $("#close-btn").click(function() {
+                        $(".loader-upload").hide()
+                    })
+                } 
+                $("#cancel-edit").prop("disabled", false)
+                $("#save-note").prop("disabled", false)
+                $("#save-note").removeClass("disabled")
             }
         })
     }
@@ -118,3 +143,12 @@ $(".data").on('keyup keypress', function(e) {
         return false
     }
 })
+
+$("#private").click(function() {
+    private_value = !private_value
+})
+
+$("#cancel-edit").click(function() {
+    history.back()
+})
+

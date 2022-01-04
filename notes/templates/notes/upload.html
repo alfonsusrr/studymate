@@ -54,13 +54,38 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="public {% if note.is_private %} unselected {% endif %}">Public</button>
-                    <button class="private {% if note.is_private %} selected {% endif %}">Private</button>
+                    <label class="switch">
+                        <input id="private" type="checkbox" {% if not new %}{% if note.is_private %} checked {% endif %}{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                    <h3>Private</h3>
                 </div>
-                <button id="save-note" class="submit" {% if not new %} data-new="false" data-note-id="{{note.id}}" {% else %} data-new="true" {% endif %}>Upload</button>
+                <button id="save-note" class="save-note" {% if not new %} data-new="false" data-note-id="{{note.id}}" > Save </button> {% else %} data-new="true" > Upload {% endif %}</button>
+                {% if not new %} <button id="cancel-edit" class="cancel-btn">Cancel</button> {% endif %}
             </div>
             <div class="preview">
                 <iframe id="file-viewer" class="file-viewer" {% if not new %} src="/media/{{note.file}}" style="display: block" {% endif %}></iframe>
+            </div>
+        </div>
+        <div class="loader-upload">
+            <div class="loader loader-center"></div>
+            <div class="upload-message">
+                <div class="message-wrapper">
+                    <div class="success-icon" id="success">
+                        <div class="success-icon__tip"></div>
+                        <div class="success-icon__long"></div>
+                    </div>
+                    <div class="failed-icon" id="failed">
+                        <div class="failed-icon__tip_1"></div>
+                        <div class="failed-icon__tip_2"></div>
+                    </div>
+                    <div class="status-message">File is sucessfully uploaded!</div>
+                </div>
+                <div class="buttons-message">
+                    <button id="back-btn" class="back-button">Back</button>
+                    <button id="close-btn" class="back-button">Close</button>
+                    <button id="go-notes-btn" class="go-to-notes-button">Go To Notes</button>
+                </div>
             </div>
         </div>
 {% endblock %}

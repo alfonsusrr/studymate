@@ -107,7 +107,8 @@ def upload(request):
             if note == None:
                 output = {
                     "status": "failed",
-                    "message": "note doesn't exist"
+                    "message": "note doesn't exist",
+                    "notes_url": reverse('view_notes', args=[note.id])
                 }
             else:
                 try:
@@ -136,7 +137,8 @@ def upload(request):
                 thumbnail_creation(note)
                 output = {
                     "status": "success",
-                    "message": "File Updated!"
+                    "message": "File Updated!",
+                    "notes_url": reverse('view_notes', args=[note.id])
                 }
                 return JsonResponse(output)
 
