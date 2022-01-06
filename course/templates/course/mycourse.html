@@ -1,0 +1,105 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}My Courses{% endblock %}
+{% block head %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'course/css/mycourse.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="welcome">
+        <h2>Welcome back, {{user.name}} </h2>
+    </div>
+    <div class="nav-course">
+        <div class="nav-list">
+            <div id="nav-in-progress" class="nav-btn nav-active"> In progress</div>
+            <div id="nav-completed" class="nav-btn"> Completed</div>
+            <div id="nav-by-me"class="nav-btn"> Courses by me</div>
+        </div>
+    </div>
+    <div class="course-container">
+        <div class="in-progress">
+            <div class="course-card">
+                <div class="course-info">
+                    <div class="course-img">
+                        <img src="{% static 'images/placeholder.jpg' %}">
+                    </div>
+                    <div class="course-detail">
+                        <h2>CS50x Introduction to Computer Science</h2>
+                        <div class="course-instructors">
+                            <div class="course-instructor">David J. Malan </div>
+                            <div class="course-instructor">Brian Yu</div>
+                        </div>
+                        <div class="course-user-detail">
+                            Joined 12 Jan 2022
+                        </div>
+                        <div class="course-action">
+                            <button class="course-btn">Resume Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="completed">
+            <div class="course-card">
+                <div class="course-info">
+                    <div class="course-img">
+                        <img src="{% static 'images/placeholder.jpg' %}">
+                    </div>
+                    <div class="course-detail">
+                        <h2>CS50x Introduction to Computer Science</h2>
+                        <div class="course-instructors">
+                            <div class="course-instructor">David J. Malan </div>
+                            <div class="course-instructor">Brian Yu</div>
+                        </div>
+                        <div class="course-user-detail">
+                            Completed 12 Jan 2022
+                        </div>
+                        <div class="course-action">
+                            <button class="course-btn">Review Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="by-me">
+            <div class="add-new-course">
+                <button id="add-course" class="add-course" data-link="{% url 'make_course'%}">Make New Course</button>
+            </div>
+            <div class="course-card">
+                <div class="course-info">
+                    <div class="course-img">
+                        <img src="{% static 'images/placeholder.jpg' %}">
+                    </div>
+                    <div class="course-detail">
+                        <h2>CS50x Introduction to Computer Science</h2>
+                        <div class="course-instructors">
+                            <div class="course-instructor">David J. Malan </div>
+                            <div class="course-instructor">Brian Yu</div>
+                        </div>
+                        <div class="course-user-detail">
+                            Completed 12 Jan 2022
+                        </div>
+                        <div class="course-action">
+                            <button class="course-btn">Edit Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block ending %} 
+<script type="text/javascript" src="{% static 'course/js/mycourse.js' %}"></script>
+<script>
+    const gradient = "linear-gradient(" +
+          "rgba(0, 0, 0, 0.3)," +
+          "rgba(0, 0, 0, 0.5)" +
+        "),"
+    $(".welcome").css("background-image", gradient + "url({% static 'images/welcome_course.jpg' %})")
+</script>
+{% endblock %}

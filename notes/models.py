@@ -7,14 +7,17 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_delete
 from studymate.storage import OverwriteStorage
 import datetime
+import uuid
 
 def get_note_filepath(self, filename):
-    now = datetime.datetime.now()
-    now = now.strftime("%Y_%m_%d_%H_%m_%S")
-    return f'notes/{self.owner.pk}/{now}_{filename}'
+    extension = filename.split(".")[-1]
+    date = datetime.date.today()
+    return f'notes/file/{self.owner.pk}/{date.year}/{date.month}/{date.day}/{uuid.uuid4()}.{extension}'
 
 def get_note_thumbnail_filepath(self, filename):
-    return f'notes/{self.owner.pk}/{self.pk}_thumbnail.jpg'
+    extension = filename.split(".")[-1]
+    date = datetime.date.today()
+    return f'notes/thumbnail/{self.owner.pk}/{date.year}/{date.month}/{date.day}/{uuid.uuid4()}.{extension}'
 
 def get_default_note_thumbnail():
     return f'notes/thumbnail.jpg' 
@@ -57,12 +60,22 @@ class NotesDiscussion(models.Model):
 def pre_save_notes(sender, instance, *args, **kwargs):
     try:
         old_file = instance.__class__.objects.get(id=instance.id).file.path
+        old_thumb = instance.__class__.objects.get(id=instance.id).thumbnail.path
         try:
             new_file = instance.file.path
         except:
             new_file = None
+
+        try:
+            new_thumb = instance.thumbnail.path
+        except:
+            new_thumb = None
+            
         import os
-        if os.path.exists(old_file) and new_file != old_file:
+        if os.path.exists(old_file) and new_file != old_file and new_file != None:
+            os.remove(old_file)
+
+        if os.path.exists(old_thumb) and new_thumb != old_thumb and new_thumb != None:
             os.remove(old_file)
     except:
         pass
@@ -76,4 +89,13 @@ def post_delete_notes(sender, instance, *args, **kwargs):
             os.remove(old_file)
     except:
         pass
+
+    try:
+        old_thumb = instance.thumbnail.path
+        import os
+        if os.path.exists(old_thumb):
+            os.remove(old_thumb)
+    except:
+        pass
+
 

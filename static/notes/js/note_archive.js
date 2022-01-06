@@ -60,6 +60,7 @@ $("#more-private").click(function() {
             }
             page_private += 1
             action()
+            clicked()
         }
     })
 })
@@ -119,6 +120,7 @@ function action() {
                             }
                             
                             clicked()
+                            action()
 
                             if (response.has_next) {
                                 $('#more-private').show()
@@ -188,6 +190,7 @@ function search_notes (query) {
             $('#more-public').hide()
 
             clicked()
+            action()
         }
     })
 }

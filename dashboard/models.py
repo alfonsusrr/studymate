@@ -1,28 +1,14 @@
 from django.db import models
 from account.models import *
 from studymate.storage import OverwriteStorage
-
-def get_course_banner_filepath(self, filename):
-    return f'banner/{self.pk}/{"banner.png"}'
-
-def get_default_banner_image():
-    return f'banner/banner.png'
+from course.models import *
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_delete
 
 def get_bg_filepath(self, filename):
-    return f'background/{self.user.pk}/bg.png'
-
-class Course(models.Model):
-    name = models.CharField(max_length=100, null=False)
-    description = models.TextField(null=False)
-    profile_image   = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_course_banner_filepath, null=True, blank=True, default=get_default_banner_image())
-    ratings = models.FloatField(null=False, default=0)
-
-class UserCourse(models.Model):
-    user = models.ManyToManyField(User, related_name="course")
-    course = models.ManyToManyField(Course, related_name="user")
-    rate = models.IntegerField(default=0)
-    progress = models.IntegerField(default=0)
-    completed = models.BooleanField(default=False)
+    extension = filename.split(".")[-1]
+    date = datetime.date.today()
+    return f'background/{self.user.pk}/{date.year}/{date.month}/{date.day}/{uuid.uuid4()}.{extension}'
 
 class RelaxSettings(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="relax_settings")
@@ -45,3 +31,17 @@ class Agenda(models.Model):
     title = models.CharField(max_length=200, null=False)
     due = models.DateField()
     completed = models.BooleanField(default=False)
+
+@receiver(pre_save, sender=RelaxSettings)
+def pre_save_notes(sender, instance, *args, **kwargs):
+    try:
+        old_file = instance.__class__.objects.get(id=instance.id).local_image.path
+        try:
+            new_file = instance.local_image.path
+        except:
+            new_file = None
+        import os
+        if os.path.exists(old_file) and new_file != old_file:
+            os.remove(old_file)
+    except:
+        pass

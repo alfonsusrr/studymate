@@ -1,0 +1,434 @@
+{% extends "main/main_dashboard.html" %}
+
+{% block title %}Add Courses{% endblock %}
+{% block head %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'course/css/add.css' %}">
+<script src="https://unpkg.com/vue@next"></script>
+{% endblock %}
+
+
+{% block content %}
+<div id="data-content" class="page-wrapper">
+    <h2>Add a New Course</h2>
+    <div class="data-container data-1" data-id-part="1">
+        <div class="data">
+            <div class="input-box">
+                <div class="label-input">
+                    <h3>Course Name</h3> <div class="required-message">Required</div>
+                </div>
+                <input v-model="course_name" id="name" class="name req-input" placeholder="Enter Course Name">
+            </div>
+            
+            <div class="input-box">
+                <div class="label-input">
+                    <h3>Upload a Thumbnail</h3> <div class="required-message">Required</div>
+                </div>
+                <input @change="onThumbnailChange" id="thumbnail-input" class="thumbnail req-input" type="file" placeholder="Enter a Link to a Picture" accept="image/png, image/jpeg, image/jpg">
+            </div>
+            <div class="thumbnail-preview">
+                <img v-show="thumbnail != ''" id="thumbnail-preview" :src="thumbnail">
+            </div>
+            
+            <div class="input-box">
+                <div class="label-input">
+                    <h3>Course Description</h3> <div class="required-message">Required</div>
+                </div>
+                <textarea v-model="desc" id="desc" class="desc req-input" placeholder="Enter Course Description"></textarea>
+            </div>
+        </div>
+        <div class="data data-col-2">
+            <div class="input-box">
+                <h3>Category</h3>
+                <input @keyup.enter="addCategory" v-model="categoryInput" id="category-input" class="category" placeholder="Enter Your Note's Category, end with enter">
+                <div class="category-container">
+                    <category-box v-for="(category, index) in categories" :name="category" :index="index"></category-box>
+                </div>
+            </div>
+            <div class="input-box">
+                <div class="label-input">
+                    <h3>Instructors</h3> <div class="required-message">Required</div>
+                </div>
+                <div class="input-wrapper">
+                    <input @keyup.enter="addInstructor" v-model="instructorInput" id="instructors-input" class="instructor-input input-wrapper-box req-input" type="text" placeholder="Enter Instructors Name">
+                    <button @click="addInstructor" id="add-instructor-btn" class="add-btn"><i class="fa fa-add"></i> </button>
+                </div>
+                <div class="instructors">
+                    <instructor-box v-for="(instructor, index) in instructors" :details="instructor" :index="index"></instructor-box>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="data-container data-1" data-id-part="1">
+        <div class="data">
+            <div class="input-box">
+                <div class="label-input">
+                    <h3 >Course Sub-topics</h3> <div v-show="isSubTopicInputEmpty" class="required-message-new">Required</div>
+                </div>
+                <div class="input-wrapper">
+                    <input @keyup.enter="addNewSubTopics" v-model="SubTopicInput" id="subtopic-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Sub-topic for each week">
+                    <button @click="addNewSubTopics" id="add-sub-topic-btn" class="add-btn"><i class="fa fa-add"></i> </button>
+                </div>
+            </div>
+            <div class="sub-topics">
+                <sub-topic-box v-for="(SubTopic, index) in SubTopics" :title="SubTopic.subTopicTitle" :index_sub="index"></sub-topic-box>
+            </div>
+        </div>
+        <div class="data-col-2">
+            <content-edit-box v-for="(content, index) in Contents" :id=index :details=content></content-edit-box>
+        </div>
+    </div>
+    <button @click="publishCourse()" class="next"> Publish <i class="fas fa-paper-plane"></i></button>
+</div>
+        
+{% endblock %}
+{% block ending %}
+<script type="module" src="{% static 'course/js/add.js' %}"></script>
+
+<script type="text/javascript">
+    const InstructorBox = {
+        delimiters: ["[[", "]]"],
+        props: ['details', 'index'],
+        data() {
+            return {
+                image: '/media/profile_images/profile.jpg',
+                instructor: this.details
+            }
+        },
+        template: `
+            <div class="instructor-card">
+                <div class="btn-delete">
+                    <button @click="deleteInstructor" class="delete-instructor">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="instructor-img">
+                    <img @click="$refs.file.click()" class="instructor-img-image" :src="image">
+                    <input ref="file" type="file" @change="onInstructorImageChange" style="display: none" class="input-instructor-img" accept="image/png, image/jpeg, image/jpg">
+                </div>
+                <div class="instructor-name"> [[details.name]]
+                </div>
+            </div>
+        `,
+        methods: {
+            deleteInstructor() {
+                this.$parent.instructors.splice(this.index, 1);
+            },
+            onInstructorImageChange(e) {
+                let files = e.target.files 
+                if (!files.length){
+                    return;
+                }
+                file = files[0]
+                this.image = URL.createObjectURL(file)
+                this.instructor.image = file;
+
+                this.$parent.instructors[this.index] = this.instructor;
+            }
+        }
+    }
+
+    const CategoryBox = {
+        delimiters: ["[[", "]]"],
+        props: ['name', 'index'],
+        data() {
+            return {
+
+            }
+        },
+        template: `
+        <div class="category-tag">
+            <div @click="deleteTag" class="delete-tag"><i class="fa fa-times"></i></div>
+            <div class="tag">[[name]]</div>
+        </div>
+        `,
+        methods: {
+            deleteTag() {
+                this.$parent.categories.splice(this.index, 1)
+            }
+        }
+    }
+    const ContentEditBox = {
+        delimiters: ["[[", "]]"],
+        props: ['details', 'id'],
+        data() {
+            return {
+                details_mod: this.details,
+            }
+        },
+        computed: {
+            inputNow() {
+                return this.details_mod
+            },
+            nowDisplay() {
+                return this.$parent.activeEdit
+            }
+        },  
+        watch: {
+            inputNow() {
+                this.$parent.Contents = details_mod
+            }
+        },
+        template: `
+            <div id="index" class="content-edit" v-show="nowDisplay == details.id">
+                <div class="content-type">
+                    <div class="switch-button">
+                        <input v-model="details_mod.type" class="switch-button-checkbox" type="checkbox" true-value="video" false-value="text"/>
+                        <label class="switch-button-label" for=""><span class="switch-button-label-span">Text</span></label>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="label-input">
+                        Title
+                    </div>
+                    <div class="input-wrapper">
+                        <input v-model="details_mod.title" id="content-title-edit-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Content Title">
+                    </div>
+                </div>
+                <div class="content-container">
+                    <div class="input-box" v-show="details_mod.type == 'video'">
+                        <div class="label-input">
+                            Video Link
+                        </div>
+                        <div class="input-wrapper">
+                            <input v-model="details_mod.video_link" id="content-video-edit-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Video Link">
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <div class="label-input">
+                            Text Content
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea v-model="details_mod.text_content" class="content-text-input"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    }
+    const ContentBox = {
+        delimiters: ["[[","]]"],
+        props: ['title', 'index_content'],
+        data(){
+            return {
+                
+            }
+        },
+        template: `
+            <div class="content-title-wrapper">
+                <div class="content-point"><i class="fas fa-list-ul"></i></div>
+                <div class="content-title">[[title]]</div>
+                <div @click="editContent" class="edit-content"><i class="fas fa-pencil"></i></div>
+                <div @click="deleteContent" class="delete-content"><i class="fas fa-trash"></i></div>
+            </div>
+        `,
+        methods: {
+            deleteContent() {
+                this.$parent.contents.splice(this.index_content, 1)
+                this.$emit("updateContent")
+            },
+            editContent() {
+                this.$parent.$parent.activeEdit = this.index_content
+            }
+        }
+    }
+
+    const SubTopicBox =  {
+        delimiters: ["[[", "]]"],
+        props: ['title', 'index_sub'],
+        data() {
+            return {
+                contents: [],
+                contentTitle: '',
+                isContentTitleEmpty: true,
+                toggleCheck: true,
+            }
+        },
+        template: `
+                <div @updateContent="update-content-list" ref="sub- + 'index_sub'" class="sub-topic-card">
+                <div class="sub-topic" @click="slideToggle">
+                    <div class="sub-topic-title">Week [[index_sub + 1]] : [[ title ]]</div>
+                    <div @click="deleteSubTopic" class="delete-sub-topic">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div> 
+                <div class="sub-topic-content" :id="index_sub">
+                    <div class="input-box">
+                        <div class="label-input">
+                            <div v-show="isContentTitleEmpty" class="required-message-new">Required</div>
+                        </div>
+                        <div class="input-wrapper">
+                            <input @keyup.enter="addNewContent" v-model="contentTitle" id="subtopic-content-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Content Title">
+                            <button @click="addNewContent" class="add-btn add-content"><i class="fa fa-add"></i> </button>
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <content-box v-for="(content, index) in contents" :title="content.title" :index_content="content.id" :ref="'content-' + index"></content-box>
+                    </div>
+                </div>
+            </div>
+        `,
+        methods: {
+            addNewContent() {
+                if (this.contentTitle != '') {
+                    let content = {
+                        'id': this.index_sub + '_' +  this.contents.length,
+                        'title': this.contentTitle,
+                        'type': "text",
+                        'video_link': '',
+                        'text_content': ''
+                    }
+                    this.contents.push(content)
+                    this.$parent.SubTopics[this.index_sub].contents = this.contents
+                    this.contentTitle = ''
+                } 
+            },
+            slideToggle() {
+                this.toggleCheck = !this.toggleCheck
+                if (this.toggleCheck == true) {
+                    $("#" + this.index_sub).slideDown()
+                }
+                else {
+                    $("#" + this.index_sub).slideUp()
+                }
+            },
+            deleteSubTopic() {
+                this.$parent.SubTopics.splice(this.index, 1)
+            },
+            updateContentList() {
+                this.$parent.SubTopics[this.index_sub].contents = this.contents
+            }
+        },
+        components: {
+            'content-box': ContentBox,
+        }
+    }
+
+    var app = Vue.createApp({
+        delimiters: ["[[","]]"],
+        el: '#data-content',
+        data() {
+            return {
+                isSubTopicInputEmpty: false,
+                SubTopics: [],
+                SubTopicInput: '',
+                activeEdit: 'false',
+                course_name: '',
+                desc: '',
+                thumbnail: '',
+                thumbnailImg: [],
+                categories: [],
+                categoryInput: '',
+                instructors: [],
+                instructorInput: '',
+            }
+        },
+        methods: {
+            addNewSubTopics() {
+                if (this.SubTopicInput != '') {
+                    let newSubTopic = {
+                        'subTopicTitle': this.SubTopicInput,
+                        'contents': [],
+                    }
+                    this.SubTopics.push(newSubTopic),
+                    this.SubTopicInput = ''
+                    this.isSubTopicInputEmpty = false
+                }
+                else {
+                    this.isSubTopicInputEmpty = true
+                }
+            },
+            onThumbnailChange(e) {
+                var file = e.target.files;
+                if (!file.length) {
+                    return;
+                }
+                file = file[0]
+                this.thumbnailImg = file
+                this.thumbnail = URL.createObjectURL(file)
+            },
+
+            addCategory() {
+                if (this.categoryInput != ''){
+                    this.categories.push(this.categoryInput)
+                    this.categoryInput = ''
+                }
+            },
+            addInstructor() {
+                if(this.instructorInput != '') {
+                    let instructor = {
+                        'name': this.instructorInput,
+                        'image': '',
+                    }
+                    this.instructors.push(instructor)
+                    this.instructorInput = ''
+                }
+            },
+            publishCourse() {
+                let data = {
+                    course_name: this.course_name,
+                    desc: this.desc,
+                    thumbnail: this.thumbnailImg,
+                    instructors: this.instructors,
+                    categories: this.categories,
+                    content: this.SubTopics
+                }
+
+                console.log(data)
+                formdata = new FormData()
+                formdata.append("name", data.course_name)
+                formdata.append("desc", data.desc)
+                formdata.append("thumbnail", data.thumbnail)
+                formdata.append("content", JSON.stringify(data.content))
+                formdata.append("categories", JSON.stringify(data.categories))
+
+                let instructors = []
+                for (let i = 0; i < data.instructors.length; i++) {
+                    instructors.push(data.instructors[i].name)
+                    formdata.append("instructor-" + String(i), data.instructors[i].image)
+                }
+                formdata.append("instructors", JSON.stringify(instructors))
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'make_course' %}",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                })
+            }
+        },
+        computed: {
+            Contents: {
+                get: function () {
+                var contents = []
+                for (let i = 0; i < this.SubTopics.length; i++) {
+                    for (let j = 0; j < this.SubTopics[i].contents.length; j++) {
+                        let content = this.SubTopics[i].contents[j]
+                        contents.push(content)
+                    }
+                }
+                return contents
+                },
+                set: function(newContent) {
+                    let id = newContent.id.split("_")
+                    let sub_id = id[0]
+                    let content_id = id[1]
+
+                    this.SubTopics[sub_id].contents[sub_id].title = newContent.title
+                    this.SubTopics[sub_id].contents[sub_id].type = newContent.type
+                    this.SubTopics[sub_id].contents[sub_id].video_link = newContent.video_link
+                    this.SubTopics[sub_id].contents[sub_id].text_content = newContent.text_content
+                }
+            }
+        },
+        components: {
+            'sub-topic-box': SubTopicBox,
+            'content-edit-box': ContentEditBox,
+            'category-box': CategoryBox,
+            'instructor-box': InstructorBox
+        }
+    })
+    app.mount("#data-content")
+</script>
+{% endblock %}

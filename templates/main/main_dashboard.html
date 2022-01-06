@@ -51,11 +51,18 @@
                     <span class="tooltip">Relax Room</span>
                 </li>
                 <li>
-                    <a class="sidebar-icon-wrapper" href="{% url 'search' %}">
+                    <a class="sidebar-icon-wrapper" href="{% url 'course_search' %}">
                         <div class="icon"><i class="fa fa-search fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Search Courses</span>
                     </a>
                     <span class="tooltip">Search</span>
+                </li>
+                <li>
+                    <a class="sidebar-icon-wrapper" href="{% url 'my_course' %}">
+                        <div class="icon"><i class="fa fa-book-open fa-2x"></i></div>
+                        <span class="links_name">&nbsp; &nbsp; My Courses</span>
+                    </a>
+                    <span class="tooltip">My Courses</span>
                 </li>
                 <li>
                     <a class="sidebar-icon-wrapper" href="{% url 'settings' %}">
@@ -64,7 +71,7 @@
                     </a>
                     <span class="tooltip">Settings</span>
                 </li>
-                <li>
+                <li class="last">
                     <a class="sidebar-icon-wrapper" href="{% url 'logout' %}">
                         <div class="icon"><i class="fa fa-sign-out fa-2x"></i></div>
                         <span class="links_name">&nbsp; &nbsp; Logout</span>
