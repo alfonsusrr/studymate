@@ -1,10 +1,21 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect, HttpResponse
 import json
+
 from .models import *
 
 def preview(request, id):
-    return render(request, "course/preview.html")
+    course = Course.objects.filter(id=id).first()
+    if course == None:
+        return HttpResponse("Course not found")
+    else:
+        instructors = course.instructors.all()
+        context = {
+            "course": course,
+            "instructors": instructors
+        }
+        return render(request, "course/preview.html", context)
 
 def learn(request, id):
     return render(request, "course/learn.html")

@@ -1,3 +1,7 @@
+.home_section {
+    margin-bottom: 0
+}
+
 h2{
     color: white;
     font-size: 50px;
@@ -9,10 +13,9 @@ h2{
 }
 
 .course{
-    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../static/images/placeholder.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
-    padding: 10% 0%;
+    padding: 10% calc(5% + 100px);
     background-position: center;
     text-align: center;
 }
@@ -26,16 +29,24 @@ h2{
 
 .profile{
     text-align: center;
-    margin-top: 1%;
+    margin: 30px 20px;
 }
 
 .instructors{
-    column-count: 2;
+    display: flex;
+    align-items: center;
+    flex-direction: row wrap;
+    justify-content: center;
 }
 
 .profile img{
     margin-top: 2%;
     max-height: 200px;
+    border-radius: 30px;
+}
+
+.about, .instructors{
+    padding: 10px calc(5% + 100px)
 }
 
 .about p{
