@@ -10,22 +10,68 @@
 {% block content %}
         <div class="content">
             <div class="course">
+                <input type="hidden" id="course-rating" value="{{course.overall_ratings}}">
+                <div class="rating-stars overall-rating-star">
+                    <i class="fa fa-star" id="rating-1"></i>
+                    <i class="fa fa-star" id="rating-2"></i>
+                    <i class="fa fa-star" id="rating-3"></i>
+                    <i class="fa fa-star" id="rating-4"></i>
+                    <i class="fa fa-star" id="rating-5"></i>
+                </div>
                 <h2>{{course.name}}</h2>
-                <button class="Enroll">Enroll</button>
+                {% if not enrolled %}
+                    <button class="Enroll" id="enroll">Enroll</button>
+                {% else %} 
+                    <button class="Enroll" id="resume">Resume Course</button>
+                {% endif %}
             </div>
+            <h3 class="details-heading">Details</h3>
             <div class="details">
-                <h3>Details</h3>
                 <div class="about">
-                    <h4>About The Course</h4>
+                    <h4 class="section-details-heading">About The Course</h4>
                     <p>{{course.description}}</p>
                 </div>
+                <div class="categories">
+                    <h4 class="section-details-heading">Categories</h4>
+                    <div class="category-container">
+                        {% for category in categories %}
+                        <div class="category-tag">
+                            {{category.name}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
                 <div class="instructor">
-                    <h4>Instructors</h4>
+                    <h4 class="section-details-heading">Instructors</h4>
                     <div class="instructors">
                         {% for instructor in instructors %}
                         <div class="profile">
                             <img src="/media/{{instructor.profile_image}}">
                             <p>{{ instructor.name }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="contents">
+                    <h4 class="section-details-heading">Contents</h4>
+                    <div class="content-wrapper">
+                        {% for content_group in content_groups %}
+                        <div class="week-content-box">
+                            <div class="week-content-title">
+                                <i class="fas fa-angle-up expand-icon"></i> {{content_group.title}}
+                            </div>
+                            <div class="content-box-wrapper">
+                                {% for content in content_group.contents %}
+                                <div class="content-box">
+                                    <div class="content-icon">
+                                        <i class="{% if content.is_video %}fas fa-play-circle {% else %}fas fa-list-ul {% endif %}"></i>
+                                    </div>
+                                    <div class="content-title">
+                                        {{content.title}}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div> 
                         </div>
                         {% endfor %}
                     </div>
@@ -36,6 +82,9 @@
 {% block ending %}
 <script type="module" src="{% static 'course/js/preview.js' %}"></script>
 <script type="text/javascript">
+    let token = "{{csrf_token}}"
+    let url_enroll = "{% url 'enroll_course' course.id %}"
+    let url_continue = "{% url 'learn_course' course.id %}"
     $(".course").css("background-image", "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/media/{{course.banner_image}})")
 </script>
 {% endblock %}
