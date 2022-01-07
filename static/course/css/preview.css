@@ -13,18 +13,25 @@ h2{
 }
 
 .course{
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     padding: 10% calc(5% + 100px);
     background-position: center;
     text-align: center;
 }
 
-.details h3{
+.details {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+}
+
+.details-heading{
     text-align: center;
-    background-color: #DDDDDD;
+    background-color: #f1f5f7;
     color: #323950;
     font-size: xx-large;
+    box-shadow: 0 3px 30px 0 rgba(0,0,0,0.1);
 }
 
 .profile{
@@ -41,31 +48,25 @@ h2{
 
 .profile img{
     margin-top: 2%;
-    max-height: 200px;
+    height: 200px;
+    width: 200px;
     border-radius: 30px;
+    object-fit: cover;
+    object-position: center;
 }
 
-.about, .instructors{
+.details{
     padding: 10px calc(5% + 100px)
 }
 
 .about p{
     text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 1%;
 }
 
-.about h4{
+.section-details-heading{
     margin-top: 2%;
     text-align: center;
     font-size: large;
-}
-
-.instructor h4{
-    margin-top: 2%;
-    text-align: center;
-    font-size: larger;
 }
 
 .content{
@@ -75,4 +76,100 @@ h2{
 .content.active{
     transition: 0.5s ease;
     margin-left: 15%;
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.overall-rating-star {
+    font-size: 25px;
+}
+
+.star-rating-active {
+    color: rgb(255, 187, 0);
+}
+
+.fa-star {
+    margin: 0 4px;
+    color: rgb(197, 210, 219);
+}
+
+.categories {
+    display: block;
+    margin-left: auto
+}
+
+.category-container {
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.category-tag {
+    background-color: rgb(0, 202, 202);
+    padding: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.category-tag:hover{
+    opacity: 0.8;
+}
+
+
+.week-content-box {
+    width: 100%;
+    box-shadow: 0 3px 30px 0 rgba(0,0,0,0.05);
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.week-content-title {
+    background-color: rgba(211, 211, 211, 0.4);
+    padding:20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content-box-wrapper {
+    padding: 20px; 
+}
+
+.content-box {
+    margin-bottom: 15px
+}
+.content-icon {
+    width: 30px;
+    height: 24px;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 5px;
+    margin-right: 25px;
+}
+
+.content-box {
+    display: flex;
+    align-items: center;
+}
+
+.expand-icon {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.rotated { 
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
 }

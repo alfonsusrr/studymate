@@ -9,78 +9,111 @@
 
 
 {% block content %}
-<div id="data-content" class="page-wrapper">
-    <h2>Add a New Course</h2>
-    <div class="data-container data-1" data-id-part="1">
-        <div class="data">
-            <div class="input-box">
-                <div class="label-input">
-                    <h3>Course Name</h3> <div class="required-message">Required</div>
+<div id="data-content">
+    <div class="page-wrapper">
+        <h2>Add a New Course</h2>
+        <div class="data-container data-1" data-id-part="1">
+            <div class="data">
+                <div class="input-box">
+                    <div class="label-input">
+                        <h3>Course Name</h3> <div v-show="isNameInputEmpty" class="required-message-new">Required</div>
+                    </div>
+                    <input v-model="course_name" id="name" class="name req-input" placeholder="Enter Course Name">
                 </div>
-                <input v-model="course_name" id="name" class="name req-input" placeholder="Enter Course Name">
-            </div>
-            
-            <div class="input-box">
-                <div class="label-input">
-                    <h3>Upload a Thumbnail</h3> <div class="required-message">Required</div>
+                
+                <div class="input-box">
+                    <div class="label-input">
+                        <h3>Upload a Thumbnail</h3> <div v-show="isThumbnailEmpty" class="required-message-new">Required</div>
+                    </div>
+                    <input @change="onThumbnailChange" id="thumbnail-input" class="thumbnail req-input" type="file" placeholder="Enter a Link to a Picture" accept="image/png, image/jpeg, image/jpg">
                 </div>
-                <input @change="onThumbnailChange" id="thumbnail-input" class="thumbnail req-input" type="file" placeholder="Enter a Link to a Picture" accept="image/png, image/jpeg, image/jpg">
-            </div>
-            <div class="thumbnail-preview">
-                <img v-show="thumbnail != ''" id="thumbnail-preview" :src="thumbnail">
-            </div>
-            
-            <div class="input-box">
-                <div class="label-input">
-                    <h3>Course Description</h3> <div class="required-message">Required</div>
+                <div v-cloak="true" class="thumbnail-preview">
+                    <img v-show="thumbnail != ''" id="thumbnail-preview" :src="thumbnail">
                 </div>
-                <textarea v-model="desc" id="desc" class="desc req-input" placeholder="Enter Course Description"></textarea>
+                
+                <div class="input-box">
+                    <div class="label-input">
+                        <h3>Course Description</h3> <div v-show="isDescInputEmpty" class="required-message-new">Required</div>
+                    </div>
+                    <textarea v-model="desc" id="desc" class="desc req-input" placeholder="Enter Course Description"></textarea>
+                </div>
+            </div>
+            <div class="data data-col-2">
+                <div class="input-box">
+                    <h3>Category</h3>
+                    <input @keyup.enter="addCategory" v-model="categoryInput" id="category-input" class="category" placeholder="Enter Your Note's Category, end with enter">
+                    <div class="category-container">
+                        <category-box v-for="(category, index) in categories" :name="category" :index="index"></category-box>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="label-input">
+                        <h3>Instructors</h3> <div v-show="isInstructorEmpty" class="required-message-new">Required</div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input @keyup.enter="addInstructor" v-model="instructorInput" id="instructors-input" class="instructor-input input-wrapper-box req-input" type="text" placeholder="Enter Instructors Name">
+                        <button @click="addInstructor" id="add-instructor-btn" class="add-btn"><i class="fa fa-add"></i> </button>
+                    </div>
+                    <div class="instructors">
+                        <instructor-box v-for="(instructor, index) in instructors" :details="instructor" :index="index"></instructor-box>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="data data-col-2">
-            <div class="input-box">
-                <h3>Category</h3>
-                <input @keyup.enter="addCategory" v-model="categoryInput" id="category-input" class="category" placeholder="Enter Your Note's Category, end with enter">
-                <div class="category-container">
-                    <category-box v-for="(category, index) in categories" :name="category" :index="index"></category-box>
+        <div class="data-container data-1" data-id-part="1">
+            <div class="data">
+                <div class="input-box">
+                    <div class="label-input">
+                        <h3 >Course Sub-topics</h3> <div v-show="isSubTopicEmpty" class="required-message-new">Required</div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input @keyup.enter="addNewSubTopics" v-model="SubTopicInput" id="subtopic-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Sub-topic for each week">
+                        <button @click="addNewSubTopics" id="add-sub-topic-btn" class="add-btn"><i class="fa fa-add"></i> </button>
+                    </div>
+                </div>
+                <div class="sub-topics">
+                    <sub-topic-box v-for="(SubTopic, index) in SubTopics" :title="SubTopic.subTopicTitle" :index_sub="index"></sub-topic-box>
                 </div>
             </div>
-            <div class="input-box">
-                <div class="label-input">
-                    <h3>Instructors</h3> <div class="required-message">Required</div>
+            <div class="data-col-2">
+                <content-edit-box v-for="(content, index) in Contents" :id=index :details=content></content-edit-box>
+            </div>
+        </div>
+        <button @click="publishCourse()" class="next"> Publish <i class="fas fa-paper-plane"></i></button>
+    </div>
+    <div v-cloak="true" v-show="status != 'waiting'" class="loader-upload">
+        <div v-show="status == 'loading'" class="loader loader-center"></div>
+        <div v-show="status == 'finish'" class="upload-message">
+            <div class="message-wrapper">
+                <div v-show="response == 'success'" class="success-icon" id="success">
+                    <div class="success-icon__tip"></div>
+                    <div class="success-icon__long"></div>
                 </div>
-                <div class="input-wrapper">
-                    <input @keyup.enter="addInstructor" v-model="instructorInput" id="instructors-input" class="instructor-input input-wrapper-box req-input" type="text" placeholder="Enter Instructors Name">
-                    <button @click="addInstructor" id="add-instructor-btn" class="add-btn"><i class="fa fa-add"></i> </button>
+                <div v-show="response == 'failed'" class="failed-icon" id="failed">
+                    <div class="failed-icon__tip_1"></div>
+                    <div class="failed-icon__tip_2"></div>
                 </div>
-                <div class="instructors">
-                    <instructor-box v-for="(instructor, index) in instructors" :details="instructor" :index="index"></instructor-box>
+                <div v-if="response == 'failed'" class="status-message">Failed to make course, please try again later</div>
+                <div v-if="response == 'success'" class="status-message">Course is successfully made</div>
+            </div>
+            <div class="buttons-message">
+                <button v-show="response == 'success'" @click="previousPage" id="back-btn" class="back-button">Back</button>
+                <button v-show="response == 'failed'" @click="changeStatus(1)" id="close-btn" class="back-button">Close</button>
+                <button v-show="response == 'success'" id="go-notes-btn" @click="previewCourse" class="go-to-notes-button">Preview Course</button>
+            </div>
+        </div>
+        <div v-show="status == 'validation'" class="upload-message validation-box">
+            <div class="message-wrapper">
+                <div class="status-message message-validation">
+                    <div v-for="message in messages"><i class="fas fa-exclamation-circle warning-icon"></i>[[message]]</div>
                 </div>
+            </div>
+            <div class="buttons-message">
+                <button @click="changeStatus(1)" id="back-btn" class="back-button">Close</button>
             </div>
         </div>
     </div>
-    <div class="data-container data-1" data-id-part="1">
-        <div class="data">
-            <div class="input-box">
-                <div class="label-input">
-                    <h3 >Course Sub-topics</h3> <div v-show="isSubTopicInputEmpty" class="required-message-new">Required</div>
-                </div>
-                <div class="input-wrapper">
-                    <input @keyup.enter="addNewSubTopics" v-model="SubTopicInput" id="subtopic-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Sub-topic for each week">
-                    <button @click="addNewSubTopics" id="add-sub-topic-btn" class="add-btn"><i class="fa fa-add"></i> </button>
-                </div>
-            </div>
-            <div class="sub-topics">
-                <sub-topic-box v-for="(SubTopic, index) in SubTopics" :title="SubTopic.subTopicTitle" :index_sub="index"></sub-topic-box>
-            </div>
-        </div>
-        <div class="data-col-2">
-            <content-edit-box v-for="(content, index) in Contents" :id=index :details=content></content-edit-box>
-        </div>
-    </div>
-    <button @click="publishCourse()" class="next"> Publish <i class="fas fa-paper-plane"></i></button>
 </div>
-        
 {% endblock %}
 {% block ending %}
 <script type="module" src="{% static 'course/js/add.js' %}"></script>
@@ -240,7 +273,6 @@
             return {
                 contents: [],
                 contentTitle: '',
-                isContentTitleEmpty: true,
                 toggleCheck: true,
             }
         },
@@ -299,6 +331,11 @@
                 this.$parent.SubTopics[this.index_sub].contents = this.contents
             }
         },
+        computed: {
+            isContentTitleEmpty: function() {
+                return this.contents.length == 0
+            }
+        },
         components: {
             'content-box': ContentBox,
         }
@@ -309,7 +346,6 @@
         el: '#data-content',
         data() {
             return {
-                isSubTopicInputEmpty: false,
                 SubTopics: [],
                 SubTopicInput: '',
                 activeEdit: 'false',
@@ -321,6 +357,10 @@
                 categoryInput: '',
                 instructors: [],
                 instructorInput: '',
+                status: 'waiting',
+                response: '',
+                messages: [],
+                url_redirect: ''
             }
         },
         methods: {
@@ -364,7 +404,36 @@
                     this.instructorInput = ''
                 }
             },
+            changeStatus(status) {
+                if (status == 1) {
+                    this.status = 'waiting'
+                }
+            },
             publishCourse() {
+                let validation =  {
+                    "name": this.isNameInputEmpty,
+                    "description": this.isDescInputEmpty,
+                    "thumbnail": this.isThumbnailEmpty,
+                    "instructors": this.isInstructorEmpty,
+                    "sub-topics": this.isSubTopicEmpty,
+                }
+                
+                let valid = true
+                this.messages = []
+                for (const [key, value] of Object.entries(validation)) {
+                    if (value) {
+                        this.messages.push("Please input course " + key)
+                        valid = false
+                    }
+                }
+
+                if (!valid) {
+                    this.status = "validation"
+                    return;
+                }
+
+                this.status = "loading"
+
                 let data = {
                     course_name: this.course_name,
                     desc: this.desc,
@@ -388,14 +457,31 @@
                     formdata.append("instructor-" + String(i), data.instructors[i].image)
                 }
                 formdata.append("instructors", JSON.stringify(instructors))
-
+                
+                let self = this
                 $.ajax({
                     type: 'POST',
                     url: "{% url 'make_course' %}",
                     data: formdata,
                     processData: false,
                     contentType: false,
+                    success: function(res) {
+                        self.status= "finish"
+                        if (res.status == "success") {
+                            self.response = "success"
+                            self.url_redirect = res.url
+                        }
+                        else {
+                            self.response = "failed"
+                        }
+                    }
                 })
+            },
+            previousPage() {
+                window.history.back()
+            },
+            previewCourse() {
+                window.location.href = this.url_redirect
             }
         },
         computed: {
@@ -420,6 +506,21 @@
                     this.SubTopics[sub_id].contents[sub_id].video_link = newContent.video_link
                     this.SubTopics[sub_id].contents[sub_id].text_content = newContent.text_content
                 }
+            },
+            isNameInputEmpty: function () {
+                return this.course_name == ''
+            },
+            isThumbnailEmpty: function () {
+                return this.thumbnail == ''
+            },
+            isDescInputEmpty: function () {
+                return this.desc == ''
+            },
+            isInstructorEmpty: function() {
+                return this.instructors.length == 0
+            },
+            isSubTopicEmpty: function () {
+                return this.SubTopics.length == 0
             }
         },
         components: {
