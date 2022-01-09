@@ -1,1 +1,13 @@
-Django==4.0
+asgiref==3.4.1
+Django==3.2.9
+django-markdownx==4.0.0b1
+importlib-metadata==4.10.0
+Markdown==3.3.6
+markdown-markup-emoji==0.2.2
+pdf2image==1.16.0
+python-markdown-math==0.8
+sqlparse==0.4.2
+psycopg2==2.8.4
+psycopg2-binary==2.8.6
+Pillow==8.2.0
+Werkzeug==2.0.1

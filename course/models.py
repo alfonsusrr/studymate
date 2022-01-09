@@ -3,6 +3,7 @@ from account.models import *
 from studymate.storage import OverwriteStorage
 import uuid
 import datetime
+
 def get_course_banner_filepath(self, filename):
     extension = filename.split(".")[-1]
     date = datetime.date.today()

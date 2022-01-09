@@ -281,7 +281,7 @@ def finishContent(request):
 
                     courseContentDB = CourseContent.objects.filter(id=content_id).first()
 
-                    checkFinishGroup(courseContentDB.content_group)
+                    checkFinishGroup(request, courseContentDB.content_group)
                 output = {
                     "status": "success"
                 }
@@ -292,14 +292,14 @@ def finishContent(request):
         return JsonResponse(output)
 
 
-def checkFinishGroup(content_group):
-    contentsDB = ContentUserProgress.objects.filter(content__content_group=content_group)
+def checkFinishGroup(request, content_group):
+    contentsDB = ContentUserProgress.objects.filter(content__content_group=content_group, user=request.user)
     finish = True
     for content in contentsDB:
         if content.completed == False:
             finish = False
     if finish == True:
-        userContentGroupProgress = ContentGroupUserProgress.objects.filter(content_group=content_group).first()
+        userContentGroupProgress = ContentGroupUserProgress.objects.filter(content_group=content_group, user=request.user).first()
         userContentGroupProgress.completed = True
         userContentGroupProgress.save()
     
@@ -315,7 +315,7 @@ def completeContent(request):
         if userContentProgress != None:
             userContentProgress.completed = True
             userContentProgress.save()
-            checkFinishGroup(userContentProgress.content.content_group)
+            checkFinishGroup(request, userContentProgress.content.content_group)
             status = "success"
     output = {
         "status": status
