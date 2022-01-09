@@ -3,7 +3,6 @@ from account.models import *
 from studymate.storage import OverwriteStorage
 import uuid
 import datetime
-
 def get_course_banner_filepath(self, filename):
     extension = filename.split(".")[-1]
     date = datetime.date.today()
@@ -28,6 +27,7 @@ class CourseInstructor(models.Model):
     profile_image = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_course_instructor_filepath, default=get_default_instructor_image())
 
 class Course(models.Model):
+    maker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="course_made_by", null=True)
     name = models.CharField(max_length=200, null=False)
     description = models.TextField(null=False)
     banner_image   = models.ImageField(max_length=255, storage=OverwriteStorage(), upload_to=get_course_banner_filepath, default=get_default_banner_image())
@@ -60,5 +60,14 @@ class CourseContent(models.Model):
 
 class CourseUserProgress(models.Model):
     info = models.ForeignKey(UserCourse, on_delete=models.CASCADE, related_name="progress") 
-    last_content_group = models.PositiveIntegerField(default=1)
     last_content = models.PositiveIntegerField(default=1)
+
+class ContentUserProgress(models.Model):
+    content = models.ForeignKey(CourseContent, on_delete=models.CASCADE, related_name="user_progress")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="content_progress")
+    completed = models.BooleanField(default=False)
+
+class ContentGroupUserProgress(models.Model):
+    content_group = models.ForeignKey(CourseContentGroup, on_delete=models.CASCADE, related_name="user_progress")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="content_group_progress")
+    completed = models.BooleanField(default=False)

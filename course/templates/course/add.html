@@ -4,6 +4,12 @@
 {% block head %} 
 {% load static %}
 <link rel="stylesheet" href="{% static 'course/css/add.css' %}">
+<link rel="stylesheet" href="{% static 'course/css/markdown.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/mathtex-script-type.min.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/base16/material-darker.min.css" integrity="sha512-4AE4hJungkjpCKswHkPiPHZFbc94aVAm7fx7vr9k8szz1PZ5fgIisTbKnE4IibTQ3Ut+wkObezOMl5e1F5qDmA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
 <script src="https://unpkg.com/vue@next"></script>
 {% endblock %}
 
@@ -11,19 +17,19 @@
 {% block content %}
 <div id="data-content">
     <div class="page-wrapper">
-        <h2>Add a New Course</h2>
+        <h2 class="page-title">Add a New Course</h2>
         <div class="data-container data-1" data-id-part="1">
             <div class="data">
                 <div class="input-box">
                     <div class="label-input">
-                        <h3>Course Name</h3> <div v-show="isNameInputEmpty" class="required-message-new">Required</div>
+                        <h3 class="page-subheading">Course Name</h3> <div v-show="isNameInputEmpty" class="required-message-new">Required</div>
                     </div>
                     <input v-model="course_name" id="name" class="name req-input" placeholder="Enter Course Name">
                 </div>
                 
                 <div class="input-box">
                     <div class="label-input">
-                        <h3>Upload a Thumbnail</h3> <div v-show="isThumbnailEmpty" class="required-message-new">Required</div>
+                        <h3 class="page-subheading">Upload a Thumbnail</h3> <div v-show="isThumbnailEmpty" class="required-message-new">Required</div>
                     </div>
                     <input @change="onThumbnailChange" id="thumbnail-input" class="thumbnail req-input" type="file" placeholder="Enter a Link to a Picture" accept="image/png, image/jpeg, image/jpg">
                 </div>
@@ -33,14 +39,14 @@
                 
                 <div class="input-box">
                     <div class="label-input">
-                        <h3>Course Description</h3> <div v-show="isDescInputEmpty" class="required-message-new">Required</div>
+                        <h3 class="page-subheading">Course Description</h3> <div v-show="isDescInputEmpty" class="required-message-new">Required</div>
                     </div>
                     <textarea v-model="desc" id="desc" class="desc req-input" placeholder="Enter Course Description"></textarea>
                 </div>
             </div>
             <div class="data data-col-2">
                 <div class="input-box">
-                    <h3>Category</h3>
+                    <h3 class="page-subheading">Category</h3>
                     <input @keyup.enter="addCategory" v-model="categoryInput" id="category-input" class="category" placeholder="Enter Your Note's Category, end with enter">
                     <div class="category-container">
                         <category-box v-for="(category, index) in categories" :name="category" :index="index"></category-box>
@@ -48,7 +54,7 @@
                 </div>
                 <div class="input-box">
                     <div class="label-input">
-                        <h3>Instructors</h3> <div v-show="isInstructorEmpty" class="required-message-new">Required</div>
+                        <h3 class="page-subheading">Instructors</h3> <div v-show="isInstructorEmpty" class="required-message-new">Required</div>
                     </div>
                     <div class="input-wrapper">
                         <input @keyup.enter="addInstructor" v-model="instructorInput" id="instructors-input" class="instructor-input input-wrapper-box req-input" type="text" placeholder="Enter Instructors Name">
@@ -64,7 +70,7 @@
             <div class="data">
                 <div class="input-box">
                     <div class="label-input">
-                        <h3 >Course Sub-topics</h3> <div v-show="isSubTopicEmpty" class="required-message-new">Required</div>
+                        <h3 class="page-subheading">Course Sub-topics</h3> <div v-show="isSubTopicEmpty" class="required-message-new">Required</div>
                     </div>
                     <div class="input-wrapper">
                         <input @keyup.enter="addNewSubTopics" v-model="SubTopicInput" id="subtopic-input" class="input-wrapper-box req-input" type="text" placeholder="Enter Sub-topic for each week">
@@ -119,6 +125,12 @@
 <script type="module" src="{% static 'course/js/add.js' %}"></script>
 
 <script type="text/javascript">
+    function highlight() {
+        document.querySelectorAll('.code-block').forEach(el => {
+        // then highlight each
+        hljs.highlightElement(el);
+        });
+    }
     const InstructorBox = {
         delimiters: ["[[", "]]"],
         props: ['details', 'index'],
@@ -187,6 +199,8 @@
         data() {
             return {
                 details_mod: this.details,
+                stats: 0,
+                preview: '',
             }
         },
         computed: {
@@ -195,11 +209,72 @@
             },
             nowDisplay() {
                 return this.$parent.activeEdit
+            },
+            contentInput() {
+                return this.details_mod.text_content
             }
         },  
         watch: {
             inputNow() {
                 this.$parent.Contents = details_mod
+            },
+            contentInput() {
+                if (this.details_mod.text_content.indexOf("/image") != -1) {
+                    this.details_mod.text_content= this.details_mod.text_content.replace("/image", "")
+                    this.$refs.imagefile.click()
+                }
+            },
+            preview() {
+                setTimeout(function() {
+                    window.highlight()
+                }, 2000)
+            }
+        },
+        methods: {
+            status(stats) {
+                this.stats = stats
+                $(".edit-btn").toggleClass("edit-panel-active")
+                $(".preview-btn").toggleClass("edit-panel-active")
+
+                if (stats == 1) {
+                    this.renderPreview()
+                }
+            },
+            uploadImage(e) {
+                let formdata = new FormData()
+                let files = e.target.files
+                if (files.length != 0) {
+                    formdata.append("image", e.target.files[0])
+                }
+                let self = this
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'upload_image' %}",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        if (res.status = "success") {
+                            self.details_mod.text_content += "!["+ res.filename +"](" + res.url + ")"
+                        }
+                    }
+                })
+            },
+            renderPreview() {
+                let text = this.details_mod.text_content
+                let self = this
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'markdown' %}",
+                    data: {
+                        "text": text
+                    },
+                    success: function(res) {
+                        if (res.status = "success") {
+                            self.preview = res.html;
+                        }
+                    }
+                })
             }
         },
         template: `
@@ -231,8 +306,17 @@
                         <div class="label-input">
                             Text Content
                         </div>
-                        <div class="input-wrapper">
+                        <div class="edit-panel">
+                            <div @click="status(0)" class="edit-panel-btn edit-btn edit-panel-active"><i class="fas fa-pencil edit-icon"></i> Edit</div>
+                            <div @click="status(1)" class="edit-panel-btn preview-btn"><i class="fas fa-eye edit-icon"></i> Preview</div>
+                        </div>
+                        <div v-show="stats == 0" class="input-wrapper">
                             <textarea v-model="details_mod.text_content" class="content-text-input"></textarea>
+                            <input @change="uploadImage" ref="imagefile" type="file" class="image-content" style="display: none">
+                        </div>
+                        <div v-show="stats == 1" class="input-wrapper">
+                            <div class="preview-content markdown-body" v-html=preview>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -244,7 +328,7 @@
         props: ['title', 'index_content'],
         data(){
             return {
-                
+
             }
         },
         template: `
@@ -262,7 +346,7 @@
             },
             editContent() {
                 this.$parent.$parent.activeEdit = this.index_content
-            }
+            },
         }
     }
 
@@ -531,5 +615,7 @@
         }
     })
     app.mount("#data-content")
+</script>
+<script type="text/javascript">
 </script>
 {% endblock %}

@@ -28,7 +28,7 @@ header{
     background-color: black;
 }
 
-li, a, button{
+.nav__links li, .nav__links a, button{
     font-weight: 500;
     font-size: 16px;
     color: white;

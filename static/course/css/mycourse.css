@@ -109,3 +109,8 @@
 .completed, .by-me {
     display:none;
 }
+
+.no-course {
+    color: grey;
+    text-align: center;
+}

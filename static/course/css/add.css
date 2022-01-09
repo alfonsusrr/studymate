@@ -26,18 +26,18 @@
     margin-left: calc(300px + 3%); 
 }
 
-h2{
+.page-title{
     text-align: center;
     margin-top: 1%;
     transition: 0.5s ease;
 }
 
-h2.active{
+.page-title.active{
     transition: 0.5s ease;
     margin-left: 20%;
 }
 
-h3{
+.page-subheading{
     margin-top: 1%;
 }
 
@@ -673,6 +673,37 @@ select{
     margin-right: 10px;
     font-size: 24px;
 }
+
+.edit-panel {
+    display: flex;
+    align-items: flex-start;
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    font-size: 15px;
+    padding-bottom: 0px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.edit-panel-btn {
+    padding: 10px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.edit-icon {
+    margin-left: 10px;
+}
+.edit-panel-active {
+    border-bottom: 3px solid #696969;
+}
+
 [v-cloak] {
     display: none;
+}
+
+.preview-content {
+    width: 100%;
+    min-height: 800px;
+    overflow: scroll;
 }

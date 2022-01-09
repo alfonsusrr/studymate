@@ -21,72 +21,94 @@
     </div>
     <div class="course-container">
         <div class="in-progress">
+            {% for course in course_inprogress %}
             <div class="course-card">
                 <div class="course-info">
                     <div class="course-img">
-                        <img src="{% static 'images/placeholder.jpg' %}">
+                        <img src="/media/{{course.course.banner_image}}">
                     </div>
                     <div class="course-detail">
-                        <h2>CS50x Introduction to Computer Science</h2>
+                        <h2>{{course.course.name}}</h2>
                         <div class="course-instructors">
-                            <div class="course-instructor">David J. Malan </div>
-                            <div class="course-instructor">Brian Yu</div>
+                            {% for instructor in course.course.instructors.all %}
+                            <div class="course-instructor">{{instructor.name}}</div>
+                            {% endfor %}
                         </div>
                         <div class="course-user-detail">
-                            Joined 12 Jan 2022
+                            Joined on {{course.start_date|date:"d M Y"}}
                         </div>
                         <div class="course-action">
-                            <button class="course-btn">Resume Course</button>
+                            <button class="resume-course-btn" data-link="{% url 'learn_course' course.course.id %}">Resume Course</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {% empty %} 
+                <div class="no-course">
+                    You haven't started any course.
+                </div>
+            {% endfor %}
         </div>
         <div class="completed">
+            {% for course in course_completed %}
             <div class="course-card">
                 <div class="course-info">
                     <div class="course-img">
-                        <img src="{% static 'images/placeholder.jpg' %}">
+                        <img src="/media/{{course.course.banner_image}}">
                     </div>
                     <div class="course-detail">
-                        <h2>CS50x Introduction to Computer Science</h2>
+                        <h2>{{course.course.name}}</h2>
                         <div class="course-instructors">
-                            <div class="course-instructor">David J. Malan </div>
-                            <div class="course-instructor">Brian Yu</div>
+                            {% for instructor in course.course.instructors.all %}
+                            <div class="course-instructor">{{instructor.name}}</div>
+                            {% endfor %}
                         </div>
                         <div class="course-user-detail">
-                            Completed 12 Jan 2022
+                            Completed on {{course.complete_date|date:"d M Y"}}
                         </div>
                         <div class="course-action">
-                            <button class="course-btn">Review Course</button>
+                            <button class="review-course-btn" data-link="{% url 'learn_course' course.course.id %}">Review Course</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {% empty %} 
+                <div class="no-course">
+                    You haven't completed any course.
+                </div>
+            {% endfor %}
         </div>
         <div class="by-me">
             <div class="add-new-course">
                 <button id="add-course" class="add-course" data-link="{% url 'make_course'%}">Make New Course</button>
             </div>
+            {% for course in course_byuser %}
             <div class="course-card">
                 <div class="course-info">
                     <div class="course-img">
-                        <img src="{% static 'images/placeholder.jpg' %}">
+                        <img src="/media/{{course.banner_image}}">
                     </div>
                     <div class="course-detail">
-                        <h2>CS50x Introduction to Computer Science</h2>
+                        <h2>{{course.name}}</h2>
                         <div class="course-instructors">
-                            <div class="course-instructor">David J. Malan </div>
-                            <div class="course-instructor">Brian Yu</div>
+                            {% for instructor in course.instructors.all %}
+                            <div class="course-instructor">{{instructor.name}}</div>
+                            {% endfor %}
                         </div>
                         <div class="course-user-detail">
-                            Completed 12 Jan 2022
+                            Edited on 
                         </div>
                         <div class="course-action">
-                            <button class="course-btn">Edit Course</button>
+                            <button class="review-course-btn" data-link="{% url 'learn_course' course.id %}">Edit Course</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            {% empty %} 
+                <div class="no-course">
+                    You haven't made any course.
+                </div>
+            {% endfor %}
             </div>
         </div>
     </div>

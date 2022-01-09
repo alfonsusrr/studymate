@@ -37,3 +37,7 @@ $("#nav-by-me").click(function () {
 $("#add-course").click(function() {
     window.location.href = $(this).attr("data-link")
 })
+
+$(".resume-course-btn").click(function() {
+    window.location.href = $(this).attr("data-link")
+})

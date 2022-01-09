@@ -1,249 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
-
-*{
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
+.home_section {
+    margin-bottom: 0
 }
 
-body{
-    box-sizing: border-box;
-    background-color: white;
-    color: black;
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    overflow-y: scroll;
-}
-
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-    background-color: #32393E;
-}
-
-li, a, button{
-    font-weight: 500;
-    font-size: 16px;
-    color: white;
-    text-decoration: none;
-}
-
-footer{
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 0.5%;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    position: fixed;
-}
-
-.logo{
-    cursor: pointer;
-    background-color: #32393E;
-    max-height: 50px;
-    max-width: 90px;
-}
-
-.nav__links{
-    list-style: none;
-    background-color: #32393E;
-}
-
-.nav__links li{
-    display: inline-block;
-    padding: 0px 20px;
-    background-color: #32393E;
-}
-
-.nav__links li a{
-    transition: all 0.3s ease 0s;
-    background-color: #32393E;
-}
-
-.nav__links li a:hover{
-    color: cyan;
-}
-
-button{
-    padding: 9px 25px;
-    background-color: rgba(0,136,169,1);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-.cta{
-    background-color: #32393E;
-}
-
-button:hover{
-    background-color: rgba(0,136,169,0.8);
-}
-
-.sidebar{
-    position: fixed;
-    width: 50px;
-    height: 100%;
-    background-color: #323950;
-    top: 0;
-    left: 0;
-    padding: 6px 14px;
-    transition: all 0.5s ease;
-}
-
-.sidebar.active{
-    width: 250px;
-}
-
-.sidebar .logo_content .logo{
-    color: white;
-    display: flex;
-    height: 50px;
-    width: 100%;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.2s ease;
-}
-
-.sidebar.active .logo_content .logo{
-    opacity: 1;
-    pointer-events: none;
-    transition: 0.2s ease;
-}
-
-.logo_content .logo img{
-    font-size: 28px;
-    margin-right: 5px;
-    max-width: 90px;
-    max-height: 60px;
-}
-
-.logo_content .logo .logo_name{
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.sidebar #menu{
-    position: absolute;
-    color: white;
-    left: 50%;
-    top: 6px;
-    font-size: 20px;
-    height: 50px;
-    width: 50px;
-    text-align: center;
-    line-height: 50px;
-    transform:  translateX(-50%);
-}
-
-.sidebar #menu:hover{
-    transition: 0.5s ease;
-    background: black;
-}
-
-.sidebar.active #menu{
-    left: 90%;
-}
-
-.sidebar ul{
-    margin-top: 20px;
-}
-
-.sidebar ul li{
-    list-style: none;
-    height: 50px;
-    width: 100%;
-    margin: 0 5px;
-    position: relative;
-    line-height: 50px;
-}
-
-.sidebar ul li a{
-    color: white;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    transition: all 0.4s ease;
-    border-radius: 12px;
-    white-space: nowrap;
-    padding-left: 3px;
-}
-
-.sidebar ul li a:hover{
-    background: white;
-    color: black;
-    padding-left: 8px;
-}
-
-.sidebar ul li a img{
-    min-height: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    max-height: 40px;
-    border-radius: 12px;
-    line-height: 50px;
-    text-align: center;
-}
-
-.sidebar .links_name{
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.2s ease;
-}
-
-.sidebar.active .links_name{
-    opacity: 1;
-    pointer-events: auto;
-    transition: 0.2s ease;
-}
-
-.sidebar ul li .tooltip{
-    position: absolute;
-    height: 35px;
-    width: 122px;
-    background: white;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    left: 122px;
-    top: 0;
-    transform: translate(-50% , -50%);
-    border-radius: 6px;
-    line-height: 35px;
-    text-align: center;
-    color: black;
-    transition: 0s;
-    opacity: 0;
-    pointer-events: none;
-    display: block;
-}
-
-.sidebar.active ul li .tooltip{
-    display: none;
-}
-
-.sidebar ul li:hover .tooltip{
-    top: 50%;
-    transition: all 0.5s ease;
-    opacity: 1;
-}
-
-.home_section{
-    transition: 0.5s ease;
-    margin-left: 75px;
-}
-
-.home_section.active{
-    transition: 0.5s ease;
-    margin-left: 250px;
-}
-
-h2{
+.page-title{
     color: white;
     font-size: 50px;
 }
@@ -254,10 +13,9 @@ h2{
 }
 
 .course{
-    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../static/images/placeholder.jpg");
-    background-size: 100%;
     background-repeat: no-repeat;
-    padding: 10% 0%;
+    background-size: cover;
+    padding: 10% calc(80px + 5%);
     background-position: center;
     text-align: center;
 }
@@ -268,22 +26,17 @@ h2{
 
 .content.active{
     transition: 0.5s ease;
-    margin-left: 15%;
+    margin-left: 278px
 }
 
 .lectures{
     margin-top: 2%;
+    margin-left: 100px;
 }
 
 .lectures h3{
     color: black;
     font-size: xx-large;
-    margin-left: 8%;
-}
-
-.lectures hr{
-    margin-left: 8%;
-    margin-right: 5%;
 }
 
 .video{
@@ -291,7 +44,7 @@ h2{
     margin-top: 2%;
 }
 
-.videos{
+.content-box{
     margin-top: 2%;
     margin-right: 5%;
 }
@@ -299,10 +52,6 @@ h2{
 .current{
     text-decoration: underline;
     font-weight: bold;
-}
-
-.links a{
-    color: black;
 }
 
 .text h4{
@@ -326,4 +75,171 @@ h2{
 .text hr{
     margin-left: initial;
     margin-right: initial;
+}
+
+.lectures {
+    display: flex;
+    align-items: flex-start;
+}
+
+.lecture-nav {
+    width: 20%;
+    background-color: rgb(248, 248, 248);
+    border-radius: 10px;
+    box-shadow: 0 2px 30px 0 rgba(0,0,0,0.1);
+}
+
+.nav-item {
+    padding: 10px 20px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background-color: aliceblue;
+}
+
+.nav-item-active {
+    border-left: 5px solid rgb(0, 189, 223);
+    padding-left: 15px
+}
+
+.nav-title {
+    padding: 20px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.check, .uncheck {
+    margin-right: 15px;
+    font-size: 25px;
+}
+
+.check {
+    color: rgb(0, 122, 0)
+}
+
+.uncheck{
+    color: grey;
+}
+
+.lecture-container {
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 80%;
+}
+
+.links {
+    margin-top: 10px;
+    background-color: rgb(247, 247, 247);
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 30px 0 rgba(0,0,0,0.1);
+}
+
+.content-link {
+    font-size: 20px;
+    text-align: center;
+    margin: 0 8px;
+    padding: 6px;
+    cursor: pointer
+}
+
+.content-link-active {
+    border-bottom: 3px solid black;
+}
+
+.content-link:hover {
+    border-bottom: 3px solid black;
+}
+
+.finished {
+    color:rgb(0, 148, 136)
+}
+
+.group-title-loading {
+    height: 70px;
+}
+
+.link-loading {
+    height: 32px;
+    margin-top: 20px;
+    border-radius: 0;
+}
+
+.content-box-loading {
+    height: 250px;
+    margin-top: 20px;
+    margin-right: 0;
+}
+
+.text-loading {
+    width: 80%;
+    height: 50px;
+    margin-right: 0;
+    margin-top: 20px
+}
+
+.loading {
+    background-color: #e2e2e2;
+}
+
+.loading::after {
+    display: block;
+    content: "";
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: -webkit-gradient(linear, left top,
+                right top, from(transparent), 
+                color-stop(rgba(255, 255, 255, 0.2)),
+                to(transparent));
+                  
+    background: linear-gradient(90deg, transparent,
+            rgba(255, 255, 255, 0.2), transparent);
+
+    /* Adding animation */
+    animation: loading 0.8s infinite;
+}
+
+/* Loading Animation */
+@keyframes loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+[v-cloak] { 
+    display:none; 
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+}
+.previous-btn{
+    display: block;
+    background-color: transparent;
+    border:2.5px solid rgb(0, 189, 223);
+    color: rgb(0, 189, 223);
+}
+
+.next-btn {
+    display:block;
+    margin-left: auto;
+    background-color: transparent;
+    border:2.5px solid rgb(0, 189, 223);
+    color: rgb(0, 189, 223);
+}
+
+.previous-btn:hover, .next-btn:hover {
+    background-color: rgb(0, 189, 223);
+    color: white
 }
