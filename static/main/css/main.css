@@ -266,6 +266,12 @@ input:focus {
     text-align: center;
     min-width: 45px;
     height: 45px;
+    transition: 0.3s ease;
+}
+
+.sidebar .icon:hover{
+    margin-left: 5%;
+    transition: 0.3s ease;
 }
 
 .last {
