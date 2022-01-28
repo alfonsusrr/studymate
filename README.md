@@ -43,11 +43,11 @@ We believe that learning is crucial for human development. But, sometimes the pr
 <br> a. __pycache__: ?
 <br> b. migrations: ?
 <br> c. templates\account: a file directory that keeps all the HTML for pages that relate to user accounts and personalization
-<br> - edit.html: a HTML file that represents the content of the the edit profile page
-<br> - login.html: a HTML file that represents the content of the the login page
-<br> - profile.html: a HTML file that represents the content of the the view profile page
-<br> - register.html: a HTML file that represents the content of the register page
-<br> - settings.html: a HTML file that represents the content of the personalization page
+<br> &ensp;&ensp;- edit.html: a HTML file that represents the content of the the edit profile page
+<br> &ensp;&ensp;- login.html: a HTML file that represents the content of the the login page
+<br> &ensp;&ensp;- profile.html: a HTML file that represents the content of the the view profile page
+<br> &ensp;&ensp;- register.html: a HTML file that represents the content of the register page
+<br> &ensp;&ensp;- settings.html: a HTML file that represents the content of the personalization page
 <br> d. __init__.py: ?
 <br> e. admin.py: ?
 <br> f. apps.py: ?
