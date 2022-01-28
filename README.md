@@ -39,7 +39,45 @@ We believe that learning is crucial for human development. But, sometimes the pr
 </ol>
 
 ### File Details
+1. account: a file directory that has all files and collect data related to logging in, registering, and customizing user accounts and experiences
+&nbsp;&nbsp; a. __pycache__: ?
+&nbsp;&nbsp; b. migrations: ?
+&nbsp;&nbsp; c. templates\account: a file directory that keeps all the HTML for pages that relate to user accounts and personalization
+&nbsp;&nbsp;&nbsp;&nbsp; - edit.html: a HTML file that represents the content of the the edit profile page
+&nbsp;&nbsp;&nbsp;&nbsp; - login.html: a HTML file that represents the content of the the login page
+&nbsp;&nbsp;&nbsp;&nbsp; - profile.html: a HTML file that represents the content of the the view profile page
+&nbsp;&nbsp;&nbsp;&nbsp; - register.html: a HTML file that represents the content of the register page
+&nbsp;&nbsp;&nbsp;&nbsp; - settings.html: a HTML file that represents the content of the personalization page
+&nbsp;&nbsp; d. __init__.py: ?
+&nbsp;&nbsp; e. admin.py: ?
+&nbsp;&nbsp; f. apps.py: ?
+&nbsp;&nbsp; g. backends.py: ?
+&nbsp;&nbsp; h. models.py: ?
+&nbsp;&nbsp; i. tests.py: ?
+&nbsp;&nbsp; j. urls.py: ?
+&nbsp;&nbsp; k. views.py: ?
 
+2. course: a file directory that has all files and collect data related to displaying courses to keeping track of user's courses
+
+3. dashboard: a file directory that has most of the features pages including the dashboard itself, the agenda page, the error page, and some informational pages.
+
+4. media: a file directory that keeps all images that is necessary to the website
+
+5. notes: a file directory that has all files and collect data related to note sharing and uploading as well as managing notes
+
+6. static: a file directory that keeps all the css and javascript codes for all the pages
+
+7. studymate: ?
+
+8. templates: a file directory that keeps the main templates of every page such as navbars and sidebars
+
+9. db.sqlite3: a database that keeps all the uploaded data
+
+10. LICENSE: a file that explains the MIT license
+
+11. requirements.txt: a text file that shows all the packages needed to run the application
+
+12. requirements2.txt: a text file that shows all the packages needed to run the application
 
 ### Previews
 <img src="static/images/preview/agenda.png">
