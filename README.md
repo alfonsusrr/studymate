@@ -40,22 +40,22 @@ We believe that learning is crucial for human development. But, sometimes the pr
 
 ### File Details
 1. account: a file directory that has all files and collect data related to logging in, registering, and customizing user accounts and experiences
-<br>&nbsp;&nbsp; a. __pycache__: ?
-<br>&nbsp;&nbsp; b. migrations: ?
-<br>&nbsp;&nbsp; c. templates\account: a file directory that keeps all the HTML for pages that relate to user accounts and personalization
-<br>&nbsp;&nbsp;&nbsp;&nbsp; - edit.html: a HTML file that represents the content of the the edit profile page
-<br>&nbsp;&nbsp;&nbsp;&nbsp; - login.html: a HTML file that represents the content of the the login page
-<br>&nbsp;&nbsp;&nbsp;&nbsp; - profile.html: a HTML file that represents the content of the the view profile page
-<br>&nbsp;&nbsp;&nbsp;&nbsp; - register.html: a HTML file that represents the content of the register page
-<br>&nbsp;&nbsp;&nbsp;&nbsp; - settings.html: a HTML file that represents the content of the personalization page
-<br>&nbsp;&nbsp; d. __init__.py: ?
-<br>&nbsp;&nbsp; e. admin.py: ?
-<br>&nbsp;&nbsp; f. apps.py: ?
-<br>&nbsp;&nbsp; g. backends.py: ?
-<br>&nbsp;&nbsp; h. models.py: ?
-<br>&nbsp;&nbsp; i. tests.py: ?
-<br>&nbsp;&nbsp; j. urls.py: ?
-<br>&nbsp;&nbsp; k. views.py: ?
+<br> a. __pycache__: ?
+<br> b. migrations: ?
+<br> c. templates\account: a file directory that keeps all the HTML for pages that relate to user accounts and personalization
+<br> - edit.html: a HTML file that represents the content of the the edit profile page
+<br> - login.html: a HTML file that represents the content of the the login page
+<br> - profile.html: a HTML file that represents the content of the the view profile page
+<br> - register.html: a HTML file that represents the content of the register page
+<br> - settings.html: a HTML file that represents the content of the personalization page
+<br> d. __init__.py: ?
+<br> e. admin.py: ?
+<br> f. apps.py: ?
+<br> g. backends.py: ?
+<br> h. models.py: ?
+<br> i. tests.py: ?
+<br> j. urls.py: ?
+<br> k. views.py: ?
 
 2. course: a file directory that has all files and collect data related to displaying courses to keeping track of user's courses
 
