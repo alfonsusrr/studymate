@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.forms.models import model_to_dict
 from django.core import serializers
+from django.db.models import Q, Value
+from django.template import loader
 import json
 from django.urls import reverse
 from .models import *
@@ -134,6 +136,19 @@ def learn(request, course_id):
 def search(request):
     return render(request, "course/search.html")
 
+def search_info(request):
+    query = request.GET["query"]
+    courses = Course.objects.filter(Q(name__icontains = query) | Q(description__icontains = query)).order_by('-overall_ratings').distinct()
+
+    html_response = loader.render_to_string("course/search_card_temp.html", {"courses": courses})
+    html_response = html_response.strip()
+
+    output = {
+        "status": "success",
+        "html": html_response
+    }
+    return JsonResponse(output)
+
 def my_course(request):
     course_inprogress = UserCourse.objects.filter(user=request.user, completed=False).order_by("-start_date")
     course_completed = UserCourse.objects.filter(user=request.user, completed=True).order_by("-complete_date")
@@ -187,9 +202,9 @@ def make_course(request):
             categoriesDB.append(categoryDB)
         
         if thumbnail != "":
-            course = Course(name=name, description=desc, banner_image=thumbnail)
+            course = Course(name=name, description=desc, banner_image=thumbnail, maker=request.user)
         else:
-            course = Course(name=name, description=desc, banner_image=thumbnail)
+            course = Course(name=name, description=desc, banner_image=thumbnail, maker=request.user)
         course.save()
 
         for category in categoriesDB:
@@ -448,7 +463,7 @@ def getUserCourseInfo(request):
                     userCourse = UserCourse.objects.filter(user=request.user, course=courseDB.first()).first()
                     if userCourse != None:
                         status = "success"
-                        contentGroupProgress = ContentGroupUserProgress.objects.filter(content_group__course__id=course).order_by("content_group__order")
+                        contentGroupProgress = ContentGroupUserProgress.objects.filter(content_group__course__id=course, user=request.user).order_by("content_group__order")
                         if len(contentGroupProgress) != 0:
                             groupProgressInfo = list(contentGroupProgress.values())
                             data["group_progress"] = groupProgressInfo
@@ -459,7 +474,7 @@ def getUserCourseInfo(request):
                     userCourse = UserCourse.objects.filter(user=request.user, course=groupDB.first().course).first()
                     if userCourse != None:
                         status = "success"
-                        contentProgress = ContentUserProgress.objects.filter(content__content_group__id = group).order_by("content__order")
+                        contentProgress = ContentUserProgress.objects.filter(content__content_group__id = group, user=request.user).order_by("content__order")
                         if len(contentProgress) != 0:
                             contentProgressInfo = list(contentProgress.values())
                             data["content_progress"] = contentProgressInfo

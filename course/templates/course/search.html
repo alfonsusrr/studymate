@@ -1,6 +1,6 @@
 {% extends "main/main_dashboard.html" %}
 
-{% block title %}Search Courses{% endblock %}
+{% block title %}Search Course{% endblock %}
 {% block head %} 
 {% load static %}
 <link rel="stylesheet" href="{% static 'course/css/search.css' %}">
@@ -8,45 +8,83 @@
 
 
 {% block content %}
+    <div class="page-wrapper">
         <section class="search">
-            <h2>Search Courses</h2>
-            <input type="text" class="search_notes" placeholder="Search a Course">
-            <button type="submit" class="result">Search</button>
+            <h2>Search Course</h2>
+            <input id="search-query" type="text" class="search_course" placeholder="Search a Topic" data-url-autocomplete="{% url 'autocomplete_search' %}">
+            <button id="search-submit" type="submit" class="result" data-url-search="{% url 'search_info' %}">Search</button>
         </section>
-        <section class="public">
-            <div class="courses">
-                <img src="../../src/placeholder.jpg">
-                <h4>Course Name</h4>
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
+        {% if category %} 
+        <div class="category-container">
+            <div class="category-tag">
+                {{category|title}}
+            </div>
+        </div>
+        {% endif %}
+        <section class="course-container">
+            {% for course in courses %}
+            <div class="course">
+                <img src="/media/{{course.thumbnail}}" data-link="{% url 'view_course' course.id %}">
+                <input class="course-id" type="hidden" value="{{course.id}}">
+                <div class="action">
+                    <input type="hidden" class="course-is-private" value="false">
+                </div>
+                <div class="rating-stars">
+                    <i class="fa fa-star {% if course.overall_rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+                    <i class="fa fa-star {% if course.overall_rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+                    <i class="fa fa-star {% if course.overall_rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+                    <i class="fa fa-star {% if course.overall_rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+                    <i class="fa fa-star {% if course.overall_rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+                </div>
+                <div class="course-info">
+                    <h4 data-link="{% url 'view_course' course.id %}">{{course.title}}</h4>
+                    <div class="course-owner">By {{course.owner.name}}</div>
                 </div>
             </div>
-            <div class="courses">
-                <img src="../../src/placeholder1.jpg">
-                <h4>Course Name</h4>
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div>
-            </div>
+            {% endfor %}
         </section>
-        
-        <script type="module" src="{% static 'course/js/search.js' %}"></script>
+    </div>
+{% endblock %}
+{% block ending %}
+<script>
+    let token = "{{csrf_token}}"
+</script>
+<script type="text/html" id="loader-skeleton">
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+    <div class="course course-skeleton">
+        <div class="course-card-img loading-skeleton"></div>
+        <div class="course-card-title loading-skeleton"></div>
+        <div class="course-card-desc loading-skeleton"></div>
+    </div>
+</script>
+<script type="text/javascript" src="{% static 'course/js/search.js' %}"></script>
 {% endblock %}

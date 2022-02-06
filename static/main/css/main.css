@@ -271,3 +271,7 @@ input:focus {
 .last {
     margin-bottom: 50px;
 }
+
+.message {
+    text-align: center
+}

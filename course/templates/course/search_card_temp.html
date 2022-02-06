@@ -1,0 +1,17 @@
+{% for course in courses %}
+    <div class="course">
+        <img class="course-link" src="/media/{{course.banner_image}}" data-link="{% url 'course_preview' course.id %}">
+        <input class="course-id" type="hidden" value="{{course.id}}">
+        <div class="rating-stars">
+            <i class="fa fa-star {% if course.overall_ratings >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+            <i class="fa fa-star {% if course.overall_ratings >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+            <i class="fa fa-star {% if course.overall_ratings >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+            <i class="fa fa-star {% if course.overall_ratings >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+            <i class="fa fa-star {% if course.overall_ratings >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+        </div>
+        <div class="course-info">
+            <h4 class="course-link" data-link="{% url 'course_preview' course.id %}">{{course.name}}</h4>
+            <div class="course-owner">By {% for instructor in course.instructors.all %} {{instructor.name}},  {% endfor %}</div>
+        </div>
+    </div>
+{% endfor %}
