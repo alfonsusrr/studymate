@@ -28,24 +28,18 @@
             </div>
         </section>
         <section class="recommend">
+            {% for course in random_courses %}
             <div class="trans fade">
-                <img src="../../static/images/placeholder.jpg">
-                <div class="caption">CS50x</div>
+                <img class="img-recommend" src="/media/{{course.banner_image}}">
+                <div class="caption">{{course.name}}</div>
             </div>
-            <div class="trans fade">
-                <img src="../../static/images/placeholder1.jpg">
-                <div class="caption">CS50 AI</div>
-            </div>
-            <div class="trans fade">
-                <img src="../../static/images/placeholder.jpg">
-                <div class="caption">CS50x</div>
-            </div>
+            {% endfor %}
             <a class="previous" onclick="slides(-1)">&#10094;</a>
             <a class="next" onclick="slides(1)">&#10095;</a>
             <div class="dot-group">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
+                {% for course in random_courses %}
+                <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                {% endfor %}
             </div>
         </section>
     </div>
@@ -53,37 +47,30 @@
     <br>
     <section class="note_rec">
         <h2>Note Recommendation</h2>
+        <div class="notes-container">
+        {% for note in random_note %}
         <div class="notes">
-            <img src="../../static/images/note_default.jpg">
-            <h4>Note Name</h4>
-            <div class="rate">
-                <input type="radio" id="star5" name="rate" value="5" />
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" name="rate" value="4" />
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3" name="rate" value="3" />
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" name="rate" value="2" />
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" name="rate" value="1" />
-                <label for="star1" title="text">1 star</label>
+            <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
+            <input class="notes-id" type="hidden" value="{{note.id}}">
+            <div class="action">
+                <input type="hidden" class="notes-is-private" value="false">
+            </div>
+            <div class="rating-stars">
+                <i class="fa fa-star {% if note.overall_rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
+                <i class="fa fa-star {% if note.overall_rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
+                <i class="fa fa-star {% if note.overall_rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
+                <i class="fa fa-star {% if note.overall_rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
+                <i class="fa fa-star {% if note.overall_rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
+            </div>
+            <div class="notes-info">
+                <h4 data-link="{% url 'view_notes' note.id %}">{{note.title}}</h4>
+                <div class="notes-owner">By {{note.owner.name}}</div>
             </div>
         </div>
-        <div class="notes">
-            <img src="../../static/images/note_default.jpg">
-            <h4>Note Name</h4>
-            <div class="rate">
-                <input type="radio" id="star5" name="rate" value="5" />
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" name="rate" value="4" />
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3" name="rate" value="3" />
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" name="rate" value="2" />
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" name="rate" value="1" />
-                <label for="star1" title="text">1 star</label>
-            </div>
+        {% endfor %}
+        </div>
+        <div class="search-more">
+            <button onclick="window.location.href = this.dataset.link" data-link="{% url 'note_share' %}">Search More</button>
         </div>
     </section>
 {% endblock %} 

@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
+from notes.models import *
 import datetime
 import json
-
+import random
 
 def welcome(request):
     return render (request, 'dashboard/welcome.html')
@@ -25,8 +26,17 @@ def home(request):
                     a[content] = a[content].strftime("%Y-%m-%d")
                     data.append(a)
     dataJSON = json.dumps(data)
+
+    notes = list(Notes.objects.filter(is_private = False))
+
+    random_note = random.sample(notes, 10)
+
+    courses = list(Course.objects.all())
+    random_courses = random.sample(courses, 5)
     context = {
-        "agenda": dataJSON
+        "agenda": dataJSON,
+        "random_note": random_note,
+        "random_courses": random_courses,
     }
     return render(request, 'dashboard/dashboard.html', context)
 
