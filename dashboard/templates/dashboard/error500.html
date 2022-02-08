@@ -1,5 +1,5 @@
 {% extends "main/main.html" %}
-{% block title %}Error 404 : Not Found{% endblock %}
+{% block title %}Forbidden{% endblock %}
 {% block head %} 
 
 {% load static %}
@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <title>Error 404 | Not Found</title>
+        <title>Error 500 | Server Error</title>
         
         <style id="" media="all">/* vietnamese */
         @font-face {
@@ -121,11 +121,11 @@
         <div id="notfound">
             <div class="notfound">
                 <div class="notfound-404">
-                    <h3>Oops! Page not found</h3>
-                    <h1><span>4</span><span id="mid">0</span><span>4</span></h1>
+                    <h3>Oops! Server Error</h3>
+                    <h1><span>5</span><span id="mid">0</span><span>0</span></h1>
                 </div>
-                <h2>{{exception}}</h2>
-                <button class="back" onclick="window.history.back()"><i class="fas fa-right-arrow"></i> Back to Homepage</button>
+                <h2>we are sorry, there's a problem with the server. Please try again later. If the error still occured, feel free to contact us at service@studymate.org</h2>
+                <button class="back" onclick="window.history.back()"> &lt;&lt; &nbsp; Back to Homepage</button>
             </div>
         </div>
         

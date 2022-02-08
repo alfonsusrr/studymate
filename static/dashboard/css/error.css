@@ -46,7 +46,6 @@
     font-weight: 900;
     margin: 0px;
     color: rgb(206, 30, 30);
-    text-transform: uppercase;
     letter-spacing: -40px;
     margin-left: -20px;
   }
@@ -60,9 +59,9 @@
     position: relative;
     font-size: 16px;
     font-weight: 700;
-    text-transform: uppercase;
     color: #262626;
     margin: 0px;
+    text-transform: uppercase;
     letter-spacing: 3px;
     padding-left: 6px;
   }
@@ -71,7 +70,6 @@
     font-family: 'Cabin', sans-serif;
     font-size: 20px;
     font-weight: 400;
-    text-transform: uppercase;
     color: #000;
     margin-top: 0px;
     margin-bottom: 25px;

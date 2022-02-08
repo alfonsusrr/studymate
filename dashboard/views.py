@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse 
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
@@ -28,11 +28,13 @@ def home(request):
     dataJSON = json.dumps(data)
 
     notes = list(Notes.objects.filter(is_private = False))
-
-    random_note = random.sample(notes, 10)
+    num_notes = min(len(notes), 10)
+    random_note = random.sample(notes, num_notes)
 
     courses = list(Course.objects.all())
-    random_courses = random.sample(courses, 5)
+
+    num_courses = min(len(courses), 5)
+    random_courses = random.sample(courses, num_courses)
     context = {
         "agenda": dataJSON,
         "random_note": random_note,
@@ -122,7 +124,6 @@ def agenda(request):
                 agendaObj.completed = False
             agendaObj.save()
             return HttpResponse(200, "Completed")
-
     else:
         user = request.user
         agenda = Agenda.objects.filter(owner=user)
@@ -140,8 +141,30 @@ def agenda(request):
         return render(request, 'dashboard/agenda.html', context)
 
 @login_required
+def agenda_api(request):
+    user = request.user
+    date = request.GET.get("date", None)
+
+    if date != None:
+        try:
+            date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+        except:
+            return HttpResponse(500)
+        agenda = Agenda.objects.filter(owner=user, due=date)
+    else:
+        agenda = Agenda.objects.filter(owner=user)
+    agenda = agenda.values()
+    data = []
+    for a in agenda:
+        for content in a:
+            if isinstance(a[content], (datetime.date, datetime.datetime)):
+                a[content] = a[content].strftime("%Y-%m-%d")
+        data.append(a)
+    context = {
+        "agenda": data
+    }
+    return JsonResponse(context)
+
+@login_required
 def search(request):
     return render(request, 'dashboard/search.html')
-
-def about(request):
-    return render(request, 'dashboard/about.html')

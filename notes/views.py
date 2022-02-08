@@ -2,6 +2,7 @@ from django import forms
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import Http404, HttpResponseForbidden
+from django.core.exceptions import PermissionDenied, BadRequest
 from django.shortcuts import render
 from django.urls import reverse
 from .models import *
@@ -197,7 +198,7 @@ def get_archive(request):
             }
             return JsonResponse(output)
     else:
-        return HttpResponseForbidden
+        raise PermissionDenied()
 
 def thumbnail_creation(note):
     img_io = BytesIO()
@@ -213,7 +214,7 @@ def delete_notes(request):
     id = request.POST.get("id")
     notes = Notes.objects.filter(id=id).first()
     if notes.owner != request.user:
-        return HttpResponseForbidden
+        raise PermissionDenied()
     notes.delete()
     return HttpResponse("Deleted")
 
@@ -242,7 +243,7 @@ def view_notes(request, id):
             if note.owner == request.user:
                 return render(request, 'notes/notes_view.html', context)
             else:
-                return HttpResponseForbidden
+                raise PermissionDenied()
         else:
             return render(request, 'notes/notes_view.html', context)
 
@@ -283,7 +284,7 @@ def rate_notes(request, id):
             }
             return JsonResponse(output)
         else:
-            return HttpResponseForbidden
+            raise PermissionDenied()
 
 @login_required
 def review_notes(request, id):
@@ -336,7 +337,7 @@ def vote_comment(request, id):
         }
         return JsonResponse(output)
     else:
-        return HttpResponseForbidden
+        raise PermissionDenied()
 
 def category(request, name):
     notes = Notes.objects.filter(is_private=False).annotate(category_now=Replace('categories__name', Value(' '), Value('-'))).filter(category_now__iexact=name).order_by('-overall_rating', '-uploaded_on')
@@ -357,4 +358,4 @@ def edit_notes(request, id):
         }
         return render(request, "notes/upload.html", context)
     else:
-        return HttpResponseForbidden
+        raise PermissionDenied

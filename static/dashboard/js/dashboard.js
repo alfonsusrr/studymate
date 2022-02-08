@@ -245,3 +245,25 @@ function passDataAgenda(data){
         addTodo(dataNow[i])
     }
 }
+
+function view_notes(url_id) {
+    window.location.href = url_id
+}
+
+function clicked() {
+    $(".notes").find('img').on("click", function () {
+        let url = $(this).attr('data-link')
+        view_notes(url)
+    })
+
+    $(".notes").find('h4').on("click", function () {
+        let url = $(this).attr('data-link')
+        view_notes(url)
+    })
+
+    $(".img-recommend").on("click", function () {
+        let url = $(this).attr('data-link')
+        view_notes(url)
+    })
+}
+clicked()

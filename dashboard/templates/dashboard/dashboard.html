@@ -30,7 +30,7 @@
         <section class="recommend">
             {% for course in random_courses %}
             <div class="trans fade">
-                <img class="img-recommend" src="/media/{{course.banner_image}}">
+                <img class="img-recommend" src="/media/{{course.banner_image}}" data-link="{% url 'course_preview' course.id%}">
                 <div class="caption">{{course.name}}</div>
             </div>
             {% endfor %}
@@ -50,7 +50,7 @@
         <div class="notes-container">
         {% for note in random_note %}
         <div class="notes">
-            <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}">
+            <img src="/media/{{note.thumbnail}}" data-link="{% url 'view_notes' note.id %}" onerror="this.onerror=null; this.src='/media/notes/thumbnail/default.svg'" >
             <input class="notes-id" type="hidden" value="{{note.id}}">
             <div class="action">
                 <input type="hidden" class="notes-is-private" value="false">

@@ -1,8 +1,10 @@
 from django.http.response import JsonResponse
+from django.http import Http404
+from django.core.exceptions import PermissionDenied, BadRequest
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.forms.models import model_to_dict
 from django.core import serializers
 from django.db.models import Q, Value
@@ -20,7 +22,7 @@ import datetime
 def preview(request, id):
     course = Course.objects.filter(id=id).first()
     if course == None:
-        return HttpResponse("Course not found")
+        raise Http404("Course Not Found")
     else:
         instructors = course.instructors.all()
         categories = course.categories.all()
@@ -74,7 +76,7 @@ def enroll(request, course_id):
         }
         return JsonResponse(output)
     else:
-        return HttpResponse("Forbidden")
+        raise PermissionDenied()
 
 def unenroll(request):
     if request.method == "POST":

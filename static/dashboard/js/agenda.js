@@ -24,7 +24,7 @@ const todoWeekList = document.querySelector('.todo_week_list');
 const filterOption = document.querySelector('.filter_todo');
 
 var currentdate = new Date()
-var date = currentdate.getFullYear() + "-" + (currentdate.getMonth()+1)  + "-" + currentdate.getDate();
+var date = currentdate.toISOString().split('T')[0];
 var dataAgenda = [] 
 //event listeners
 //todoButton.addEventListener("click", addTodo)
@@ -54,13 +54,14 @@ function addTodo(data) {
     const newDate = document.createElement('li');
     newTodo.innerText = title;
     newDate.innerText = due;
-
+    
     var dateArray = [parseInt(due.slice(0, 4)), parseInt(due.slice(5, 7))-1, parseInt(due.slice(8))] //making date into array
     
     var dateDate = new Date(dateArray[0], dateArray[1], dateArray[2]);
 
     if(newDate.innerText == date){
         todoDiv.classList.add('todo');
+        console.log(newDate.innerText)
     }
     else if(dateDate >= firstDay && dateDate <= lastDay){
         todoDiv.classList.add('todo_week');

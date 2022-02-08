@@ -34,3 +34,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
     urlpatterns += staticfiles_urlpatterns()
+
+handler404 = 'studymate.views.handler404'
+handler403 = 'studymate.views.handler403'
+handler500 = 'studymate.views.handler500'

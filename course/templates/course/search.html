@@ -22,26 +22,6 @@
         </div>
         {% endif %}
         <section class="course-container">
-            {% for course in courses %}
-            <div class="course">
-                <img src="/media/{{course.thumbnail}}" data-link="{% url 'view_course' course.id %}">
-                <input class="course-id" type="hidden" value="{{course.id}}">
-                <div class="action">
-                    <input type="hidden" class="course-is-private" value="false">
-                </div>
-                <div class="rating-stars">
-                    <i class="fa fa-star {% if course.overall_rating >= 1 %} star-rating-active {% endif %} " id="rating-1"></i>
-                    <i class="fa fa-star {% if course.overall_rating >= 2 %} star-rating-active {% endif %}" id="rating-2"></i>
-                    <i class="fa fa-star {% if course.overall_rating >= 3 %} star-rating-active {% endif %}" id="rating-3"></i>
-                    <i class="fa fa-star {% if course.overall_rating >= 4 %} star-rating-active {% endif %}" id="rating-4"></i>
-                    <i class="fa fa-star {% if course.overall_rating >= 5 %} star-rating-active {% endif %}" id="rating-5"></i>
-                </div>
-                <div class="course-info">
-                    <h4 data-link="{% url 'view_course' course.id %}">{{course.title}}</h4>
-                    <div class="course-owner">By {{course.owner.name}}</div>
-                </div>
-            </div>
-            {% endfor %}
         </section>
     </div>
 {% endblock %}
