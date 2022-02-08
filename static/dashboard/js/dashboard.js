@@ -89,16 +89,8 @@ function addTodo(data) {
     
     var dateDate = new Date(dateArray[0], dateArray[1], dateArray[2]);
 
-    if(newDate.innerText == date){
-        todoDiv.classList.add('todo');
-    }
-    else if(dateDate >= firstDay && dateDate <= lastDay){
-        todoDiv.classList.add('todo_week');
-    }
-    else if(dateDate > lastDay) {
-        todoDiv.classList.add('todo_not_today');
-    }
-
+    todoDiv.classList.add('todo');
+    
     newTodo.classList.add('todo_item');
     todoDiv.appendChild(newTodo);
     todoDiv.appendChild(newDate);
@@ -118,17 +110,8 @@ function addTodo(data) {
     if (data.completed == true) {
         todoDiv.classList.toggle("completedItem")
     }
-
-    //Append to Actual LIST
-    if(newDate.innerText == date){
-        todoList.appendChild(todoDiv);
-    }
-    else if(dateDate > today && dateDate <= lastDay){
-        todoWeekList.appendChild(todoDiv);
-    }
-    else if(dateDate > lastDay) {
-        todoNotTodayList.appendChild(todoDiv);
-    }
+    
+    todoList.appendChild(todoDiv);
 }
 
 //DELETE & CHECK
