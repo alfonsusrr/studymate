@@ -190,7 +190,7 @@ select{
 }
 
 .select:hover::after{
-color: rgb(25, 39, 230)139, 201);
+    color: rgb(25, 39, 230);
 }
 
 .todo_container{
@@ -224,6 +224,7 @@ color: rgb(25, 39, 230)139, 201);
 .todo li {
     flex: 1;
     white-space: nowrap;
+    color: #fff;
 }
 
 .complete_btn, .delete_btn{
