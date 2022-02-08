@@ -90,7 +90,7 @@ function addTodo(data) {
     var dateDate = new Date(dateArray[0], dateArray[1], dateArray[2]);
 
     todoDiv.classList.add('todo');
-    
+
     newTodo.classList.add('todo_item');
     todoDiv.appendChild(newTodo);
     todoDiv.appendChild(newDate);
@@ -139,16 +139,16 @@ function deleteCheck(e) {
     if (item.classList[0] === "complete_btn") {
         const todo = item.parentElement;
         todo.classList.toggle("completedItem")
+        $.ajax({
+            type: "POST",
+            url: "/agenda/",
+            data: {
+                "id": item.id,
+                "action": "completed",
+                "csrfmiddlewaretoken" : token,
+            }, 
+        })
     }
-    $.ajax({
-        type: "POST",
-        url: "/agenda/",
-        data: {
-            "id": item.id,
-            "action": "completed",
-            "csrfmiddlewaretoken" : token,
-        }, 
-    })
 }
 //FILTERING THE TASKS ACCORDING THE OPTION
 function filterTodo(e) {
