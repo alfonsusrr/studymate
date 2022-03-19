@@ -18,7 +18,7 @@ def handler404(request, exception, message = "Page Not Found", template_name="da
     }
     return render(request, "dashboard/error404.html",  context = context, status=404)
 
-def handler403(request, exception, message = "Forbidden",template_name="dashboard/error403.html"):
+def handler403(request, exception, message = "Forbidden", template_name="dashboard/error403.html"):
     context = {
         "exception": message
     }

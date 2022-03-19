@@ -25,6 +25,7 @@ def home(request):
                 if a[content] == today:
                     a[content] = a[content].strftime("%Y-%m-%d")
                     data.append(a)
+                    
     dataJSON = json.dumps(data)
 
     notes = list(Notes.objects.filter(is_private = False))
