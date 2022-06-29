@@ -1,6 +1,5 @@
 # 📚 Studymate 📖
 ## Alfonsus Rodriques Rendy | Nicholas Sidharta
-### CS50 Final Project
 
 ## 🎞️ Video Demo
 Add Link Here
