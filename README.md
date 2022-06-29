@@ -44,6 +44,8 @@ This app is has not been deployed to production yet. To try this application:
 3. Run the application `python3 manage.py runserver`
 4. Open browser on ~[https://localhost:8000/](https://localhost:8000/)
 
+Update: Database credential in the `studymate/settings.py` is no longer valid.
+
 ### Previews
 <img src="static/images/preview/agenda.png">
 <img src="static/images/preview/noteSharing.png">
