@@ -41,7 +41,7 @@ We believe that learning is crucial for human development. But, sometimes the pr
 This app is has not been deployed to production yet. To try this application:
 1. Clone the repository
 2. Run `pip3 install requirements.txt` to install dependencies 
-3. Run the application `python3 manage.py` runserver
+3. Run the application `python3 manage.py runserver`
 4. Open browser on ~[https://localhost:8000/](https://localhost:8000/)
 
 ### Previews
