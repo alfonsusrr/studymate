@@ -34,111 +34,15 @@ We believe that learning is crucial for human development. But, sometimes the pr
   <li>Explore to Your Heart's Content :)</li>
 </ol>
 
-### File Details
-1. account: a file directory that has all files and collect data related to logging in, registering, and customizing user accounts and experiences
-<br> a. __pycache__: ?
-<br> b. migrations: ?
-<br> c. templates\account: a file directory that keeps all the HTML for pages that relate to user accounts and personalization
-<br> &ensp;&ensp;- edit.html: a HTML file that represents the content of the the edit profile page
-<br> &ensp;&ensp;- login.html: a HTML file that represents the content of the the login page
-<br> &ensp;&ensp;- profile.html: a HTML file that represents the content of the the view profile page
-<br> &ensp;&ensp;- register.html: a HTML file that represents the content of the register page
-<br> &ensp;&ensp;- settings.html: a HTML file that represents the content of the personalization page
-<br> d. __init__.py: ?
-<br> e. admin.py: ?
-<br> f. apps.py: ?
-<br> g. backends.py: ?
-<br> h. models.py: ?
-<br> i. tests.py: ?
-<br> j. urls.py: ?
-<br> k. views.py: ?
+### Full Stack:
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white) ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-2. course: a file directory that has all files and collect data related to displaying courses to keeping track of user's courses
-<br> a. __pycache__: ?
-<br> b. migrations: ?
-<br> c. templates\course: a file directory that keeps all the HTML for pages that relate to searching courses to keeping track of user's courses
-<br> &ensp;&ensp;- add.html: a HTML file that represents the content of the add course page
-<br> &ensp;&ensp;- learn.html: a HTML file that represents the content of each courses
-<br> &ensp;&ensp;- mycourse.html: a HTML file that represents the content of user's courses
-<br> &ensp;&ensp;- preview.html: a HTML file that represents the content of the preview of a specific course
-<br> &ensp;&ensp;- search.html: a HTML file that represents the content of the search course page
-<br> d. __init__.py: ?
-<br> e. admin.py: ?
-<br> f. apps.py: ?
-<br> g. models.py: ?
-<br> h. tests.py: ?
-<br> i. urls.py: ?
-<br> j. views.py: ?
-
-3. dashboard: a file directory that has most of the features pages including the dashboard itself, the agenda page, the error page, and some informational pages
-<br> a. __pycache__: ?
-<br> b. migrations: ?
-<br> c. templates\dashboard: a file directory that keeps all the HTML for pages that relate to most of the features pages such as the dashboard page, the agenda page, the error page, and some informational pages
-<br> &ensp;&ensp;- about.html: a HTML file that represents the content of the about page
-<br> &ensp;&ensp;- agenda.html: a HTML file that represents the content of the agenda page
-<br> &ensp;&ensp;- dashboard.html: a HTML file that represents the content of the dashboard page
-<br> &ensp;&ensp;- error403.html: a HTML file that represents the 403 (Forbidden) error
-<br> &ensp;&ensp;- error404.html: a HTML file that represents the 404 (Not Found) error
-<br> &ensp;&ensp;- help.html: a HTML file that represents the content of the help page
-<br> &ensp;&ensp;- relax.html: a HTML file that represents the content of the relax page
-<br> &ensp;&ensp;- welcome.html: a HTML file that represents the content of the welcome page
-<br> d. __init__.py: ?
-<br> e. admin.py: ?
-<br> f. apps.py: ?
-<br> g. models.py: ?
-<br> h. tests.py: ?
-<br> i. urls.py: ?
-<br> j. views.py: ?
-
-4. media: a file directory that keeps all images that is necessary to the website
-
-5. notes: a file directory that has all files and collect data related to note sharing and uploading as well as managing notes
-<br> a. __pycache__: ?
-<br> b. migrations: ?
-<br> c. templates\notes: a file directory that keeps all the HTML for pages that relate to uploading notes to sharing and viewing notes
-<br> &ensp;&ensp;- comments.html: ?
-<br> &ensp;&ensp;- note_archive.html: a HTML file that represents the content of the user's uploaded notes
-<br> &ensp;&ensp;- notes_search_temp.html: ?
-<br> &ensp;&ensp;- notes_view.html: a HTML file that represents the view page of a note
-<br> &ensp;&ensp;- notes.html: ?
-<br> &ensp;&ensp;- share.html: a HTML file that represents the content of the note sharing page
-<br> &ensp;&ensp;- upload.html: a HTML file that represents the content of the note upload page
-<br> d. __init__.py: ?
-<br> e. admin.py: ?
-<br> f. apps.py: ?
-<br> g. models.py: ?
-<br> h. tests.py: ?
-<br> i. urls.py: ?
-<br> j. views.py: ?
-
-6. static: a file directory that keeps all the css and javascript codes for all the pages
-
-7. studymate: ?
-<br> a. __pycache__: ?
-<br> b. __init__.py: ?
-<br> c. asgi.py: ?
-<br> d. models.py: ?
-<br> e. settings.py: ?
-<br> f. storage.py: ?
-<br> g. urls.py: ?
-<br> h. views.py: ?
-<br> i. wsgi.py: ?
-
-8. templates: a file directory that keeps the main templates of every page such as navbars and sidebars
-<br> a. main_dashboard.html: a HTML file that represents the template of the side bar
-<br> b. main.html: a HTML file that represents the template of the navigation bar and footer
-
-9. db.sqlite3: a database that keeps all the uploaded data
-
-10. LICENSE: a file that explains the MIT license
-
-11. manage.py: ?
-
-12. README.md: a markdown file that contains information about the web application including descriptions, file details, and previews
-
-13. requirements.txt: a text file that shows all the packages needed to run the application
-
-14. requirements2.txt: a text file that shows all the packages needed to run the application
+### How to run:
+This app is has not been deployed to production yet. To try this application:
+1. Clone the repository
+2. Run `pip3 install requirements.txt` to install dependencies 
+3. Run the application `python3 manage.py` runserver
+4. Open browser on ~[https://localhost:8000/](https://localhost:8000/)
 
 ### Previews
 <img src="static/images/preview/agenda.png">
