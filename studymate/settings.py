@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'studymate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'df51lihsa5o868',
-        'USER': 'vlnscpndfqjirq',
-        'PASSWORD': 'bb7e032890fd6e2597b690bdc53f5ffe94252dbaf8a517fcf51e31782789353a',
-        'HOST':'ec2-52-200-68-5.compute-1.amazonaws.com',
+        'NAME': 'd8t39spa5q1aig',
+        'USER': 'xcqbiugxuzhmly',
+        'PASSWORD': 'b169385d15aadc790973853c111ec9846482fe877d78f6e5bd55634e22509f28',
+        'HOST':'ec2-34-192-210-139.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
