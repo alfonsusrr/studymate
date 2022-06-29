@@ -92,7 +92,7 @@ select{
 .todo{
     margin: 5px auto;
     background: rgb(46, 44, 44);
-    color: #000000;
+    color: white;
     display: flex;
     font-size: 1.2rem;
     padding: 0.3rem;
@@ -196,7 +196,7 @@ h2.active{
 .todo_not_today{
     margin: 5px auto;
     background: rgb(46, 44, 44);
-    color: #000000;
+    color: white;
     display: flex;
     font-size: 1.2rem;
     padding: 0.3rem;
@@ -225,7 +225,7 @@ h2.active{
 .todo_week{
     margin: 5px auto;
     background: rgb(46, 44, 44);
-    color: #000000;
+    color: white;
     display: flex;
     font-size: 1.2rem;
     padding: 0.3rem;
