@@ -2,7 +2,7 @@
 ## Alfonsus Rodriques Rendy | Nicholas Sidharta
 
 ## 🎞️ Video Demo
-Add Link Here
+<a href="https://youtu.be/DqvoZ1Gax30">Demo Here</a>
 
 ## Description:
 ### About the Project
